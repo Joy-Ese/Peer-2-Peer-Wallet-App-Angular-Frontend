@@ -1,0 +1,112 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-10 p-3">
+      <img src="../assets/images/Logo-.png" alt="">
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row d-flex justify-content-center align-items-center">
+    <div class="col">
+      <div class="card card-registration border border-3 roundB my-2">
+        <div class="row d-flex flex-row-reverse">
+          <div class="col-xl-6 d-none d-xl-block position-absolute start-0 top-50 translate-middle-y">
+            <img src="../../assets/images/Sign up-pana.svg"
+              alt="Sample photo" class="img-fluid form-img"/>
+          </div>
+          <form class="col-xl-6" (ngSubmit)="onRegister(regForm.value)" #regForm="ngForm">
+            <div class="card-body p-md-5">
+              <h3 class="mb-3 text-uppercase text-center bnt">
+                <b>Sign Up</b>
+              </h3>
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="firstName">First Name</label>
+                    <input type="text" class="form-control" name="firstName" ngModel required #fName="ngModel"/>
+                    <small *ngIf="fName.invalid && fName.touched">First Name is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="lastName">Last Name</label>
+                    <input type="text" class="form-control" name="lastName" ngModel required #lName="ngModel"/>
+                    <small *ngIf="lName.invalid && lName.touched">Last Name is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="userName">Username</label>
+                    <input type="text" class="form-control" name="userName" ngModel required #uName="ngModel"/>
+                    <small *ngIf="uName.invalid && uName.touched">Username is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="password">Password</label>
+                    <input type="password" class="form-control" name="password" ngModel required #pAss="ngModel"/>
+                    <small *ngIf="pAss.invalid && pAss.touched">Password is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="email">Email</label>
+                    <input type="email" class="form-control" name="email" ngModel required email #eMail="ngModel"/>
+                    <small *ngIf="eMail.invalid && eMail.touched">Email is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" name="phoneNumber" ngModel required #pHone="ngModel"/>
+                    <small *ngIf="pHone.invalid && pHone.touched">Phone Number is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-md-12 mb-3">
+                <div class="form-outline">
+                  <label class="form-label inputColour" for="address">Address</label>
+                  <input type="text" class="form-control " name="address" ngModel required #aDrr="ngModel"/>
+                  <small *ngIf="aDrr.invalid && aDrr.touched">Address is required</small>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="pin">Pin</label>
+                    <input type="password" class="form-control" maxlength="4" name="pin" ngModel required #pIn="ngModel"/>
+                    <small *ngIf="pIn.invalid && pIn.touched">Pin is required</small>
+                  </div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="conPin">Confirm Pin</label>
+                    <input type="password" class="form-control" maxlength="4" name="confirmPin" ngModel required #cOnpin="ngModel"/>
+                    <small *ngIf="cOnpin.invalid && cOnpin.touched">Confirm Pin is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-center pt-3">
+                <button class="btn btn-primary ms-2 buttn" type="submit" value="Submit" [disabled]="!regForm.valid">Submit</button>
+              </div>
+
+              <p class="text-center text-muted mt-3 mb-0">Already have an account?
+                <a routerLink="/login" class="fw-bold text-body"><u>Login here</u></a>
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

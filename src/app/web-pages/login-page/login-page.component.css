@@ -1,0 +1,33 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
+* {
+	font-family: "Poppins", sans-serif;
+}
+
+.bnt {
+  color: #0e3457;
+}
+
+.inputColour {
+  color: rgb(87, 84, 84);
+}
+
+.roundB {
+  border-radius: 50px;
+}
+
+.buttn {
+  background-color: #337AB7;
+}
+
+.divHeight {
+  padding: 80px;
+}
+
+input.ng-invalid {
+  border: rgba(253, 85, 85, 0.753) 1px solid;
+}
+
+small {
+  color: rgba(253, 85, 85, 0.932);
+}
