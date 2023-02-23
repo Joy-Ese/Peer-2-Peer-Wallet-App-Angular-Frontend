@@ -11,19 +11,25 @@ import { RegisterPageComponent } from './web-pages/register-page/register-page.c
 import { DashboardPageComponent } from './web-pages/dashboard-page/dashboard-page.component';
 import { SendmoneyPageComponent } from './web-pages/sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from './web-pages/fundaccount-page/fundaccount-page.component';
+import { MaterialModule } from './material/material.module';
+import { SnackBarComponent } from './reuseable-components/snack-bar/snack-bar.component';
+import { TransactionPageComponent } from './web-pages/transaction-page/transaction-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    DashboardPageComponent,
-    SendmoneyPageComponent,
-    FundaccountPageComponent,
+    // DashboardPageComponent,
+    // SendmoneyPageComponent,
+    // FundaccountPageComponent,
+    // SnackBarComponent,
+    // TransactionPageComponent,
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
+    MaterialModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule

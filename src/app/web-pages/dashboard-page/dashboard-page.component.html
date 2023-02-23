@@ -1,1 +1,49 @@
-<p>dashboard-page works!</p>
+<mat-toolbar>
+  <button mat-icon-button *ngIf="sidenav.mode === 'over'" (click) = "sidenav.toggle()">
+    <mat-icon *ngIf="!sidenav.opened">
+      menu
+    </mat-icon>
+    <mat-icon *ngIf="sidenav.opened">
+      close
+    </mat-icon>
+  </button>
+  <div class="">
+    <div class="row">
+      <div class="col-10 p-3">
+        <img src="../assets/images/Logo-.png" alt="">
+      </div>
+    </div>
+  </div>
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav #sidenav>
+    <button mat-button class="menu-button">
+      <mat-icon class="ico">home</mat-icon>
+      <span>Dashboard</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/sendmoney">
+      <mat-icon class="ico">money</mat-icon>
+      <span>Send Money</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/fundaccount">
+      <mat-icon class="ico">star</mat-icon>
+      <span>Fund Account</span>
+    </button>
+    <button mat-button class="menu-button" routerLink="/transactions">
+      <mat-icon class="ico">list</mat-icon>
+      <span>Transactions</span>
+    </button>
+    <mat-divider></mat-divider>
+    <button mat-button class="menu-button">
+      <mat-icon class="ico">settings</mat-icon>
+      <span>Log Out</span>
+    </button>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <div class="content mat-elevation-z8">
+      <!-- <router-outlet></router-outlet> -->
+      Content!!!!!
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>

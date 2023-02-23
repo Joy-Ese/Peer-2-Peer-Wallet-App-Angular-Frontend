@@ -15,7 +15,8 @@
             <img src="../../assets/images/Sign up-pana.svg"
               alt="Sample photo" class="img-fluid form-img"/>
           </div>
-          <form class="col-xl-6" (ngSubmit)="onRegister(regForm.value)" #regForm="ngForm">
+          <form class="col-xl-6" (ngSubmit)="onRegister(regForm.value)" 
+            #regForm="ngForm">
             <div class="card-body p-md-5">
               <h3 class="mb-3 text-uppercase text-center bnt">
                 <b>Sign Up</b>
@@ -24,7 +25,8 @@
                 <div class="col-md-6 mb-3">
                   <div class="form-outline">
                     <label class="form-label inputColour" for="firstName">First Name</label>
-                    <input type="text" class="form-control" name="firstName" ngModel required #fName="ngModel"/>
+                    <input type="text" class="form-control" id="first_name" 
+                      name="firstName" ngModel required #fName="ngModel"/>
                     <small *ngIf="fName.invalid && fName.touched">First Name is required</small>
                   </div>
                 </div>
@@ -97,7 +99,10 @@
               </div>
 
               <div class="d-flex justify-content-center pt-3">
-                <button class="btn btn-primary ms-2 buttn" type="submit" value="Submit" [disabled]="!regForm.valid">Submit</button>
+                <button class="btn btn-primary ms-2 buttn" type="submit" 
+                  value="Submit" [disabled]="!regForm.valid"
+                  (click)="passDataToSnackComponent()">
+                Submit</button>
               </div>
 
               <p class="text-center text-muted mt-3 mb-0">Already have an account?
@@ -105,6 +110,7 @@
               </p>
             </div>
           </form>
+
         </div>
       </div>
     </div>
