@@ -18,19 +18,19 @@
 
 <mat-sidenav-container>
   <mat-sidenav #sidenav>
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" routerLink="minidashboard">
       <mat-icon class="ico">home</mat-icon>
       <span>Dashboard</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/sendmoney">
+    <button mat-button class="menu-button" routerLink="sendmoney">
       <mat-icon class="ico">money</mat-icon>
       <span>Send Money</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/fundaccount">
+    <button mat-button class="menu-button" routerLink="fundaccount">
       <mat-icon class="ico">star</mat-icon>
       <span>Fund Account</span>
     </button>
-    <button mat-button class="menu-button" routerLink="/transactions">
+    <button mat-button class="menu-button" routerLink="transactions">
       <mat-icon class="ico">list</mat-icon>
       <span>Transactions</span>
     </button>
@@ -42,8 +42,8 @@
   </mat-sidenav>
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
-      <!-- <router-outlet></router-outlet> -->
-      Content!!!!!
+      <router-outlet></router-outlet>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+

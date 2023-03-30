@@ -3,8 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
 import { RegisterPageComponent } from './web-pages/register-page/register-page.component';
 import { LoginPageComponent } from './web-pages/login-page/login-page.component';
-import { DashboardPageComponent } from './web-pages/dashboard-page/dashboard-page.component';
-import { AuthGuard } from './auth/auth.guard';
 import { AuthService } from './auth/auth.service';
 
 const routes: Routes = [
@@ -23,8 +21,6 @@ const routes: Routes = [
   },
   {
     path: "dashboard",
-    // component: DashboardPageComponent,  
-    // canActivate: [AuthGuard],
     canMatch: [() => inject(AuthService).isAuthenticated()],
     loadChildren: () => import("./web-pages/modules/dashboard/dashboard.module").then(d => d.DashboardModule)
   },

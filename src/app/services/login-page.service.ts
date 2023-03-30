@@ -9,7 +9,7 @@ import { LoginResponseFromBackEnd } from '../models/response-from-backend/login-
 export class LoginPageService {
   errorMessage : string = "";
 
-  result : object = {};
+  // result : object = {};
 
   loginResponseFromBackEnd! : LoginResponseFromBackEnd;
 
@@ -38,7 +38,8 @@ export class LoginPageService {
         console.log(this.loginResponseFromBackEnd);
         this.key = localStorage.setItem("userData", JSON.stringify(this.loginResponseFromBackEnd));
         localStorage.setItem("token", this.loginResponseFromBackEnd.result);
-        this.router.navigateByUrl('/dashboard');
+        // this.router.navigateByUrl('/dashboard');
+        this.router.navigate(['/dashboard']);
       },
       error: (err) => {
         console.log(err);
