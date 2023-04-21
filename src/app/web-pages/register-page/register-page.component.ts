@@ -25,7 +25,7 @@ export class RegisterPageComponent implements OnInit{
   passDataToSnackComponent() {
     const hiName = this.first_name = (<HTMLInputElement>document.getElementById("first_name")).value;
     this.matSnackBar.openFromComponent(SnackBarComponent, {
-      data: `Hi ${hiName}, You have been registered successfully!`,
+      data: `Hi ${hiName}, Check email to verify your registration!`,
       duration: 5000,
       panelClass: ["snack-notification"],
       horizontalPosition: "center",
@@ -41,15 +41,16 @@ export class RegisterPageComponent implements OnInit{
     firstName: string,
     lastName: string,
     userName: string,
-    password: string,
-    email: string,
     phoneNumber: string,
+    password: string,
+    confirmPassword: string,
+    email: string,
     address: string,
-    pin: string,
-    confirmPin: string
   }) {
     this.registerPageService.onRegister(registerData);
-    this.passDataToSnackComponent();
-    setTimeout(() => {this.domDocument.location.reload()}, 6000);
+    if (this.registerPageService.status == true) {
+      this.passDataToSnackComponent();
+    }
+    setTimeout(() => {this.domDocument.location.replace("/login")}, 6000);
   }
 }

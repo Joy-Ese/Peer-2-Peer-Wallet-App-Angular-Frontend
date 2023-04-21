@@ -9,3 +9,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 * {
 	font-family: "Poppins", sans-serif;
 }
+
+@font-face {
+	font-family: FiraSans-Black;
+	src: url("assets/fonts/FiraSans-Black.ttf");
+}
+
+@font-face {
+	font-family: FiraSans-Bold;
+	src: url("assets/fonts/FiraSans-Bold.ttf");
+}
+
+@font-face {
+	font-family: MeeraInimai-Headings;
+	src: url("assets/fonts/MeeraInimai-Regular.ttf");
+}

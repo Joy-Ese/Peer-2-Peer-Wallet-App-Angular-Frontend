@@ -19,7 +19,7 @@
             #regForm="ngForm">
             <div class="card-body p-md-5">
               <h3 class="mb-3 text-uppercase text-center bnt">
-                <b>Sign Up</b>
+                <b>Register</b>
               </h3>
               <div class="row">
                 <div class="col-md-6 mb-3">
@@ -49,9 +49,9 @@
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="form-outline">
-                    <label class="form-label inputColour" for="password">Password</label>
-                    <input type="password" class="form-control" name="password" ngModel required #pAss="ngModel"/>
-                    <small *ngIf="pAss.invalid && pAss.touched">Password is required</small>
+                    <label class="form-label inputColour" for="phoneNumber">Phone Number</label>
+                    <input type="text" class="form-control" name="phoneNumber" ngModel required #pHone="ngModel"/>
+                    <small *ngIf="pHone.invalid && pHone.touched">Phone Number is required</small>
                   </div>
                 </div>
               </div>
@@ -59,16 +59,26 @@
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="form-outline">
-                    <label class="form-label inputColour" for="email">Email</label>
-                    <input type="email" class="form-control" name="email" ngModel required email #eMail="ngModel"/>
-                    <small *ngIf="eMail.invalid && eMail.touched">Email is required</small>
+                    <label class="form-label inputColour" for="password">Password</label>
+                    <input type="password" class="form-control" name="password" ngModel required #pAss="ngModel"/>
+                    <small *ngIf="pAss.invalid && pAss.touched">Password is required</small>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">
                   <div class="form-outline">
-                    <label class="form-label inputColour" for="phoneNumber">Phone Number</label>
-                    <input type="text" class="form-control" name="phoneNumber" ngModel required #pHone="ngModel"/>
-                    <small *ngIf="pHone.invalid && pHone.touched">Phone Number is required</small>
+                    <label class="form-label inputColour" for="confirmPassword">Confirm Password</label>
+                    <input type="password" class="form-control" name="confirmPassword" ngModel required #coNpAss="ngModel"/>
+                    <small *ngIf="coNpAss.invalid && coNpAss.touched">Confirm Password is required</small>
+                  </div>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-12 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label inputColour" for="email">Email</label>
+                    <input type="email" class="form-control" name="email" ngModel required email #eMail="ngModel"/>
+                    <small *ngIf="eMail.invalid && eMail.touched">Email is required</small>
                   </div>
                 </div>
               </div>
@@ -81,28 +91,11 @@
                 </div>
               </div>
 
-              <div class="row">
-                <div class="col-md-6 mb-3">
-                  <div class="form-outline">
-                    <label class="form-label inputColour" for="pin">Pin</label>
-                    <input type="password" class="form-control" maxlength="4" name="pin" ngModel required #pIn="ngModel"/>
-                    <small *ngIf="pIn.invalid && pIn.touched">Pin is required</small>
-                  </div>
-                </div>
-                <div class="col-md-6 mb-3">
-                  <div class="form-outline">
-                    <label class="form-label inputColour" for="conPin">Confirm Pin</label>
-                    <input type="password" class="form-control" maxlength="4" name="confirmPin" ngModel required #cOnpin="ngModel"/>
-                    <small *ngIf="cOnpin.invalid && cOnpin.touched">Confirm Pin is required</small>
-                  </div>
-                </div>
-              </div>
-
               <div class="d-flex justify-content-center pt-3">
                 <button class="btn btn-primary ms-2 buttn" type="submit" 
                   value="Submit" [disabled]="!regForm.valid"
                   (click)="passDataToSnackComponent()">
-                Submit</button>
+                Register</button>
               </div>
 
               <p class="text-center text-muted mt-3 mb-0">Already have an account?

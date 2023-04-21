@@ -10,12 +10,14 @@ import { LoginPageComponent } from './web-pages/login-page/login-page.component'
 import { RegisterPageComponent } from './web-pages/register-page/register-page.component';
 import { MaterialModule } from './material/material.module';
 import { MiniDashboardPageComponent } from './web-pages/mini-dashboard-page/mini-dashboard-page.component';
+import { ProfilePageComponent } from './web-pages/profile-page/profile-page.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
+    ProfilePageComponent,
     // MiniDashboardPageComponent,
   ],
   imports: [

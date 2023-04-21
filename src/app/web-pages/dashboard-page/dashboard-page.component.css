@@ -1,5 +1,5 @@
 .ico {
-  color: black;
+  color: white;
 }
 
 mat-toolbar {
@@ -33,6 +33,14 @@ mat-sidenav-container {
   align-items: center;
   justify-content: flex-start;
   font-size: 0.9rem;
+}
+
+.mBB {
+  margin-top: 30px;
+}
+
+span {
+  color: white;
 }
 
 mat-icon {

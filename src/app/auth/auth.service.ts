@@ -8,6 +8,11 @@ export class AuthService {
 
   constructor() { }
 
+  public getToken() {
+    const getToken = localStorage.getItem("token");
+    return getToken;
+  }
+
   isAuthenticated(){
     const token = localStorage.getItem("token");
     if (token != null) {

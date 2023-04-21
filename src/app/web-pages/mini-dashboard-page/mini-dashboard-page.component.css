@@ -1,0 +1,46 @@
+.firstDiv {
+  border: 2px #003366 solid;
+  margin-left: 50px;
+  border-radius: 25px;
+  width: 50%;
+  height: 20vh;
+  /* background-color: #FF0033; */
+}
+
+.bdgDiv {
+  background-color: #003366;
+  border-radius: 30px;
+  width: 50%;
+  margin-left: -20px;
+  height: 20vh;
+}
+
+.myBal {
+  color: white;
+  font-size: 18px;
+}
+
+.balFigure {
+  color: white;
+}
+
+.balCurr {
+  color: white;
+}
+
+.myAcct {
+  color: black;
+  font-size: 18px;
+}
+
+.acctNum {
+  color: black;
+}
+
+.tranDiv {
+  background-color: #003366;
+  width: 50%;
+  height: 50vh;
+  margin-left: 50px;
+  border-radius: 25px;
+}

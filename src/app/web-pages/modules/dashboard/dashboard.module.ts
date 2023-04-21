@@ -9,6 +9,10 @@ import { DashboardPageComponent } from '../../dashboard-page/dashboard-page.comp
 import { TransactionPageComponent } from '../../transaction-page/transaction-page.component';
 import { RouterModule, Routes } from '@angular/router';
 import { MiniDashboardPageComponent } from '../../mini-dashboard-page/mini-dashboard-page.component';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
+import { TokenInterceptorInterceptor } from 'src/app/reuseable-components/bearer-token/token-interceptor.interceptor';
+import { AuthorizeInterceptorInterceptor } from 'src/app/reuseable-components/bearer-token/authorize-interceptor.interceptor';
+import { ProfilePageComponent } from '../../profile-page/profile-page.component';
 
 const routes: Routes = [
   {
@@ -35,6 +39,10 @@ const routes: Routes = [
         path: "transactions",
         component: TransactionPageComponent
       },
+      {
+        path: "profile",
+        component: ProfilePageComponent
+      },
     ]
   }
 ];
@@ -53,6 +61,19 @@ const routes: Routes = [
     MaterialModule,
     CommonModule,
     RouterModule,
+    HttpClientModule,
+  ],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: TokenInterceptorInterceptor, 
+      multi: true
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: AuthorizeInterceptorInterceptor, 
+      multi: true
+    },
   ],
   exports: [RouterModule]
 })
