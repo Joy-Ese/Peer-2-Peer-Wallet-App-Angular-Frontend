@@ -18,7 +18,7 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor {
 
   passDataToSnackComponent() {
     this.matSnackBar.openFromComponent(SnackBarComponent, {
-      data: `Hi, You have unauthorized access!`,
+      data: `Hi {NAME}, You now have unauthorized access!`,
       duration: 5000,
       panelClass: ["snack-notification"],
       horizontalPosition: "center",
@@ -32,7 +32,6 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor {
       next: (event) => {
         if (event instanceof HttpResponse) {
           if(event.status == 401) {
-            // alert('Unauthorized access!')
             this.passDataToSnackComponent();
           }
         }
@@ -40,11 +39,10 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor {
       },
       error: (error) => {
         if(error.status === 401) {
-          // alert('Unauthorized access!')
-          this.router.navigate(['/login']);
+          this.passDataToSnackComponent();
+          setTimeout(() => {this.router.navigate(['/login'])}, 4000);
         }
         else if(error.status === 404) {
-          // alert('Page Not Found!')
           this.router.navigate(['/login']);
         }
       }

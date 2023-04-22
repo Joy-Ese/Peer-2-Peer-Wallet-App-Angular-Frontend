@@ -1,15 +1,40 @@
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
-<p>transaction-page works!</p>
+<div class="row">
+  <div class="tranDiv mt-3">
+    <div class="mt-4">
+      <h2 class="myBal mx-2">List of Transactions</h2>
+      <h2 class="myBal mx-2">WATCH DEBORAH KURATA TABLE VIDEO</h2>
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th scope="col">AMOUNT</th>
+              <th scope="col">SENDER INFO</th>
+              <th scope="col">RECEPIENT INFO</th>
+              <th scope="col">TYPE</th>
+              <th scope="col">CURRENCY</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">DATE</th>
+            </tr>
+          </thead>
+          <tbody class="tableBody" *ngFor="let item of txns | keyvalue">
+            <tr>
+              <td>{{item.value | json }}</td>
+              <td>vv</td>
+              <td>cc</td>
+              <td>
+                <p class="badge bg-success">CREDIT</p>
+              </td>
+              <td>NGN</td>
+              <td>Success</td>
+              <td>
+                <p class="badge bg-warning">12-03-2023</p> <br>
+                <p class="badge bg-primary">10:03PM</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+

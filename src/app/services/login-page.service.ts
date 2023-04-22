@@ -9,8 +9,6 @@ import { LoginResponseFromBackEnd } from '../models/response-from-backend/login-
 export class LoginPageService {
   errorMessage : string = "";
 
-  // result : object = {};
-
   loginResponseFromBackEnd! : LoginResponseFromBackEnd;
 
   baseUrl : string = "http://localhost:7236";

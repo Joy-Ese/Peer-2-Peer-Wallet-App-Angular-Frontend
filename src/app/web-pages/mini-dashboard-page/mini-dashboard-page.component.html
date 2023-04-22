@@ -1,19 +1,25 @@
 <div class="row">
-  <div class="mt-4 firstDiv">
-    <div class="d-flex">
-      <div class="bdgDiv">
-        <div class="mt-4">
-          <span class="myBal mx-4">Balance</span>
-          <div class="mx-4 mt-2 d-flex">
-            <h1 class="balFigure"><span>&#8358;</span>35,450.87</h1> 
-            <span class="balCurr mt-2">NGN</span>
+  <div class="col-11 d-flex justify-content-between">
+    <div class="mt-2">
+      <img class="imgDash" src="../../../assets/images/undraw_revenue_red.svg" alt="">
+    </div>
+  
+    <div class="mt-4 firstDiv">
+      <div class="d-flex">
+        <div class="bdgDiv">
+          <div class="mt-4">
+            <span class="myBal text-center mx-4">Balance</span>
+            <div class="mx-4 mt-2 d-flex">
+              <h1 class="balFigure text-center"><span>&#8358;</span>{{this.balance}}</h1> 
+              <span class="balCurr text-center mt-2">{{this.currency}}</span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="mt-4">
-        <div>
-          <span class="mx-4 myAcct">Account Number</span>
-          <h1 class="mx-4 mt-2 acctNum">{{this.acctNumber}}</h1> why is it not working??????????
+        <div class="mt-4">
+          <div>
+            <span class="mx-4 text-center myAcct">Account Number</span>
+            <h1 class="mx-4 mt-2 text-center acctNum">{{this.acctNumber}}</h1>
+          </div>
         </div>
       </div>
     </div>
@@ -21,9 +27,68 @@
 </div>
 
 <div class="row">
-  <div class="tranDiv mt-5">
+  <div class="tranDiv mt-3">
     <div class="mt-4">
       <span class="myBal mx-2">Last Transactions</span>
+      <div class="table-responsive mt-4">
+        <table class="table table-bordered">
+          <thead class="text-white">
+            <tr>
+              <th scope="col">AMOUNT</th>
+              <th scope="col">SENDER INFO</th>
+              <th scope="col">RECEPIENT INFO</th>
+              <th scope="col">TYPE</th>
+              <th scope="col">CURRENCY</th>
+              <th scope="col">STATUS</th>
+              <th scope="col">DATE</th>
+            </tr>
+          </thead>
+          <tbody class="text-white tableBody">
+            <tr>
+              <td>399</td>
+              <td>Sender_33399940404</td>
+              <td>Recepient_33399940404</td>
+              <td>
+                <p class="badge bg-success">CREDIT</p>
+              </td>
+              <td>NGN</td>
+              <td>Success</td>
+              <td>
+                <p class="badge bg-warning">12-03-2023</p> <br>
+                <p class="badge bg-primary">10:03PM</p>
+              </td>
+            </tr>
+            <tr>
+              <td>377</td>
+              <td>Sender_33399940404</td>
+              <td>Recepient_33399940404</td>
+              <td>
+                <p class="badge bg-danger">DEBIT</p>
+              </td>
+              <td>NGN</td>
+              <td>Fail</td>
+              <td>
+                <p class="badge bg-warning">12-03-2023</p> <br>
+                <p class="badge bg-primary">10:03PM</p>
+              </td>
+            </tr>
+            <tr>
+              <td>377</td>
+              <td>Sender_33399940404</td>
+              <td>Recepient_33399940404</td>
+              <td>
+                <p class="badge bg-success">CREDIT</p>
+              </td>
+              <td>NGN</td>
+              <td>Pending</td>
+              <td>
+                <p class="badge bg-warning">12-03-2023</p> <br>
+                <p class="badge bg-primary">10:03PM</p>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
 </div>
