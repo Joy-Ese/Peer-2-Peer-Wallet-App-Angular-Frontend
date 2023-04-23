@@ -13,6 +13,8 @@ import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { TokenInterceptorInterceptor } from 'src/app/reuseable-components/bearer-token/token-interceptor.interceptor';
 import { AuthorizeInterceptorInterceptor } from 'src/app/reuseable-components/bearer-token/authorize-interceptor.interceptor';
 import { ProfilePageComponent } from '../../profile-page/profile-page.component';
+import { FormsModule } from '@angular/forms';
+import { FilterPipe } from 'src/app/models/filter.pipe';
 
 const routes: Routes = [
   {
@@ -55,6 +57,7 @@ const routes: Routes = [
     FundaccountPageComponent,
     TransactionPageComponent,
     SnackBarComponent,
+    FilterPipe,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -62,6 +65,7 @@ const routes: Routes = [
     CommonModule,
     RouterModule,
     HttpClientModule,
+    FormsModule,
   ],
   providers: [
     { 

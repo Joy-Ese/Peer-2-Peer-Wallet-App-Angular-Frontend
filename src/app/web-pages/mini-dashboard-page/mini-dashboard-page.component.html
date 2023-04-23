@@ -10,7 +10,7 @@
           <div class="mt-4">
             <span class="myBal text-center mx-4">Balance</span>
             <div class="mx-4 mt-2 d-flex">
-              <h1 class="balFigure text-center"><span>&#8358;</span>{{this.balance}}</h1> 
+              <h1 class="balFigure text-center">{{this.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
               <span class="balCurr text-center mt-2">{{this.currency}}</span>
             </div>
           </div>
@@ -18,7 +18,7 @@
         <div class="mt-4">
           <div>
             <span class="mx-4 text-center myAcct">Account Number</span>
-            <h1 class="mx-4 mt-2 text-center acctNum">{{this.acctNumber}}</h1>
+            <h1 class="mt-2 text-center acctNum">{{this.acctNumber}}</h1>
           </div>
         </div>
       </div>
@@ -29,9 +29,9 @@
 <div class="row">
   <div class="tranDiv mt-3">
     <div class="mt-4">
-      <span class="myBal mx-2">Last Transactions</span>
+      <span class="myBal">Last three Transactions</span>
       <div class="table-responsive mt-4">
-        <table class="table table-bordered">
+        <table class="table table-bordered text-center align-middle">
           <thead class="text-white">
             <tr>
               <th scope="col">AMOUNT</th>
@@ -44,46 +44,17 @@
             </tr>
           </thead>
           <tbody class="text-white tableBody">
-            <tr>
-              <td>399</td>
-              <td>Sender_33399940404</td>
-              <td>Recepient_33399940404</td>
+            <tr *ngFor="let item of lastThreeTxns">
+              <td>{{item.amount |currency:"&#8358;":"symbol":"1.2-2"}}</td>
+              <td>{{item.senderInfo}}</td>
+              <td>{{item.recepientInfo}}</td>
               <td>
-                <p class="badge bg-success">CREDIT</p>
+                <p [ngClass]="item.transactionType == 'CREDIT' ? 'badge bg-success' : 'badge bg-danger'">{{item.transactionType}}</p>
               </td>
-              <td>NGN</td>
-              <td>Success</td>
+              <td>{{item.currency}}</td>
+              <td>{{item.status}}</td>
               <td>
-                <p class="badge bg-warning">12-03-2023</p> <br>
-                <p class="badge bg-primary">10:03PM</p>
-              </td>
-            </tr>
-            <tr>
-              <td>377</td>
-              <td>Sender_33399940404</td>
-              <td>Recepient_33399940404</td>
-              <td>
-                <p class="badge bg-danger">DEBIT</p>
-              </td>
-              <td>NGN</td>
-              <td>Fail</td>
-              <td>
-                <p class="badge bg-warning">12-03-2023</p> <br>
-                <p class="badge bg-primary">10:03PM</p>
-              </td>
-            </tr>
-            <tr>
-              <td>377</td>
-              <td>Sender_33399940404</td>
-              <td>Recepient_33399940404</td>
-              <td>
-                <p class="badge bg-success">CREDIT</p>
-              </td>
-              <td>NGN</td>
-              <td>Pending</td>
-              <td>
-                <p class="badge bg-warning">12-03-2023</p> <br>
-                <p class="badge bg-primary">10:03PM</p>
+                <p class="badge bg-primary dateColour">{{item.date | date:'dd/MM/YYYY hh:mm a'}}</p> <br>
               </td>
             </tr>
           </tbody>

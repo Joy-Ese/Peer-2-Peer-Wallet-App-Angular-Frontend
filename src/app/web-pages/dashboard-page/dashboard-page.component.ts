@@ -2,6 +2,8 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Router } from '@angular/router';
+import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -10,13 +12,35 @@ import { Router } from '@angular/router';
 })
 export class DashboardPageComponent implements OnInit {
 
+  baseUrl : string = "http://localhost:7236";
+
+  userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
+
+  username! : string;
+
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private router: Router) {}
+  constructor(private observer: BreakpointObserver, private http: HttpClient) {}
 
   ngOnInit(){
-    this.router.navigate(['/minidashboard']);
-    console.log('shift shift')
+    this.getUsername();
+  }
+
+  getUsername() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
+    {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
+        this.username = this.userDetailResponseFromBackEnd.username;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   ngAfterViewInit() {

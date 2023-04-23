@@ -1,10 +1,21 @@
 <div class="row">
   <div class="tranDiv mt-3">
     <div class="mt-4">
-      <h2 class="myBal mx-2">List of Transactions</h2>
-      <h2 class="myBal mx-2">WATCH DEBORAH KURATA TABLE VIDEO</h2>
-      <div class="table-responsive mt-4">
-        <table class="table table-bordered">
+      <div class=" d-flex justify-content-between">
+        <h2 class="myBal mx-2">List of all Transactions: <span>filter not working perfectly why????</span></h2>
+        <h2 class="myBal mx-2">Angular material table filtering</h2>
+        <div class="col-5 card mx-2 filterCard">
+          <div class="card-body d-flex justify-content-between">
+            Filter By: 
+            <div class="mx--5 filterInput">
+              <input type="text" [(ngModel)]="searchText" class="form-control">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="table-responsive mt-4 mx-2">
+        <table class="table table-bordered text-center align-middle"
+        *ngIf="(txns | filterBy: searchText).length > 0; else noResults">
           <thead>
             <tr>
               <th scope="col">AMOUNT</th>
@@ -16,23 +27,26 @@
               <th scope="col">DATE</th>
             </tr>
           </thead>
-          <tbody class="tableBody" *ngFor="let item of txns | keyvalue">
-            <tr>
-              <td>{{item.value | json }}</td>
-              <td>vv</td>
-              <td>cc</td>
+          <tbody class="tableBody">
+            <tr *ngFor="let item of txns | filterBy: searchText;">
+              <td>{{item.amount |currency:"&#8358;":"symbol":"1.2-2"}}</td>
+              <td>{{item.senderInfo}}</td>
+              <td>{{item.recepientInfo}}</td>
               <td>
-                <p class="badge bg-success">CREDIT</p>
+                <p [ngClass]="item.transactionType == 'CREDIT' ? 'badge bg-success' : 'badge bg-danger'">{{item.transactionType}}</p>
               </td>
-              <td>NGN</td>
-              <td>Success</td>
+              <td>{{item.currency}}</td>
+              <td>{{item.status}}</td>
               <td>
-                <p class="badge bg-warning">12-03-2023</p> <br>
-                <p class="badge bg-primary">10:03PM</p>
+                <p class="badge bg-primary dateColour">{{item.date | date:'dd/MM/YYYY hh:mm a'}}</p> <br>
               </td>
             </tr>
           </tbody>
         </table>
+
+        <ng-template #noResults>
+          <p>No results found for "{{searchText}}".</p>
+        </ng-template>
       </div>
     </div>
   </div>
