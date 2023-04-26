@@ -8,23 +8,25 @@
     </mat-icon>
   </button>
   <div class="row">
-    <div class="col-12 d-flex flex-row">
-      <div class="col-12 p-3">
+    <div class="container-fluid navContainer">
+      <div>
         <img src="../assets/images/Logo-.png" alt="">
       </div>
-      <div class="col-12 d-flex flex-row">
-        <div class="col-4 btnDiv">
-          <button type="button" class="btn btn-primary btnColour">
-            Notifications <span class="badge bg-danger">4</span>
+      <div class="container allDivCon">
+        <div class="notificationDiv">
+          <button type="button" class="btn btn-primary notificationColour">
+            <mat-icon class="ico">sms</mat-icon><span class="badge bg-danger spanBadge">4</span>
           </button>
         </div>
-        <div class="nameSign mt-5">
-          <p>Hi, {{this.username}} </p>
-          <p>Hi, {{this.username}} </p>
+        <div class="nameDiv">
+          <p>Hi, Username </p>
+          <p>Hi, Username </p>
+          <!-- <p>Hi, {{this.username}} </p>
+          <p>Hi, {{this.username}} </p> -->
         </div>
-        <div>
+        <div class="imgDiv">
           <img src="../../../assets/images/undraw_profile_pic_red.svg" 
-          class="rounded-circle mt-1 imgAvatar" alt="Avatar" />
+          class="rounded-circle imgElement" alt="Avatar" />
         </div>
       </div>
     </div>
@@ -42,7 +44,7 @@
       <span>Send Money</span>
     </button>
     <button mat-button class="menu-button mBB" routerLink="fundaccount">
-      <mat-icon class="ico">account_balance</mat-icon>
+      <mat-icon class="ico">payment</mat-icon>
       <span>Fund Account</span>
     </button>
     <button mat-button class="menu-button mBB" routerLink="transactions">
@@ -55,7 +57,7 @@
     </button>
     <mat-divider></mat-divider>
     <button mat-button class="menu-button">
-      <mat-icon class="ico">settings_power</mat-icon>
+      <mat-icon class="ico">power_settings_new</mat-icon>
       <span>Log Out</span>
     </button>
   </mat-sidenav>

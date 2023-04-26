@@ -8,10 +8,16 @@ export class FilterPipe implements PipeTransform {
     if (!items) return [];
     if (!searchText) return items;
   
-    return items.filter(item => {
-      return Object.keys(item).some(key => {
-        return String(item[key]).toLowerCase().includes(searchText.toLowerCase());
-      });
+    const arr = items.filter(item => this.getSome(item, searchText));
+    return arr;
+  }
+
+
+  getSome(item: any, searchText: string){
+    const returnVal = Object.keys(item).some(key => {
+      const val = String(item[key]).toLowerCase().includes(searchText.toLowerCase());
+      return val;
     });
+    return returnVal;
   }
 }

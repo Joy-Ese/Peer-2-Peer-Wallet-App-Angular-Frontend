@@ -2,25 +2,95 @@
   color: white;
 }
 
-.btnColour {
-  background-color: #003366!important;
+.spanBadge {
+	font-size: 10px;
+	position: absolute;
 }
 
-.btnDiv {
-	margin-left: 150px;
-	margin-top: 30px;
+.navContainer {
+	display: flex;
+	justify-content: space-between;
 }
 
-.imgAvatar {
-  width: 80px;
-  height: 80px;
-  margin-left: 80px;
-  /* position: absolute; */
-  box-shadow: inset 0px 1px 2px #003366a6;
+.allDivCon {
+	display: flex;
+	justify-content: space-between;
+}
+
+.imgDiv {
+	transform: translate(1310%, -2%);
+}
+
+.imgElement {
+	width: 70px;
+	height: 70px;
+}
+
+.notificationDiv {
+	margin-top: 5px;
+	transform: translate(1200%, 5%);
+}
+
+.notificationColour {
+	background-color: #003366!important;
+}
+
+.notificationColour:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.nameDiv p {
+	margin-top: 10px;
+	color: #fff;
+	font-size: 1.2em;
+	position: absolute;
+	transform: translate(440%, 5%);
+}
+
+.nameDiv p:nth-child(1) {
+	color: transparent;
+	-webkit-text-stroke: 2.6px #003366;
+}
+
+.nameDiv p:nth-child(2) {
+	color: #FF0033;
+	animation: animate 3s ease-in-out infinite;
+}
+
+@keyframes animate {
+	0%,
+	100% {
+		clip-path: polygon(
+			0% 25%,
+			16% 44%,
+			33% 50%,
+			54% 60%,
+			70% 61%,
+			84% 59%,
+			100% 52%,
+			100% 100%,
+			0% 100%
+		);
+	}
+
+	50% {
+		clip-path: polygon(
+			0% 60%,
+			15% 65%,
+			34% 66%,
+			51% 62%,
+			67% 50%,
+			84% 45%,
+			100% 46%,
+			100% 100%,
+			0% 100%
+		);
+	}
 }
 
 mat-toolbar {
-  height: 90px;
+  height: 100px!important;
 }
 
 mat-sidenav {
@@ -68,53 +138,5 @@ mat-divider {
   margin-top: 16px;
   margin-bottom: 16px;
   background-color: rgba(0, 0, 0, 0.5);
-}
-
-.nameSign p {
-	color: #fff;
-	font-size: 1.2em;
-	position: absolute;
-	transform: translate(-50%, -50%);
-}
-
-.nameSign p:nth-child(1) {
-	color: transparent;
-	-webkit-text-stroke: 2.6px #003366;
-}
-
-.nameSign p:nth-child(2) {
-	color: #FF0033;
-	animation: animate 3s ease-in-out infinite;
-}
-
-@keyframes animate {
-	0%,
-	100% {
-		clip-path: polygon(
-			0% 25%,
-			16% 44%,
-			33% 50%,
-			54% 60%,
-			70% 61%,
-			84% 59%,
-			100% 52%,
-			100% 100%,
-			0% 100%
-		);
-	}
-
-	50% {
-		clip-path: polygon(
-			0% 60%,
-			15% 65%,
-			34% 66%,
-			51% 62%,
-			67% 50%,
-			84% 45%,
-			100% 46%,
-			100% 100%,
-			0% 100%
-		);
-	}
 }
 
