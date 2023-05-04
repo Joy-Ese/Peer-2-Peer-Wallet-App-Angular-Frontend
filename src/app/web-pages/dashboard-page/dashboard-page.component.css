@@ -1,5 +1,6 @@
 .ico {
   color: white;
+	font-size: 27px;
 }
 
 .spanBadge {
@@ -42,13 +43,14 @@
 
 .nameDiv p {
 	margin-top: 10px;
-	color: #fff;
+	/* color: #fff; */
+	color: #003366;
 	font-size: 1.2em;
 	position: absolute;
-	transform: translate(440%, 5%);
+	transform: translate(600%, 5%);
 }
 
-.nameDiv p:nth-child(1) {
+/* .nameDiv p:nth-child(1) {
 	color: transparent;
 	-webkit-text-stroke: 2.6px #003366;
 }
@@ -87,7 +89,7 @@
 			0% 100%
 		);
 	}
-}
+} */
 
 mat-toolbar {
   height: 100px!important;
@@ -120,6 +122,11 @@ mat-sidenav-container {
   align-items: center;
   justify-content: flex-start;
   font-size: 0.9rem;
+}
+
+.menu-button:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .mBB {

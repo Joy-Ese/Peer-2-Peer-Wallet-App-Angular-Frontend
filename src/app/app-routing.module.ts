@@ -4,12 +4,13 @@ import { RouterModule, Routes } from '@angular/router';
 import { RegisterPageComponent } from './web-pages/register-page/register-page.component';
 import { LoginPageComponent } from './web-pages/login-page/login-page.component';
 import { AuthService } from './auth/auth.service';
+import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
 
 const routes: Routes = [
   {
     path: "",
     pathMatch: "full",
-    redirectTo: "login"
+    redirectTo: "notfound"
   },
   {
     path: "register",
@@ -18,6 +19,10 @@ const routes: Routes = [
   {
     path: "login",
     component: LoginPageComponent
+  },
+  {
+    path: "notfound",
+    component: PageNotFoundComponent
   },
   {
     path: "dashboard",

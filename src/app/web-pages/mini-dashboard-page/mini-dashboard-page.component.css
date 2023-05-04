@@ -47,11 +47,25 @@
 .tranDiv {
   background-color: #003366;
   width: 97%;
-  height: 48vh;
+  height: 50vh;
   margin-left: 17px;
   border-radius: 25px;
 }
 
 .tableBody {
   font-size: 18px;
+}
+
+.linkToTxn {
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 30px;
+  display: inline-block;
+  padding: 5px;
+}
+
+.linkToTxn:hover {
+  transform: translateY(-5px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }

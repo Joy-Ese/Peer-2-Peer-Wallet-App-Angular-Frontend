@@ -1,0 +1,52 @@
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.btn-outline-secondary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tabBtns {
+  color: white;
+  border-radius: 10px;
+  padding: 15px;
+}
+
+.mBB {
+  margin-top: 30px;
+}
+
+mat-divider {
+  /* background-color: #003366; */
+  background-color: #FF0033;
+  height: calc(113vh - 98px);
+  width: 0px !important;
+  position: inherit !important;
+}
+
+.editProfile {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.updatePin {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.changePassword {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.setImage {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.updateImage {
+  padding-left: 25px;
+  margin-top: 15px;
+}

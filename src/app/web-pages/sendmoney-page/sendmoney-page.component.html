@@ -1,10 +1,48 @@
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
-<p>sendmoney-page works!</p>
+<div class="row">
+  <div class="container">
+    <div class="col-9 bdgDiv d-flex justify-content-between">
+      <div class="mt-4">
+        <span class="myBal mx-4 mt-5">Balance</span>
+        <div class="mx-4 mt-2 d-flex">
+          <h1 class="balFigure text-center">{{balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1>
+        </div>
+      </div>
+      <div class="showBal d-flex flex-column">
+        <!-- <i class="" [ngClass]="this.balance != '' ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i> -->
+        <i class="fa fa-eye mx-5"></i>
+        <!-- <span class="mx-2 fw-bold">Hide balance</span> -->
+      </div>
+    </div>
+    <!--  -->
+    <div class="col-9 compusloryMargin">
+      <form>
+        <div class="input-group mb-3 mt-3">
+          <input type="search" class="form-control" name="searchInfo" 
+          [(ngModel)]="searchInfo" [value]="searchInfo" placeholder="Search by email or username or account number">
+          <button class="btn btn-outline-secondary" type="submit" (click)="accountLookUp(searchInfo)">
+            Search
+          </button>
+        </div>
+      </form>
+    </div>
+    <!--  -->
+    <div class="col-9 compusloryMargin searchResult" *ngIf="this.status; else elseDiv">
+      <h2>Search Result:</h2>
+      <h3>Firstname: <span>{{firstName}}</span></h3>
+      <h3>Lastname: <span>{{lastName}}</span></h3>
+      <h3>Account Number: <span>{{destAcct}}</span></h3>
+    </div>
+    <ng-template #elseDiv>
+      <div class="col-9 compusloryMargin searchResult">
+        <h3>Account Not Found</h3>
+      </div>
+    </ng-template>
+    <!-- Input type date time for the datepicker thingy in minidashboard -->
+    <!--  -->
+    <div class="col-9 compusloryMargin mt-5">
+      <button class="btn btn-outline-secondary proceedTo" type="submit" (click)="openDialog('600ms', '300ms')">
+        Proceed to Transfer
+      </button>
+    </div>
+  </div>
+</div>

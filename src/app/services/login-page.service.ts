@@ -25,19 +25,31 @@ export class LoginPageService {
     password: string
   }) {
     const headers = new HttpHeaders({
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
     })
     this.http.post(`${this.baseUrl}/api/Auth/Login`,
     loginData, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.loginResponseFromBackEnd = res as LoginResponseFromBackEnd;
         console.log(this.loginResponseFromBackEnd);
-        this.key = localStorage.setItem("userData", JSON.stringify(this.loginResponseFromBackEnd));
+        this.key = localStorage.setItem("loginResponse", JSON.stringify(this.loginResponseFromBackEnd));
         localStorage.setItem("token", this.loginResponseFromBackEnd.result);
-        // this.router.navigateByUrl('/dashboard');
-        this.router.navigate(['/dashboard']);
+        const headers2 = new HttpHeaders({
+          "Content-Type": "application/json",
+          "Authorization": `Bearer ${this.loginResponseFromBackEnd.result}`
+        })
+          this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers2})
+          .subscribe({
+            next: (res) => {
+              console.log(res);
+              localStorage.setItem("userDetails", JSON.stringify(res))
+              this.router.navigate(['/dashboard']);
+            },
+            error: (err) => {
+              console.log(err);
+            },
+          });
       },
       error: (err) => {
         console.log(err);

@@ -9,14 +9,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { LoginPageComponent } from './web-pages/login-page/login-page.component';
 import { RegisterPageComponent } from './web-pages/register-page/register-page.component';
 import { MaterialModule } from './material/material.module';
-import { ProfilePageComponent } from './web-pages/profile-page/profile-page.component';
+import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginPageComponent,
     RegisterPageComponent,
-    ProfilePageComponent,
+    PageNotFoundComponent,
   ],
   imports: [
     BrowserModule,

@@ -41,7 +41,6 @@ export class MiniDashboardPageComponent implements OnInit{
     {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
         this.acctNumber = this.userDetailResponseFromBackEnd.accountNumber;
         this.balance = this.userDetailResponseFromBackEnd.balance;

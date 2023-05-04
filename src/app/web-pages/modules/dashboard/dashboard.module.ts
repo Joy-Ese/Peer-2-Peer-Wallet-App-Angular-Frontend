@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
@@ -15,6 +16,7 @@ import { AuthorizeInterceptorInterceptor } from 'src/app/reuseable-components/be
 import { ProfilePageComponent } from '../../profile-page/profile-page.component';
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from 'src/app/models/filter.pipe';
+import { DialogContentComponent } from 'src/app/reuseable-components/dialog-content/dialog-content.component';
 
 const routes: Routes = [
   {
@@ -56,7 +58,9 @@ const routes: Routes = [
     SendmoneyPageComponent,
     FundaccountPageComponent,
     TransactionPageComponent,
+    ProfilePageComponent,
     SnackBarComponent,
+    DialogContentComponent,
     FilterPipe,
   ],
   imports: [
@@ -66,6 +70,7 @@ const routes: Routes = [
     RouterModule,
     HttpClientModule,
     FormsModule,
+    MatDialogModule,
   ],
   providers: [
     { 

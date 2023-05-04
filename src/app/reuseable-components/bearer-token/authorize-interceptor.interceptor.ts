@@ -43,7 +43,7 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor {
           setTimeout(() => {this.router.navigate(['/login'])}, 4000);
         }
         else if(error.status === 404) {
-          this.router.navigate(['/login']);
+          this.router.navigate(['/notfound']);
         }
       }
     }));

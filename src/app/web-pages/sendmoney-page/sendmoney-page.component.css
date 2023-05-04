@@ -1,0 +1,58 @@
+.container {
+  margin-top: 10px;
+}
+
+.bdgDiv {
+  background-color: #003366;
+  border-radius: 30px;
+  margin-left: 150px;
+  height: 20.5vh;
+}
+
+.myBal {
+  color: white;
+  font-size: 18px;
+}
+
+.balFigure {
+  color: white;
+}
+
+.balCurr {
+  color: white;
+}
+
+i {
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.showBal {
+  margin-top: 85px;
+  color: white;
+}
+
+.compusloryMargin {
+  margin-left: 150px;
+}
+
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.searchResult {
+  font-size: 18px;
+  line-height: 250%;
+  margin-left: 160px;
+}
+
+.proceedTo {
+  margin-left: 644px;
+}
+
+.proceedTo:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}

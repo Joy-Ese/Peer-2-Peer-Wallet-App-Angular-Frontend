@@ -61,7 +61,7 @@
                   <div class="form-outline">
                     <label class="form-label inputColour" for="password">Password</label>
                     <input type="password" class="form-control" name="password" ngModel required #pAss="ngModel"/>
-                    <small *ngIf="pAss.invalid && pAss.touched">Password is required</small>
+                    <small *ngIf="pAss.invalid && pAss.touched">Min of 6 char,1 capital letter and 1 number</small>
                   </div>
                 </div>
                 <div class="col-md-6 mb-3">

@@ -10,15 +10,15 @@
           <div class="mt-4">
             <span class="myBal text-center mx-4">Balance</span>
             <div class="mx-4 mt-2 d-flex">
-              <h1 class="balFigure text-center">{{this.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
-              <span class="balCurr text-center mt-2">{{this.currency}}</span>
+              <h1 class="balFigure text-center">{{balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
+              <span class="balCurr text-center mt-2">{{currency}}</span>
             </div>
           </div>
         </div>
         <div class="mt-4">
           <div>
             <span class="mx-4 text-center myAcct">Account Number</span>
-            <h1 class="mt-2 text-center acctNum">{{this.acctNumber}}</h1>
+            <h1 class="mt-2 text-center acctNum">{{acctNumber}}</h1>
           </div>
         </div>
       </div>
@@ -60,6 +60,7 @@
           </tbody>
         </table>
       </div>
+      <a class="linkToTxn" routerLink="/dashboard/transactions">View more transactions......</a>
     </div>
   </div>
 </div>

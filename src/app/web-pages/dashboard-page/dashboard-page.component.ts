@@ -1,7 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import { Router } from '@angular/router';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
@@ -17,6 +16,7 @@ export class DashboardPageComponent implements OnInit {
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
 
   username! : string;
+  sourceAcct! : string;
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
@@ -36,6 +36,7 @@ export class DashboardPageComponent implements OnInit {
       next: (res) => {
         this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
         this.username = this.userDetailResponseFromBackEnd.username;
+        this.sourceAcct = this.userDetailResponseFromBackEnd.accountNumber;
       },
       error: (err) => {
         console.log(err);

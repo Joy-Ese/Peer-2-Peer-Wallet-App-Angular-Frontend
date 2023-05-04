@@ -1,12 +1,188 @@
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
-<p>profile-page works!</p>
+<div class="row">
+  <div class="container d-flex"  [ngSwitch]="switchTabs">
+    <div class="firstDiv">
+      <div class="d-flex">
+        <div class="tabBtns">
+          <div>
+            <button class="btn btn-outline-secondary" (click)="changeContent('editProfile')" type="button">My Profile</button>
+          </div>
+    
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('updatePin')" type="button">Update Pin</button>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('setImage')" type="button">Set Profile Picture</button>
+          </div>
+    
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('changePassword')" type="button">Change Password</button>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('updateImage')" type="button">Update Profile Picture</button>
+          </div>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+      </div>
+    </div>
+    <div class="secondDiv">
+      <div class="editProfile" *ngSwitchCase="'editProfile'">
+        <form class="">
+          <h4 class="fw-bold">Edit your profile</h4>
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="firstName">First Name</label>
+                <input type="text" class="form-control" id="first_name" name="firstName" readonly/>
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="lastName">Last Name</label>
+                <input type="text" class="form-control" name="lastName" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="userName">Username</label>
+                <input type="text" class="form-control" name="userName" />
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="phoneNumber">Phone Number</label>
+                <input type="text" class="form-control" name="phoneNumber" />
+              </div>
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-12 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="email">Email</label>
+                <input type="email" class="form-control" name="email" readonly/>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="address">Address</label>
+              <input type="text" class="form-control " name="address" />
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" type="submit">Save Changes</button>
+          </div>
+        </form>
+      </div>
+      <!--  -->
+      <div class="updatePin" *ngSwitchCase="'updatePin'">
+        <form class="">
+          <h4 class="fw-bold">Update your pin</h4>
+          <div class="col-md-12 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="secQ">Security Question</label>
+              <input type="text" class="form-control " name="secQ" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="oldPin">Old Pin</label>
+                <input type="password" id="oldPin" class="form-control" 
+                  maxlength="4" pattern="^[0-9]{4}$" />
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="newPin">New Pin</label>
+                <input type="password" id="newPin" class="form-control"
+                maxlength="4" pattern="^[0-9]{4}$" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" type="submit">Update Pin</button>
+          </div>
+        </form>
+      </div>
+      <!--  -->
+      <div class="changePassword" *ngSwitchCase="'changePassword'">
+        <form>
+          <h4 class="fw-bold">Change your password</h4>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="secQ">Security Question</label>
+              <input type="text" class="form-control " name="secQ" />
+            </div>
+          </div>
+
+          <div class="row">
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label mt-2" for="securityAnsCH">Password</label>
+                <input type="text" id="securityAnsCH" class="form-control form-control-sm" />
+              </div>
+            </div>
+            <div class="col-md-6 mb-3">
+              <div class="form-outline">
+                <label class="form-label" for="conPasswordCH">Confirm Password</label>
+                <input type="password" id="conPasswordCH" class="form-control" pattern="^[a-zA-Z0-9]{6,}$" />
+              </div>
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" type="submit">Update Password</button>
+          </div>
+        </form>
+      </div>
+      <!--  -->
+      <div class="setImage" *ngSwitchCase="'setImage'">
+        <form>
+          <h4 class="fw-bold">Set your display picture</h4>
+
+          <div class="col-md-12 mb-3">
+            <div class="form-outline">
+              <label for="profile" class="form-label">Upload an image to set your display picture</label>
+              <input class="form-control form-control-sm mt-2" type="file" id="photoUpload" accept=".jpg, .jpeg, .png, .pdf">
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" type="submit">Upload Image</button>
+          </div>
+        </form>
+      </div>
+      <!--  -->
+      <div class="updateImage" *ngSwitchCase="'updateImage'">
+        <form>
+          <h4 class="fw-bold">Update your display picture</h4>
+          <!-- use sweet alert to preview image when selected -->
+
+          <div class="col-md-12 mb-3">
+            <div class="form-outline">
+              <label for="profile" class="form-label">Select an image to update your display picture</label>
+              <input class="form-control form-control-sm mt-2" type="file" id="photoUpload" accept=".jpg, .jpeg, .png, .pdf">
+            </div>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" type="submit">Upload Image</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
