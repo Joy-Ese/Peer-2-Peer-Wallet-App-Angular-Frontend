@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserInformation } from '../userInformation';
-import { Component, Input, Inject, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
@@ -19,7 +19,6 @@ export class DialogContentComponent implements OnInit{
   status = false;
 
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<DialogContentComponent>, @Inject(MAT_DIALOG_DATA) public data: MatDialogRef<DialogContentComponent>) {
-    console.log(data)
     this.accInfo = data
   }
 

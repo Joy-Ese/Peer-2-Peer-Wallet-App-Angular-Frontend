@@ -1,8 +1,10 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import {MatDialog} from '@angular/material/dialog';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { LogoutDialogContentComponent } from 'src/app/reuseable-components/logout-dialog-content/logout-dialog-content.component';
 
 @Component({
   selector: 'app-dashboard-page',
@@ -20,7 +22,7 @@ export class DashboardPageComponent implements OnInit {
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private http: HttpClient) {}
+  constructor(private observer: BreakpointObserver, private http: HttpClient, public dialog: MatDialog, ) {}
 
   ngOnInit(){
     this.getUsername();
@@ -53,6 +55,15 @@ export class DashboardPageComponent implements OnInit {
         this.sidenav.mode = 'side';
         this.sidenav.open();
       }
+    });
+  }
+
+  openLogoutDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(LogoutDialogContentComponent, {
+      width: '600px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
     });
   }
 }

@@ -28,19 +28,20 @@
     </div>
     <div class="secondDiv">
       <div class="editProfile" *ngSwitchCase="'editProfile'">
-        <form class="">
+        <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{responseMsg}}</div>
+        <form #editProfileForm="ngForm" (ngSubmit)="onProfileUpdate(editProfileForm.value)">
           <h4 class="fw-bold">Edit your profile</h4>
           <div class="row">
             <div class="col-md-6 mb-3">
               <div class="form-outline">
                 <label class="form-label" for="firstName">First Name</label>
-                <input type="text" class="form-control" id="first_name" name="firstName" readonly/>
+                <input #firstName type="text" class="form-control" name="firstName" [(ngModel)]="fname" readonly/>
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <div class="form-outline">
                 <label class="form-label" for="lastName">Last Name</label>
-                <input type="text" class="form-control" name="lastName" />
+                <input #lastName type="text" class="form-control" name="lastName" [(ngModel)]="lname" />
               </div>
             </div>
           </div>
@@ -49,13 +50,13 @@
             <div class="col-md-6 mb-3">
               <div class="form-outline">
                 <label class="form-label" for="userName">Username</label>
-                <input type="text" class="form-control" name="userName" />
+                <input #username type="text" class="form-control" name="username" [(ngModel)]="uname" />
               </div>
             </div>
             <div class="col-md-6 mb-3">
               <div class="form-outline">
                 <label class="form-label" for="phoneNumber">Phone Number</label>
-                <input type="text" class="form-control" name="phoneNumber" />
+                <input #phoneNumber type="text" class="form-control" name="phoneNumber" [(ngModel)]="phnum" />
               </div>
             </div>
           </div>
@@ -64,7 +65,7 @@
             <div class="col-md-12 mb-3">
               <div class="form-outline">
                 <label class="form-label" for="email">Email</label>
-                <input type="email" class="form-control" name="email" readonly/>
+                <input #email type="email" class="form-control" name="email" [(ngModel)]="em" readonly/>
               </div>
             </div>
           </div>
@@ -72,7 +73,7 @@
           <div class="col-md-12 mb-3">
             <div class="form-outline">
               <label class="form-label" for="address">Address</label>
-              <input type="text" class="form-control " name="address" />
+              <input #address type="text" class="form-control " name="address" [(ngModel)]="addr" />
             </div>
           </div>
 
@@ -167,7 +168,6 @@
       <div class="updateImage" *ngSwitchCase="'updateImage'">
         <form>
           <h4 class="fw-bold">Update your display picture</h4>
-          <!-- use sweet alert to preview image when selected -->
 
           <div class="col-md-12 mb-3">
             <div class="form-outline">

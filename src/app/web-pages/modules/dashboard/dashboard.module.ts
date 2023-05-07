@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
@@ -17,6 +19,7 @@ import { ProfilePageComponent } from '../../profile-page/profile-page.component'
 import { FormsModule } from '@angular/forms';
 import { FilterPipe } from 'src/app/models/filter.pipe';
 import { DialogContentComponent } from 'src/app/reuseable-components/dialog-content/dialog-content.component';
+import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
 const routes: Routes = [
   {
@@ -71,6 +74,9 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     MatDialogModule,
+    MatTableModule,
+    MatPaginatorModule,
+    SweetAlert2Module,
   ],
   providers: [
     { 

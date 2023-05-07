@@ -25,6 +25,7 @@
         <div class="imgDiv">
           <img src="../../../assets/images/undraw_profile_pic_red.svg" 
           class="rounded-circle imgElement" alt="Avatar" />
+          <!-- GET display image -->
         </div>
       </div>
     </div>
@@ -54,7 +55,7 @@
       <span>Profile</span>
     </button>
     <mat-divider></mat-divider>
-    <button mat-button class="menu-button">
+    <button mat-button class="menu-button" (click)="openLogoutDialog('600ms', '300ms')">
       <mat-icon class="ico">power_settings_new</mat-icon>
       <span>Log Out</span>
     </button>

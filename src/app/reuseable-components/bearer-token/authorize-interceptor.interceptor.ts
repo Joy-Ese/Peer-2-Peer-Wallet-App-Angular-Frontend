@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, OnInit } from '@angular/core';
 import {
   HttpRequest,
   HttpHandler,
@@ -10,15 +10,22 @@ import { Observable, tap } from 'rxjs';
 import { Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from 'src/app/reuseable-components/snack-bar/snack-bar.component';
+import { UserInformation } from '../userInformation';
 
 @Injectable()
-export class AuthorizeInterceptorInterceptor implements HttpInterceptor {
+export class AuthorizeInterceptorInterceptor implements HttpInterceptor, OnInit{
+
+  userDetails! : any;
 
   constructor(private router: Router, private matSnackBar: MatSnackBar) {}
 
+  ngOnInit() {
+    this.userDetails = UserInformation();
+  }
+
   passDataToSnackComponent() {
     this.matSnackBar.openFromComponent(SnackBarComponent, {
-      data: `Hi {NAME}, You now have unauthorized access!`,
+      data: `Hi ${this.userDetails.firstName}, You now have unauthorized access!`,
       duration: 5000,
       panelClass: ["snack-notification"],
       horizontalPosition: "center",

@@ -5,6 +5,7 @@ import { RegisterPageComponent } from './web-pages/register-page/register-page.c
 import { LoginPageComponent } from './web-pages/login-page/login-page.component';
 import { AuthService } from './auth/auth.service';
 import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
+import { AuthGuard } from './auth/auth.guard';
 
 const routes: Routes = [
   {
@@ -27,6 +28,7 @@ const routes: Routes = [
   {
     path: "dashboard",
     canMatch: [() => inject(AuthService).isAuthenticated()],
+    // canActivate: [AuthGuard],
     loadChildren: () => import("./web-pages/modules/dashboard/dashboard.module").then(d => d.DashboardModule)
   },
 ]

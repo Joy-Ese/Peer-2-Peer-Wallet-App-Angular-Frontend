@@ -10,6 +10,7 @@ import { LoginPageComponent } from './web-pages/login-page/login-page.component'
 import { RegisterPageComponent } from './web-pages/register-page/register-page.component';
 import { MaterialModule } from './material/material.module';
 import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
+import { LogoutDialogContentComponent } from './reuseable-components/logout-dialog-content/logout-dialog-content.component';
 
 @NgModule({
   declarations: [
@@ -17,6 +18,7 @@ import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found
     LoginPageComponent,
     RegisterPageComponent,
     PageNotFoundComponent,
+    LogoutDialogContentComponent,
   ],
   imports: [
     BrowserModule,

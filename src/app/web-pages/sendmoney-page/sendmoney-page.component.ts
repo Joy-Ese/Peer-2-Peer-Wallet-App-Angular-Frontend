@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
 import {MatDialog} from '@angular/material/dialog';
 import { AcctEnquiryResponseFromBackEnd } from 'src/app/models/response-from-backend/acctEnquiry-response';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
@@ -29,7 +28,7 @@ export class SendmoneyPageComponent implements OnInit{
   lastName! : string;
   status! : boolean;
 
-  constructor(private http: HttpClient, public dialog: MatDialog, private activatedRoute: ActivatedRoute) {}
+  constructor(private http: HttpClient, public dialog: MatDialog, ) {}
 
   ngOnInit() {
     this.getUserDetails();

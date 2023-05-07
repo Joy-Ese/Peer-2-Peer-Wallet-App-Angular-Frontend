@@ -25,9 +25,18 @@
 }
 
 input.ng-invalid {
-  border: rgba(253, 85, 85, 0.753) 1px solid;
+  /* border: rgba(253, 85, 85, 0.753) 1px solid; */
+  border: #FF0033 1px solid;
+  
 }
 
 small {
-  color: rgba(253, 85, 85, 0.932);
+  /* color: rgba(253, 85, 85, 0.932); */
+  color: #FF0033;
+}
+
+.iconEye {
+  position: relative;
+  left: 63%;
+  margin-top: -30px;
 }

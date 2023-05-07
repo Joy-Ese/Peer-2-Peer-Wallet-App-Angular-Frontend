@@ -26,7 +26,7 @@ export class LoginPageService {
   }) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json",
-    })
+    });
     this.http.post(`${this.baseUrl}/api/Auth/Login`,
     loginData, {headers: headers})
     .subscribe({
@@ -38,7 +38,7 @@ export class LoginPageService {
         const headers2 = new HttpHeaders({
           "Content-Type": "application/json",
           "Authorization": `Bearer ${this.loginResponseFromBackEnd.result}`
-        })
+        });
           this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers2})
           .subscribe({
             next: (res) => {

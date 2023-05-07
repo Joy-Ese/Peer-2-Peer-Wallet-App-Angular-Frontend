@@ -10,6 +10,8 @@ import { LoginPageService } from 'src/app/services/login-page.service';
 export class LoginPageComponent implements OnInit {
   errorMessage : string = "";
 
+  showPassword: boolean = false;
+
   @ViewChild("logForm") form!: NgForm;
 
   constructor(private loginPageService : LoginPageService) {
@@ -17,6 +19,10 @@ export class LoginPageComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginPageService;
+  }
+
+  togglePasswordVisibility(): void {
+    this.showPassword = !this.showPassword;
   }
 
   onLogin(loginData: {
