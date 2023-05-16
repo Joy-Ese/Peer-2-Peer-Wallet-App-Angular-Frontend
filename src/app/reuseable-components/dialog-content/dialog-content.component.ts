@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { UserInformation } from '../userInformation';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-dialog-content',
@@ -36,10 +37,25 @@ export class DialogContentComponent implements OnInit{
         console.log(res);
         this.responseMsg = res.responseMessage;
         this.status = res.status;
+        if (this.status == true) {
+          Swal.fire({
+            text: this.responseMsg,
+            confirmButtonColor: "#003366",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);
       },
       error: (err) => {
         console.log(err);
       }
-    })
+    });
   }
 }

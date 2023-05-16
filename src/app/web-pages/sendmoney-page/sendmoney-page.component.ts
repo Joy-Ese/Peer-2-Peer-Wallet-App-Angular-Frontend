@@ -1,4 +1,4 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { AcctEnquiryResponseFromBackEnd } from 'src/app/models/response-from-backend/acctEnquiry-response';
@@ -39,9 +39,9 @@ export class SendmoneyPageComponent implements OnInit{
     // });
 	}
 
-  hideBalance = false;
-  toggleBalance() {
-    this.hideBalance = !this.hideBalance;
+  showEye = false;
+  toggleEye() {
+    this.showEye = !this.showEye;
   }
 
   accountLookUp(value: string) {

@@ -4,7 +4,7 @@ import { Router } from '@angular/router';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-type activeTab = "editProfile" | "updatePin" | "changePassword" | "setImage" | "updateImage";
+type activeTab = "editProfile" | "updatePin" | "changePassword" | "uploadImage" | "updateImage";
 
 @Component({
   selector: 'app-profile-page',
@@ -15,6 +15,7 @@ type activeTab = "editProfile" | "updatePin" | "changePassword" | "setImage" | "
 export class ProfilePageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
+  imageFile: any;
 
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
 
@@ -29,6 +30,12 @@ export class ProfilePageComponent implements OnInit{
   changePassRespMsg = "";
   changePassStatus! : boolean;
 
+  imageUploadRespMsg = "";
+  imageUploadStatus! : boolean;
+
+  imageUpdateRespMsg = "";
+  imageUpdateStatus! : boolean;
+
   fname! : string;
   lname! : string;
   uname! : string;
@@ -37,8 +44,6 @@ export class ProfilePageComponent implements OnInit{
   em! : string;
 
   securityQues! : string;
-
-  // ImageDetails! : File;
 
   constructor(private http: HttpClient, private router: Router,) {}
 
@@ -87,7 +92,6 @@ export class ProfilePageComponent implements OnInit{
     this.http.put<any>(`${this.baseUrl}/api/Auth/UpdateUserPin`, updatePinData, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.updatePinRespMsg = res.message;
         this.updatePinStatus = res.status;
         if (this.updatePinStatus == true) {
@@ -101,9 +105,6 @@ export class ProfilePageComponent implements OnInit{
               popup: 'animate__animated animate__fadeOutUp'
             }
           })
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         }
         setTimeout(() => {
           window.location.reload();
@@ -114,19 +115,43 @@ export class ProfilePageComponent implements OnInit{
       }
     });
   }
-// Figure out image upload and update..........
-  onImageUpload(ImageDetails: File) {
-    const formData: FormData = new FormData();
-    formData.append('ImageDetails', ImageDetails);
-    this.http.post(`${this.baseUrl}/api/Dashboard/UploadNewImage`, formData)
-    .subscribe({
-      next: (res) => {
-        console.log(res);
-      },
-      error: (err) => {
-        console.log(err);
-      }
-    });
+
+  handleFile(event: any){
+    this.imageFile = event.target.files[0];
+  }
+
+  onImageUpload(imageData: any) {
+    const file:File = imageData;
+    if (file) {
+      const formData = new FormData();
+      formData.append('ImageDetails', this.imageFile);
+
+      this.http.post<any>(`${this.baseUrl}/api/Dashboard/UploadNewImage`, formData)
+      .subscribe({
+        next: (res) => {
+          this.imageUploadRespMsg = res.message;
+          this.imageUploadStatus = res.status;
+          if (this.imageUploadStatus == true) {
+            Swal.fire({
+              text: this.imageUploadRespMsg,
+              confirmButtonColor: "#003366",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
   }
 
   onPasswordChange(changePassData: [key: string]) {
@@ -136,7 +161,6 @@ export class ProfilePageComponent implements OnInit{
     this.http.post<any>(`${this.baseUrl}/api/Auth/ChangePassword`, changePassData, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.changePassRespMsg = res.message;
         this.changePassStatus = res.status;
         if (this.changePassStatus == true) {
@@ -150,13 +174,10 @@ export class ProfilePageComponent implements OnInit{
               popup: 'animate__animated animate__fadeOutUp'
             }
           })
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
         }
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 1000);
       },
       error: (err) => {
         console.log(err);
@@ -165,15 +186,31 @@ export class ProfilePageComponent implements OnInit{
   }
 
   onImageUpdate(imageData: any) {
-    const file:File = imageData.target.files[0];
+    const file:File = imageData;
     if (file) {
       const formData = new FormData();
-      formData.append('ImageDetails', file);
+      formData.append('ImageDetails', this.imageFile);
 
       this.http.put<any>(`${this.baseUrl}/api/Dashboard/UpdateImage`, formData)
       .subscribe({
         next: (res) => {
-          console.log(res);
+          this.imageUpdateRespMsg = res.message;
+          this.imageUpdateStatus = res.status;
+          if (this.imageUpdateStatus == true) {
+            Swal.fire({
+              text: this.imageUpdateRespMsg,
+              confirmButtonColor: "#003366",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 1000);
         },
         error: (err) => {
           console.log(err);

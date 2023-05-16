@@ -19,7 +19,6 @@ export class TransactionPageComponent implements OnInit{
   count: number = 0;
   tableSize: number = 5;
 
-  // order: string = 'id';
   order!: string;
   reverse: boolean = false;
 
@@ -28,11 +27,6 @@ export class TransactionPageComponent implements OnInit{
   ngOnInit() {
 		this.getTxnsList();
 	}
-
-  // setOrder(order: string) {
-  //   this. order = order;
-  //   this.reverse = !this.reverse;
-  // }
 
   setOrder(value: string) { 
     if (this.order === value) { 
@@ -49,7 +43,6 @@ export class TransactionPageComponent implements OnInit{
     {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.txns = res;
       },
       error: (err) => {

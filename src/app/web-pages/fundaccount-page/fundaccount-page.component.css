@@ -1,0 +1,64 @@
+.container {
+  margin-top: 10px;
+}
+
+.bdgDiv {
+  background-color: #003366;
+  border-radius: 30px;
+  margin-left: 150px;
+  height: 20.5vh;
+}
+
+.bdgDivBlur {
+  filter: blur(4px);
+}
+
+.myBal {
+  color: white;
+  font-size: 18px;
+}
+
+.balFigure {
+  color: white;
+}
+
+i {
+  color: white;
+  cursor: pointer;
+  font-size: 18px;
+}
+
+.showBal {
+  margin-top: 85px;
+  color: white;
+}
+
+.compusloryMargin {
+  margin-left: 150px;
+}
+
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.btn-outline-secondary:hover {
+  transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.proceedTo {
+  margin-left: 614px;
+}
+
+.styleIFrame {
+  height: calc(113vh - 99px);
+  width: 85%;
+  background-color: rgba(0,0,0, 0.4);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+}
