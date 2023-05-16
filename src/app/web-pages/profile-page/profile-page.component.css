@@ -50,3 +50,7 @@ mat-divider {
   padding-left: 25px;
   margin-top: 15px;
 }
+
+.alert-danger {
+  color: #FF0033;
+}

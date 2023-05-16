@@ -53,7 +53,6 @@ export class SendmoneyPageComponent implements OnInit{
     this.http.post(`${this.baseUrl}/api/Account/AccountLookUp?${params}`, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.acctEnquiryResponseFromBackEnd = res as AcctEnquiryResponseFromBackEnd;
         this.destAcct = this.acctEnquiryResponseFromBackEnd.acctNumber;
         this.firstName = this.acctEnquiryResponseFromBackEnd.firstName;

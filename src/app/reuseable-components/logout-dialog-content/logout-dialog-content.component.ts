@@ -22,6 +22,6 @@ export class LogoutDialogContentComponent implements OnInit{
     // );
     setTimeout(() => {
       window.location.reload();
-    }, 100);
+    }, 50);
   }
 }

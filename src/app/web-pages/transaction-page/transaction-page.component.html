@@ -1,14 +1,29 @@
 <div class="row">
   <div class="tranDiv mt-3">
+    <h2 class="myBal mx-2">List of all Transactions</h2>
+    <!--  -->
+    <form>
+      <div class="row form-group">
+        <div class="col-sm-4">
+          <div class="input-group date" id="datepicker">
+            <input type="text" class="form-control">
+            <span class="input-group-append">
+              <span class="input-group-text bg-white">
+                <mat-icon>calendar_today</mat-icon>
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+    </form>
+    <!--  -->
     <div class="mt-4">
       <div class=" d-flex justify-content-between">
-        <h2 class="myBal mx-2">List of all Transactions</h2>
-        <!-- <h2 class="myBal mx-2">Angular material table filtering???????</h2> -->
         <div class="col-5 card mx-2 filterCard">
           <div class="card-body d-flex justify-content-between">
             Filter By: 
             <div class="mx--5 filterInput">
-              <input type="text" [(ngModel)]="searchText" class="form-control">
+              <input type="search" [(ngModel)]="searchText" class="form-control">
             </div>
           </div>
         </div>
@@ -18,17 +33,26 @@
         *ngIf="(txns | filterBy: searchText).length > 0; else noResults">
           <thead>
             <tr>
-              <th scope="col">AMOUNT</th>
-              <th scope="col">SENDER INFO</th>
-              <th scope="col">RECEPIENT INFO</th>
-              <th scope="col">TYPE</th>
-              <th scope="col">CURRENCY</th>
-              <th scope="col">STATUS</th>
-              <th scope="col">DATE</th>
+              <th scope="col" (click)="setOrder('amount')">
+                AMOUNT <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
+              <th scope="col" (click)="setOrder('senderInfo')">
+                SENDER INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
+              <th scope="col" (click)="setOrder('recepientInfo')">
+                RECEPIENT INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+              <th scope="col" (click)="setOrder('type')">
+                TYPE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+              <th scope="col" (click)="setOrder('currency')">
+                CURRENCY <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+              <th scope="col" (click)="setOrder('status')">
+                STATUS <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+              <th scope="col" (click)="setOrder('date')">
+                DATE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
             </tr>
           </thead>
           <tbody class="tableBody">
-            <tr *ngFor="let item of txns | filterBy: searchText;">
+            <tr *ngFor="let item of txns | filterBy: searchText | orderBy: order: reverse | paginate: {itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
               <td>{{item.amount |currency:"&#8358;":"symbol":"1.2-2"}}</td>
               <td>{{item.senderInfo}}</td>
               <td>{{item.recepientInfo}}</td>
@@ -44,63 +68,20 @@
           </tbody>
         </table>
 
+        <div class="d-flex justify-content-center raisedbox">
+          <pagination-controls
+            previousLabel="Prev"
+            nextLabel="Next"
+            (pageChange)="onTableDataChange($event)"
+          >
+          </pagination-controls>
+        </div>
+
         <ng-template #noResults>
           <p>No results found for "{{searchText}}".</p>
         </ng-template>
       </div>
     </div>
-    <!-- Input type date time for the datepicker thingy in minidashboard -->
-
-
-    <!--  -->
-    <!--  -->
-    <div class="mat-elevation-z8">
-      <table mat-table [dataSource]="dataSource" matSort *ngFor="let itemsss of txns">
-    
-        <ng-container matColumnDef="amount">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>AMOUNT</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.amount}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="senderInfo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>SENDER INFO</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.senderInfo}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="recepientInfo">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>RECEPIENT INFO</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.recepientInfo}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="transactionType">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>TYPE</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.transactionType}} </td>
-        </ng-container>
-    
-        <ng-container matColumnDef="currency">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>CURRENCY</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.currency}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="status">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>STATUS</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.status}} </td>
-        </ng-container>
-
-        <ng-container matColumnDef="date">
-          <th mat-header-cell *matHeaderCellDef mat-sort-header>DATE</th>
-          <td mat-cell *matCellDef="let itemsss"> {{itemsss.date}} </td>
-        </ng-container>
-    
-        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-        <tr mat-row *matRowDef="let itemsss; columns: displayedColumns;"></tr>
-    
-      </table>
-    
-      <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" aria-label="Select page of users"></mat-paginator>
-    </div>
-    <!--  -->
-    <!--  -->
   </div>
 </div>
 

@@ -59,7 +59,6 @@ export class MiniDashboardPageComponent implements OnInit{
     {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
         this.lastThreeTxns = res;
       },
       error: (err) => {
@@ -76,7 +75,6 @@ export class MiniDashboardPageComponent implements OnInit{
     {headers: headers})
     .subscribe({
       next: (res) => {
-        // console.log(res);
         this.acctCurrencyResponseFromBackEnd = res as AcctCurrencyResponseFromBackEnd;
         this.currency = this.acctCurrencyResponseFromBackEnd.currency;
       },
@@ -85,6 +83,4 @@ export class MiniDashboardPageComponent implements OnInit{
       },
     });
   }
-
-
 }

@@ -17,6 +17,8 @@ export class DashboardPageComponent implements OnInit {
 
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
 
+  imageFromDb! : any;
+
   username! : string;
   sourceAcct! : string;
 
@@ -26,19 +28,34 @@ export class DashboardPageComponent implements OnInit {
 
   ngOnInit(){
     this.getUsername();
+    this.getUserImage();
   }
 
   getUsername() {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
-    {headers: headers})
+    this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers})
     .subscribe({
       next: (res) => {
         this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
         this.username = this.userDetailResponseFromBackEnd.username;
         this.sourceAcct = this.userDetailResponseFromBackEnd.accountNumber;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getUserImage() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserImage`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.imageFromDb ="data:image/png;base64," + res.imageDetails;
       },
       error: (err) => {
         console.log(err);

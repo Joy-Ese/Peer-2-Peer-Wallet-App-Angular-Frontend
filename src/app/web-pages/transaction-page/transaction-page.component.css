@@ -30,3 +30,11 @@
 .dateColour {
   background-color: grey!important;
 }
+
+.raisedbox { 
+  padding-top: 50px;
+}
+
+.pointer {
+  cursor: pointer;
+}

@@ -1,3 +1,9 @@
+.imgLogo {
+	width: 180px;
+	height: 90px;
+	margin-left: -10px;
+}
+
 .ico {
   color: white;
 	font-size: 27px;
@@ -16,20 +22,22 @@
 .allDivCon {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 10px;
 }
 
 .imgDiv {
-	transform: translate(1310%, -2%);
+	transform: translate(1440%, -2%);
 }
 
 .imgElement {
 	width: 70px;
 	height: 70px;
+	border: 1px solid #ff0033;
 }
 
 .notificationDiv {
 	margin-top: 5px;
-	transform: translate(1200%, 5%);
+	transform: translate(1480%, 5%);
 }
 
 .notificationColour {
@@ -47,7 +55,7 @@
 	color: #003366;
 	font-size: 1.2em;
 	position: absolute;
-	transform: translate(600%, 5%);
+	transform: translate(720%, 5%);
 }
 
 /* .nameDiv p:nth-child(1) {

@@ -10,7 +10,7 @@
   <div class="row">
     <div class="container-fluid navContainer">
       <div>
-        <img src="../assets/images/Logo-.png" alt="">
+        <img class="imgLogo" src="../../../assets/images/logo.png" alt="">
       </div>
       <div class="container allDivCon">
         <div class="notificationDiv">
@@ -23,9 +23,7 @@
           <p>Hi, {{username}} </p>
         </div>
         <div class="imgDiv">
-          <img src="../../../assets/images/undraw_profile_pic_red.svg" 
-          class="rounded-circle imgElement" alt="Avatar" />
-          <!-- GET display image -->
+          <img [src]="imageFromDb" class="rounded-circle imgElement" alt="Image" />
         </div>
       </div>
     </div>

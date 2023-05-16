@@ -42,7 +42,6 @@ export class LoginPageService {
           this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers2})
           .subscribe({
             next: (res) => {
-              console.log(res);
               localStorage.setItem("userDetails", JSON.stringify(res))
               this.router.navigate(['/dashboard']);
             },

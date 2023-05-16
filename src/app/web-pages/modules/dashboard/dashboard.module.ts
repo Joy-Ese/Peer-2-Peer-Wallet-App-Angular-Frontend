@@ -1,8 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
-import {MatTableModule} from '@angular/material/table';
-import {MatPaginatorModule} from '@angular/material/paginator';
+import {NgxPaginationModule} from 'ngx-pagination';
+import { OrderModule } from 'ngx-order-pipe';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
@@ -74,9 +76,11 @@ const routes: Routes = [
     HttpClientModule,
     FormsModule,
     MatDialogModule,
-    MatTableModule,
-    MatPaginatorModule,
     SweetAlert2Module,
+    NgxPaginationModule,
+    OrderModule,
+    MatDatepickerModule,
+    MatFormFieldModule,
   ],
   providers: [
     { 

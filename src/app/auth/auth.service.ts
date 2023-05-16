@@ -28,9 +28,10 @@ export class AuthService {
     localStorage.removeItem("token");
     localStorage.removeItem("loginResponse");
     localStorage.removeItem("userDetails");
+    localStorage.clear();
     this.router.navigate(['/login']);
     setTimeout(() => {
       window.location.reload();
-    }, 500);
+    }, 300);
   }
 }

@@ -1,26 +1,13 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { AfterViewInit, Component, ViewChild, OnInit } from '@angular/core';
-import {MatPaginator} from '@angular/material/paginator';
-import {MatSort} from '@angular/material/sort';
-import {MatTableDataSource} from '@angular/material/table';
-
-
-export interface TableInfo {
-  amount: number;
-  senderInfo: string;
-  recepientInfo: string;
-  transactionType: string;
-  currency: string;
-  status: string;
-  date: Date;
-}
+import { Component, OnInit } from '@angular/core';
+import { OrderPipe } from 'ngx-order-pipe';
 
 @Component({
   selector: 'app-transaction-page',
   templateUrl: './transaction-page.component.html',
   styleUrls: ['./transaction-page.component.css']
 })
-export class TransactionPageComponent implements OnInit, AfterViewInit{
+export class TransactionPageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
@@ -28,24 +15,30 @@ export class TransactionPageComponent implements OnInit, AfterViewInit{
 
   searchText!: string;
 
-  constructor(
-    private http: HttpClient, 
-  ) {
-    this.dataSource = new MatTableDataSource(this.txns);
-  }
+  page: number = 1;
+  count: number = 0;
+  tableSize: number = 5;
 
-  displayedColumns: string[] = ['amount', 'senderInfo', 'recepientInfo', 'transactionType', 'currency', 'status', 'date'];
-  dataSource: MatTableDataSource<any[]>;
+  // order: string = 'id';
+  order!: string;
+  reverse: boolean = false;
 
-  @ViewChild(MatPaginator) paginator: MatPaginator| null = null;
-  @ViewChild(MatSort) sort: MatSort| null = null;
+  constructor( private http: HttpClient, ) {}
 
   ngOnInit() {
 		this.getTxnsList();
 	}
-  ngAfterViewInit() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
+
+  // setOrder(order: string) {
+  //   this. order = order;
+  //   this.reverse = !this.reverse;
+  // }
+
+  setOrder(value: string) { 
+    if (this.order === value) { 
+      this.reverse = !this.reverse; 
+    } 
+    this.order = value; 
   }
 
   getTxnsList() {
@@ -63,6 +56,16 @@ export class TransactionPageComponent implements OnInit, AfterViewInit{
         console.log(err);
       },
     });
+  }
+
+  onTableDataChange(event: any) {
+    this.page = event;
+    this.getTxnsList();
+  }
+  onTableSizeChange(event: any): void {
+    this.tableSize = event.target.value;
+    this.page = 1;
+    this.getTxnsList();
   }
 }
 
