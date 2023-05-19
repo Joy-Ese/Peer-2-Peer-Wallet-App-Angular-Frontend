@@ -2,33 +2,37 @@
   <div class="tranDiv mt-3">
     <h2 class="myBal mx-2">List of all Transactions</h2>
     <!--  -->
-    <form>
-      <div class="row form-group">
-        <div class="col-sm-4">
-          <div class="input-group date" id="datepicker">
-            <input type="text" class="form-control">
-            <span class="input-group-append">
-              <span class="input-group-text bg-white">
-                <mat-icon>calendar_today</mat-icon>
-              </span>
-            </span>
+    <form #txnsByRangeForm="ngForm">
+      <div class="row">
+        <div class="col-7 d-flex">
+          <div class="col-md-6 mb-3 mx-2">
+            <label>Start Date: </label>
+            <input #startDate type="date" class="form-control" name="startDate" ngModel required/>
+          </div>
+          <div class="col-md-6 mb-3 mx-2">
+            <label>End Date: </label>
+            <input #endDate type="date" class="form-control" name="endDate" ngModel required/>
+          </div>
+          <div class="btnDiv mx-2">
+            <button class="btn btn-outline-secondary" type="submit" (click)="getTxnsByRange(txnsByRangeForm.value)">Search</button>
           </div>
         </div>
       </div>
     </form>
+    <app-spinner></app-spinner>
     <!--  -->
-    <div class="mt-4">
-      <div class=" d-flex justify-content-between">
-        <div class="col-5 card mx-2 filterCard">
-          <div class="card-body d-flex justify-content-between">
-            Filter By: 
-            <div class="mx--5 filterInput">
+    <div class="mt-3">
+      <div class="filterCard d-flex justify-content-between">
+        <div class="col-12">
+          <div class="d-flex justify-content-between">
+            <h4 class="filterText"><b>Filter By:</b></h4> 
+            <div class="filterInput mx-2">
               <input type="search" [(ngModel)]="searchText" class="form-control">
             </div>
           </div>
         </div>
       </div>
-      <div class="table-responsive mt-4 mx-2">
+      <div class="table-responsive mt-2 mx-2">
         <table class="table table-bordered text-center align-middle"
         *ngIf="(txns | filterBy: searchText).length > 0; else noResults">
           <thead>

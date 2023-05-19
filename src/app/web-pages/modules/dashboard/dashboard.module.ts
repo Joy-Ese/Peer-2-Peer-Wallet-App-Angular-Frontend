@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import {MatDialogModule} from '@angular/material/dialog';
 import {NgxPaginationModule} from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
-import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatFormFieldModule} from '@angular/material/form-field';
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
@@ -22,6 +21,8 @@ import { FormsModule } from '@angular/forms';
 import { FilterPipe } from 'src/app/models/filter.pipe';
 import { DialogContentComponent } from 'src/app/reuseable-components/dialog-content/dialog-content.component';
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
+import { SpinnerComponent } from 'src/app/reuseable-components/spinner/spinner.component';
+import { LoadingInterceptor } from 'src/app/reuseable-components/loader/loading.interceptor';
 
 const routes: Routes = [
   {
@@ -67,6 +68,7 @@ const routes: Routes = [
     SnackBarComponent,
     DialogContentComponent,
     FilterPipe,
+    SpinnerComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -79,7 +81,6 @@ const routes: Routes = [
     SweetAlert2Module,
     NgxPaginationModule,
     OrderModule,
-    MatDatepickerModule,
     MatFormFieldModule,
   ],
   providers: [
@@ -91,6 +92,11 @@ const routes: Routes = [
     { 
       provide: HTTP_INTERCEPTORS, 
       useClass: AuthorizeInterceptorInterceptor, 
+      multi: true
+    },
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: LoadingInterceptor, 
       multi: true
     },
   ],

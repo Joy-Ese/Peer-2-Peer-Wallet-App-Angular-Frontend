@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,6 +11,8 @@ import { RegisterPageComponent } from './web-pages/register-page/register-page.c
 import { MaterialModule } from './material/material.module';
 import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
 import { LogoutDialogContentComponent } from './reuseable-components/logout-dialog-content/logout-dialog-content.component';
+import { PreSpinnerComponent } from './reuseable-components/pre-spinner/pre-spinner.component';
+import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading.interceptor';
 
 @NgModule({
   declarations: [
@@ -19,6 +21,7 @@ import { LogoutDialogContentComponent } from './reuseable-components/logout-dial
     RegisterPageComponent,
     PageNotFoundComponent,
     LogoutDialogContentComponent,
+    PreSpinnerComponent,
   ],
   imports: [
     BrowserModule,
@@ -28,7 +31,13 @@ import { LogoutDialogContentComponent } from './reuseable-components/logout-dial
     HttpClientModule,
     AppRoutingModule
   ],
-  providers: [],
+  providers: [
+    { 
+      provide: HTTP_INTERCEPTORS, 
+      useClass: PreLoadingInterceptor, 
+      multi: true
+    },
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

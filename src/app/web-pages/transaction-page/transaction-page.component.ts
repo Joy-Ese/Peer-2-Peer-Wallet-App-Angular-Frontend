@@ -12,6 +12,7 @@ export class TransactionPageComponent implements OnInit{
   baseUrl : string = "http://localhost:7236";
 
   txns!: any[];
+  rangeTxns!: any[];
 
   searchText!: string;
 
@@ -33,6 +34,22 @@ export class TransactionPageComponent implements OnInit{
       this.reverse = !this.reverse; 
     } 
     this.order = value; 
+  }
+
+  getTxnsByRange(rangeData: [key: string]) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.post(`${this.baseUrl}/api/Transaction/TransactionsByDateRange`, rangeData, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        // display range data in a dialogue and add download pdf format button to it.
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    })
   }
 
   getTxnsList() {
