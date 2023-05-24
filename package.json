@@ -30,6 +30,7 @@
     "datatables.net-bs5": "^1.11.3",
     "datatables.net-dt": "^1.11.3",
     "font-awesome": "^4.7.0",
+    "html2pdf.js": "^0.10.1",
     "jquery": "^3.6.4",
     "ng2-order-pipe": "^0.1.5",
     "ngx-order-pipe": "^2.2.0",

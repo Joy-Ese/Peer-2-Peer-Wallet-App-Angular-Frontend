@@ -16,11 +16,7 @@
           </div>
 
           <div>
-            <button class="btn btn-outline-secondary mBB" (click)="changeContent('uploadImage')" type="button">Upload Profile Picture</button>
-          </div>
-
-          <div>
-            <button class="btn btn-outline-secondary mBB" (click)="changeContent('updateImage')" type="button">Update Profile Picture</button>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('profileImage')" type="button">Profile Picture Settings</button>
           </div>
         </div>
         <mat-divider [vertical]="true"></mat-divider>
@@ -28,171 +24,166 @@
     </div>
     <div class="secondDiv">
       <div class="editProfile" *ngSwitchCase="'editProfile'">
-        <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{responseMsg}}</div>
-        <form #editProfileForm="ngForm" (ngSubmit)="onProfileUpdate(editProfileForm.value)">
-          <h4 class="fw-bold">Edit your profile</h4>
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="firstName">First Name</label>
-                <input #firstName type="text" class="form-control" name="firstName" [(ngModel)]="fname" readonly/>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="lastName">Last Name</label>
-                <input #lastName type="text" class="form-control" name="lastName" [(ngModel)]="lname" />
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="userName">Username</label>
-                <input #username type="text" class="form-control" name="username" [(ngModel)]="uname" />
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="phoneNumber">Phone Number</label>
-                <input #phoneNumber type="text" class="form-control" name="phoneNumber" [(ngModel)]="phnum" />
-              </div>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-12 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="email">Email</label>
-                <input #email type="email" class="form-control" name="email" [(ngModel)]="em" readonly/>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-md-12 mb-3">
-            <div class="form-outline">
-              <label class="form-label" for="address">Address</label>
-              <input #address type="text" class="form-control " name="address" [(ngModel)]="addr" />
-            </div>
-          </div>
-
+        <h4 class="fw-bold">Your profile information</h4>
+        <div class="d-flex mt-5">
           <div>
-            <button class="btn btn-outline-secondary mBB" type="submit">Save Changes</button>
+            <img class="img-fluid imgLog" src="../../../assets/images/undraw_profile.svg" alt="">
           </div>
-        </form>
+          <div class="col-9">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <div class="form-outline">
+                  <label class="form-label laBel">First Name</label>
+                  <div>{{fname}}</div>
+                </div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label laBel">Last Name</label>
+                <div>{{lname}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label laBel">Username</label>
+                <div>{{uname}}</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label laBel">Phone Number</label>
+                <div>{{phnum}}</div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label laBel">Email</label>
+                <div>{{em}}</div>
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label laBel">Address</label>
+                <div>{{addr}}</div>
+              </div>
+            </div>
+            <div>
+              <button class="btn btn-outline-secondary mBB" type="submit" (click)="openEditProfileDialog('600ms', '300ms')">Edit Profile</button>
+            </div>
+          </div>
+        </div>
       </div>
       <!--  -->
       <div class="updatePin" *ngSwitchCase="'updatePin'">
-        <div *ngIf="updatePinRespMsg" [ngClass]="updatePinStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{updatePinRespMsg}}</div>
-        <form #updatePinForm="ngForm">
-          <h4 class="fw-bold">Update your pin</h4>
-          <div class="col-md-12 mb-3">
-            <div class="form-outline">
-              <label class="form-label" for="secQ">Security Question</label>
-              <div class="mb-2"><small>{{securityQues}}. Note that answer is case sensitive</small></div>
-              <input #answer type="text" class="form-control " name="answer" ngModel required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="oldPin">Old Pin</label>
-                <input #oldPin type="password" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
-                name="oldPin" ngModel required/>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="newPin">New Pin</label>
-                <input #newPin type="password" id="newPin" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
-                name="newPin" ngModel required/>
-              </div>
-            </div>
-          </div>
-
+        <h4 class="fw-bold">Update your pin</h4>
+        <div class="d-flex mt-5">
           <div>
-            <button class="btn btn-outline-secondary mBB" type="submit" (click)="onPinUpdate(updatePinForm.value)">Update Pin</button>
+            <img class="img-fluid imgLog" src="../../../assets/images/undraw_security.svg" alt="">
           </div>
-        </form>
+          <div class="col-9">
+            <div *ngIf="updatePinRespMsg" [ngClass]="updatePinStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{updatePinRespMsg}}</div>
+            <form #updatePinForm="ngForm">
+              <div class="col-md-11 mb-3">
+                <div class="form-outline">
+                  <label class="form-label laBel" for="secQ">Security Question</label>
+                  <div class="mb-2">{{securityQues}}. Note that answer is case sensitive</div>
+                  <input #answer type="text" class="form-control " name="answer" ngModel required/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label" for="oldPin">Old Pin</label>
+                    <input #oldPin type="password" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
+                    name="oldPin" ngModel required/>
+                  </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label" for="newPin">New Pin</label>
+                    <input #newPin type="password" id="newPin" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
+                    name="newPin" ngModel required/>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onPinUpdate(updatePinForm.value)">Update Pin</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <!--  -->
       <div class="changePassword" *ngSwitchCase="'changePassword'">
-        <div *ngIf="changePassRespMsg" [ngClass]="changePassStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{changePassRespMsg}}</div>
-        <form #changePassForm="ngForm">
-          <h4 class="fw-bold">Change your password</h4>
-
-          <div class="col-md-12 mb-3">
-            <div class="form-outline">
-              <label class="form-label" for="secQ">Security Question</label>
-              <div class="mb-2"><small>{{securityQues}}. Note that answer is case sensitive</small></div>
-              <input #answer type="text" class="form-control " name="answer" ngModel required/>
-            </div>
-          </div>
-
-          <div class="row">
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="password">Password</label>
-                <input #password type="password" class="form-control " pattern="^[a-zA-Z0-9]{6,}$" 
-                name="password" ngModel required/>
-              </div>
-            </div>
-            <div class="col-md-6 mb-3">
-              <div class="form-outline">
-                <label class="form-label" for="conPasswordCH">Confirm Password</label>
-                <input #confirmPassword type="password" class="form-control" pattern="^[a-zA-Z0-9]{6,}$" 
-                name="confirmPassword" ngModel required/>
-              </div>
-            </div>
-          </div>
-
+        <h4 class="fw-bold">Change your password</h4>
+        <div class="d-flex mt-5">
           <div>
-            <button class="btn btn-outline-secondary mBB" type="submit" (click)="onPasswordChange(changePassForm.value)">Update Password</button>
+            <img class="img-fluid imgLog" src="../../../assets/images/undraw_security.svg" alt="">
           </div>
-        </form>
+          <div class="col-9">
+            <div *ngIf="changePassRespMsg" [ngClass]="changePassStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{changePassRespMsg}}</div>
+            <form #changePassForm="ngForm">
+              <div class="col-md-11 mb-3">
+                <div class="form-outline">
+                  <label class="form-label laBel" for="secQ">Security Question</label>
+                  <div class="mb-2">{{securityQues}}. Note that answer is case sensitive</div>
+                  <input #answer type="text" class="form-control " name="answer" ngModel required/>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-5 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label" for="password">Password</label>
+                    <input #password type="password" class="form-control " pattern="^[a-zA-Z0-9]{6,}$" 
+                    name="password" ngModel required/>
+                  </div>
+                </div>
+                <div class="col-md-5 mb-3">
+                  <div class="form-outline">
+                    <label class="form-label" for="conPasswordCH">Confirm Password</label>
+                    <input #confirmPassword type="password" class="form-control" pattern="^[a-zA-Z0-9]{6,}$" 
+                    name="confirmPassword" ngModel required/>
+                  </div>
+                </div>
+              </div>
+
+              <div>
+                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onPasswordChange(changePassForm.value)">Update Password</button>
+              </div>
+            </form>
+          </div>
+        </div>
       </div>
       <!--  -->
-      <div class="uploadImage" *ngSwitchCase="'uploadImage'">
-        <div *ngIf="imageUploadRespMsg" [ngClass]="imageUploadStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{imageUploadRespMsg}}</div>
-        <form #uploadImageForm="ngForm">
-          <h4 class="fw-bold">Set your display picture</h4>
-
-          <div class="col-md-12 mb-3">
-            <div class="form-outline">
-              <label for="ImageDetails" class="form-label">Upload an image to set your display picture</label>
-              <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
-              accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile($event)"/>
-            </div>
-          </div>
-
+      <div class="uploadImage" *ngSwitchCase="'profileImage'">
+        <h4 class="fw-bold">Choose your display picture</h4>
+        <div class="d-flex mt-5">
           <div>
-            <button class="btn btn-outline-secondary mBB" type="submit" (click)="onImageUpload(uploadImageForm.value)">Upload Image</button>
+            <img class="img-fluid imgLog" src="../../../assets/images/undraw_image.svg" alt="">
           </div>
-        </form>
-      </div>
-      <!--  -->
-      <div class="updateImage" *ngSwitchCase="'updateImage'">
-        <div *ngIf="imageUpdateRespMsg" [ngClass]="imageUpdateStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{imageUpdateRespMsg}}</div>
-        <form #updateImageForm="ngForm">
-          <h4 class="fw-bold">Update your display picture</h4>
+          <div class="col-9">
+            <div *ngIf="profileImageRespMsg" [ngClass]="profileImageStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{profileImageRespMsg}}</div>
+            <form #profileImageForm="ngForm">
+              <div class="col-md-11 mb-3">
+                <div class="form-outline">
+                  <label for="ImageDetails" class="form-label laBel">Choose an image for your display picture</label>
+                  <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
+                  accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile($event)"/>
+                </div>
+              </div>
 
-          <div class="col-md-12 mb-3">
-            <div class="form-outline">
-              <label for="ImageDetails" class="form-label">Select an image to update your display picture</label>
-              <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
-              accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile($event)"/>
-            </div>
+              <div>
+                <button [ngClass]="userHaveImage == false ? 'btn btn-outline-secondary mBB' : 'btn btn-outline-secondary mBB d-none'" type="submit" (click)="onImageUpload(profileImageForm)">Upload Image</button>
+              </div>
+              <!--  -->
+              <div>
+                <button [ngClass]="userHaveImage == true ? 'btn btn-outline-secondary mBB' : 'btn btn-outline-secondary mBB d-none'" type="submit" (click)="onImageUpdate(profileImageForm)">Update Image</button>
+              </div>
+            </form>
           </div>
-
-          <div>
-            <button class="btn btn-outline-secondary mBB" type="submit" (click)="onImageUpdate(updateImageForm)">Upload Image</button>
-          </div>
-        </form>
+        </div>
       </div>
     </div>
   </div>
 </div>
+<app-spinner></app-spinner>
 
 

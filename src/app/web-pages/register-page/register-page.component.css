@@ -4,6 +4,12 @@
 	font-family: "Poppins", sans-serif;
 }
 
+.imgLogo {
+	width: 180px;
+	height: 90px;
+	margin-left: 70px;
+}
+
 .bnt {
   color: #003366;
 }

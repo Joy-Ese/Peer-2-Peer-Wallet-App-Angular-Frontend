@@ -1,0 +1,27 @@
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.btn-outline-secondary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.pointer {
+  cursor: pointer;
+}
+
+.dateColour {
+  background-color: #003366!important;
+}
+
+.backBtn {
+  background-color: #003366!important;
+  color: white!important;
+}
+
+.pdfBtn {
+  background-color: #FF0033!important;
+  color: white!important;
+}

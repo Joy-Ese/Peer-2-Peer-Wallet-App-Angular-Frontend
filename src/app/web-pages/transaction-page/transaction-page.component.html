@@ -2,24 +2,9 @@
   <div class="tranDiv mt-3">
     <h2 class="myBal mx-2">List of all Transactions</h2>
     <!--  -->
-    <form #txnsByRangeForm="ngForm">
-      <div class="row">
-        <div class="col-7 d-flex">
-          <div class="col-md-6 mb-3 mx-2">
-            <label>Start Date: </label>
-            <input #startDate type="date" class="form-control" name="startDate" ngModel required/>
-          </div>
-          <div class="col-md-6 mb-3 mx-2">
-            <label>End Date: </label>
-            <input #endDate type="date" class="form-control" name="endDate" ngModel required/>
-          </div>
-          <div class="btnDiv mx-2">
-            <button class="btn btn-outline-secondary" type="submit" (click)="getTxnsByRange(txnsByRangeForm.value)">Search</button>
-          </div>
-        </div>
-      </div>
-    </form>
-    <app-spinner></app-spinner>
+    <button class="mx-2 btn btn-outline-secondary" type="submit" (click)="openTxnRangeDialog('600ms', '300ms')">
+      Get Transactions By Date Range
+    </button>
     <!--  -->
     <div class="mt-3">
       <div class="filterCard d-flex justify-content-between">
@@ -44,15 +29,20 @@
                 SENDER INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
               </th>
               <th scope="col" (click)="setOrder('recepientInfo')">
-                RECEPIENT INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+                RECEPIENT INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
               <th scope="col" (click)="setOrder('type')">
-                TYPE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+                TYPE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
               <th scope="col" (click)="setOrder('currency')">
-                CURRENCY <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+                CURRENCY <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
               <th scope="col" (click)="setOrder('status')">
-                STATUS <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+                STATUS <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
               <th scope="col" (click)="setOrder('date')">
-                DATE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span></th>
+                DATE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+              </th>
             </tr>
           </thead>
           <tbody class="tableBody">
@@ -88,4 +78,5 @@
     </div>
   </div>
 </div>
+<app-spinner></app-spinner>
 

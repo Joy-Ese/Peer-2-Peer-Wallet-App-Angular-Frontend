@@ -1,0 +1,56 @@
+<h6 mat-dialog-title class="fw-bold formEdit">Edit your profile</h6>
+<div mat-dialog-content class="formEditt">
+  <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{responseMsg}}</div>
+  <form #editProfileForm="ngForm" (ngSubmit)="onProfileUpdate(editProfileForm.value)">
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <div class="form-outline">
+          <label class="form-label" for="firstName">First Name</label>
+          <input #firstName type="text" class="form-control" name="firstName" [(ngModel)]="fname" readonly/>
+        </div>
+      </div>
+      <div class="col-md-5 mb-3">
+        <div class="form-outline">
+          <label class="form-label" for="lastName">Last Name</label>
+          <input #lastName type="text" class="form-control" name="lastName" [(ngModel)]="lname" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-5 mb-3">
+        <div class="form-outline">
+          <label class="form-label" for="userName">Username</label>
+          <input #username type="text" class="form-control" name="username" [(ngModel)]="uname" />
+        </div>
+      </div>
+      <div class="col-md-5 mb-3">
+        <div class="form-outline">
+          <label class="form-label" for="phoneNumber">Phone Number</label>
+          <input #phoneNumber type="text" class="form-control" name="phoneNumber" [(ngModel)]="phnum" />
+        </div>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-md-10 mb-3">
+        <div class="form-outline">
+          <label class="form-label" for="email">Email</label>
+          <input #email type="email" class="form-control" name="email" [(ngModel)]="em" readonly/>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-10 mb-3">
+      <div class="form-outline">
+        <label class="form-label" for="address">Address</label>
+        <input #address type="text" class="form-control " name="address" [(ngModel)]="addr" />
+      </div>
+    </div>
+
+    <div>
+      <button class="btn btn-outline-secondary mBB" type="submit">Save Changes</button>
+    </div>
+  </form>
+</div>
+<app-spinner></app-spinner>

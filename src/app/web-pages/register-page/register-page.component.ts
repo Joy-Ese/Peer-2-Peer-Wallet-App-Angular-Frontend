@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { RegisterPageService } from 'src/app/services/register-page.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { SnackBarComponent } from 'src/app/reuseable-components/snack-bar/snack-bar.component';
 import { DOCUMENT } from '@angular/common';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 @Component({
   selector: 'app-register-page',
@@ -11,15 +11,19 @@ import { DOCUMENT } from '@angular/common';
   styleUrls: ['./register-page.component.css']
 })
 export class RegisterPageComponent implements OnInit{
-  errorMessage : string = "";
+
+  baseUrl : string = "http://localhost:7236";
 
   first_name : string = "";
+
+  responseMsg : string = "";
+  status! : boolean;
 
   @ViewChild("regForm") form!: NgForm;
 
   constructor(
     @Inject(DOCUMENT) private domDocument: Document,
-    private registerPageService: RegisterPageService, 
+    private http: HttpClient,
     private matSnackBar: MatSnackBar) { }
 
   passDataToSnackComponent() {
@@ -33,24 +37,26 @@ export class RegisterPageComponent implements OnInit{
     })
   }
 
-  ngOnInit(): void {
-    this.registerPageService;
-  }
+  ngOnInit() {}
 
-  onRegister(registerData: {
-    firstName: string,
-    lastName: string,
-    userName: string,
-    phoneNumber: string,
-    password: string,
-    confirmPassword: string,
-    email: string,
-    address: string,
-  }) {
-    this.registerPageService.onRegister(registerData);
-    if (this.registerPageService.status == true) {
-      this.passDataToSnackComponent();
-    }
-    setTimeout(() => {this.domDocument.location.replace("/login")}, 6000);
+  onRegister(registerData: [key: string]) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.post<any>(`${this.baseUrl}/api/Auth/SignUp`, registerData, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.responseMsg = res.message;
+        this.status = res.status;
+        if (this.status == true) {
+          this.passDataToSnackComponent();
+          setTimeout(() => {this.domDocument.location.replace("/login")}, 3000);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 }

@@ -1,0 +1,18 @@
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.btn-outline-secondary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.formEdit {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.formEditt {
+  padding-left: 25px;
+}

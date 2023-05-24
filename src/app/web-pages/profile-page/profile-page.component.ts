@@ -1,10 +1,12 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit, } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
+import { EditProfileDialogContentComponent } from 'src/app/reuseable-components/edit-profile-dialog-content/edit-profile-dialog-content.component';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-type activeTab = "editProfile" | "updatePin" | "changePassword" | "uploadImage" | "updateImage";
+type activeTab = "editProfile" | "updatePin" | "changePassword" | "profileImage";
 
 @Component({
   selector: 'app-profile-page',
@@ -15,6 +17,7 @@ type activeTab = "editProfile" | "updatePin" | "changePassword" | "uploadImage" 
 export class ProfilePageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
+
   imageFile: any;
 
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
@@ -30,11 +33,8 @@ export class ProfilePageComponent implements OnInit{
   changePassRespMsg = "";
   changePassStatus! : boolean;
 
-  imageUploadRespMsg = "";
-  imageUploadStatus! : boolean;
-
-  imageUpdateRespMsg = "";
-  imageUpdateStatus! : boolean;
+  profileImageRespMsg = "";
+  profileImageStatus! : boolean;
 
   fname! : string;
   lname! : string;
@@ -45,11 +45,14 @@ export class ProfilePageComponent implements OnInit{
 
   securityQues! : string;
 
-  constructor(private http: HttpClient, private router: Router,) {}
+  userHaveImage! : boolean;
+
+  constructor(private http: HttpClient, private router: Router, public dialog: MatDialog,) {}
 
   ngOnInit() {
 		this.getDetailsInForm();
     this.getSecurityQuestion();
+    this.doesUserHaveImage();
 	}
 
   changeContent(content: activeTab) {
@@ -116,44 +119,6 @@ export class ProfilePageComponent implements OnInit{
     });
   }
 
-  handleFile(event: any){
-    this.imageFile = event.target.files[0];
-  }
-
-  onImageUpload(imageData: any) {
-    const file:File = imageData;
-    if (file) {
-      const formData = new FormData();
-      formData.append('ImageDetails', this.imageFile);
-
-      this.http.post<any>(`${this.baseUrl}/api/Dashboard/UploadNewImage`, formData)
-      .subscribe({
-        next: (res) => {
-          this.imageUploadRespMsg = res.message;
-          this.imageUploadStatus = res.status;
-          if (this.imageUploadStatus == true) {
-            Swal.fire({
-              text: this.imageUploadRespMsg,
-              confirmButtonColor: "#003366",
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-            })
-          }
-          setTimeout(() => {
-            window.location.reload();
-          }, 500);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    }
-  }
-
   onPasswordChange(changePassData: [key: string]) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
@@ -185,6 +150,44 @@ export class ProfilePageComponent implements OnInit{
     });
   }
 
+  handleFile(event: any){
+    this.imageFile = event.target.files[0];
+  }
+
+  onImageUpload(imageData: any) {
+    const file:File = imageData;
+    if (file) {
+      const formData = new FormData();
+      formData.append('ImageDetails', this.imageFile);
+
+      this.http.post<any>(`${this.baseUrl}/api/Dashboard/UploadNewImage`, formData)
+      .subscribe({
+        next: (res) => {
+          this.profileImageRespMsg = res.message;
+          this.profileImageStatus = res.status;
+          if (this.profileImageStatus == true) {
+            Swal.fire({
+              text: this.profileImageRespMsg,
+              confirmButtonColor: "#003366",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 500);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+  }
+
   onImageUpdate(imageData: any) {
     const file:File = imageData;
     if (file) {
@@ -194,11 +197,11 @@ export class ProfilePageComponent implements OnInit{
       this.http.put<any>(`${this.baseUrl}/api/Dashboard/UpdateImage`, formData)
       .subscribe({
         next: (res) => {
-          this.imageUpdateRespMsg = res.message;
-          this.imageUpdateStatus = res.status;
-          if (this.imageUpdateStatus == true) {
+          this.profileImageRespMsg = res.message;
+          this.profileImageStatus = res.status;
+          if (this.profileImageStatus == true) {
             Swal.fire({
-              text: this.imageUpdateRespMsg,
+              text: this.profileImageRespMsg,
               confirmButtonColor: "#003366",
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
@@ -252,6 +255,30 @@ export class ProfilePageComponent implements OnInit{
       error: (err) => {
         console.log(err);
       },
+    });
+  }
+
+  doesUserHaveImage() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/DoesUserHaveImage`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.userHaveImage = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  openEditProfileDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(EditProfileDialogContentComponent, {
+      width: '900px',
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
     });
   }
 }

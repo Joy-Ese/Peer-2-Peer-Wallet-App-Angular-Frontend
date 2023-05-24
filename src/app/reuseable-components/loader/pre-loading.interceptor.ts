@@ -17,7 +17,6 @@ export class PreLoadingInterceptor implements HttpInterceptor {
   constructor(public preLoadingService: PreLoaderService) {}
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    console.log("Caught request");
     this.totalRequests++;
     this.preLoadingService.setLoading(true);
     return next.handle(request).pipe(

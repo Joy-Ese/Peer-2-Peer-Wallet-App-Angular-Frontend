@@ -23,6 +23,8 @@ import { DialogContentComponent } from 'src/app/reuseable-components/dialog-cont
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 import { SpinnerComponent } from 'src/app/reuseable-components/spinner/spinner.component';
 import { LoadingInterceptor } from 'src/app/reuseable-components/loader/loading.interceptor';
+import { TxnRangeDialogContentComponent } from 'src/app/reuseable-components/txn-range-dialog-content/txn-range-dialog-content.component';
+import { EditProfileDialogContentComponent } from 'src/app/reuseable-components/edit-profile-dialog-content/edit-profile-dialog-content.component';
 
 const routes: Routes = [
   {
@@ -69,6 +71,8 @@ const routes: Routes = [
     DialogContentComponent,
     FilterPipe,
     SpinnerComponent,
+    TxnRangeDialogContentComponent,
+    EditProfileDialogContentComponent,
   ],
   imports: [
     RouterModule.forChild(routes),

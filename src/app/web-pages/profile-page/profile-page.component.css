@@ -11,7 +11,8 @@
 .tabBtns {
   color: white;
   border-radius: 10px;
-  padding: 15px;
+  padding: 10px;
+  width: 230px;
 }
 
 .mBB {
@@ -19,7 +20,6 @@
 }
 
 mat-divider {
-  /* background-color: #003366; */
   background-color: #FF0033;
   height: calc(113vh - 98px);
   width: 0px !important;
@@ -53,4 +53,13 @@ mat-divider {
 
 .alert-danger {
   color: #FF0033;
+}
+
+.imgLog {
+  display: block;
+  width: 80%;
+}
+
+.laBel {
+  font-weight: 600;
 }

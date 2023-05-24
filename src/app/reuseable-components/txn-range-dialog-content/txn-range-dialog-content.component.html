@@ -1,0 +1,74 @@
+<h1 mat-dialog-title>Please select the date range</h1>
+<div class="row" mat-dialog-content>
+  <form #txnsByRangeForm="ngForm">
+    <div class="col-7 d-flex">
+      <div class="col-md-6 mb-1">
+        <label>Start Date: </label>
+        <input #startDate type="date" class="form-control" name="startDate" ngModel required/>
+      </div>
+      <div class="col-md-6 mb-1 mx-2">
+        <label>End Date: </label>
+        <input #endDate type="date" class="form-control" name="endDate" ngModel required/>
+      </div>
+      <div class="mx-2 mt-4">
+        <button class="btn btn-outline-secondary" type="submit" (click)="getTxnsByRange(txnsByRangeForm.value)">Search</button>
+      </div>
+    </div>
+  </form>
+</div>
+<!--  -->
+<div mat-dialog-actions>
+  <div class="table-responsive mt-2 mx-2">
+    <table id="rangeTable" class="table table-bordered text-center align-middle">
+      <thead>
+        <tr>
+          <th scope="col" (click)="setOrder('amount')">
+            AMOUNT <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('senderInfo')">
+            SENDER INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('recepientInfo')">
+            RECEPIENT INFO <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('type')">
+            TYPE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('currency')">
+            CURRENCY <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('status')">
+            STATUS <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+          <th scope="col" (click)="setOrder('date')">
+            DATE <span class="pointer" [hidden]="reverse">▼</span><span class="pointer" [hidden]="!reverse">▲</span>
+          </th>
+        </tr>
+      </thead>
+      <tbody class="tableBody">
+        <tr *ngFor="let item of rangeTxns | orderBy: order: reverse">
+          <td>{{item.amount |currency:"&#8358;":"symbol":"1.2-2"}}</td>
+          <td>{{item.senderInfo}}</td>
+          <td>{{item.recepientInfo}}</td>
+          <td>
+            <p [ngClass]="item.transactionType == 'CREDIT' ? 'badge bg-success' : 'badge bg-danger'">{{item.transactionType}}</p>
+          </td>
+          <td>{{item.currency}}</td>
+          <td>{{item.status}}</td>
+          <td>
+            <p class="badge bg-primary dateColour">{{item.date | date:'dd/MM/YYYY hh:mm a'}}</p> <br>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<!--  -->
+<div mat-dialog-actions class="mx-2">
+  <button mat-button mat-dialog-close class="backBtn">Back</button>
+  <button mat-button mat-dialog-close class="pdfBtn" (click)="download()">Download PDF</button>
+  <!-- <button class="btn btn-outline-secondary" type="submit" (click)="createTransfer(transferForm.value)">
+    Send
+  </button> -->
+</div>
+<app-spinner></app-spinner>

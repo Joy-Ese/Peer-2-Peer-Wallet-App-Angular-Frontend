@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
-import { OrderPipe } from 'ngx-order-pipe';
+import { MatDialog } from '@angular/material/dialog';
+import { TxnRangeDialogContentComponent } from 'src/app/reuseable-components/txn-range-dialog-content/txn-range-dialog-content.component';
 
 @Component({
   selector: 'app-transaction-page',
@@ -12,7 +13,6 @@ export class TransactionPageComponent implements OnInit{
   baseUrl : string = "http://localhost:7236";
 
   txns!: any[];
-  rangeTxns!: any[];
 
   searchText!: string;
 
@@ -23,7 +23,7 @@ export class TransactionPageComponent implements OnInit{
   order!: string;
   reverse: boolean = false;
 
-  constructor( private http: HttpClient, ) {}
+  constructor( private http: HttpClient, public dialog: MatDialog, ) {}
 
   ngOnInit() {
 		this.getTxnsList();
@@ -34,22 +34,6 @@ export class TransactionPageComponent implements OnInit{
       this.reverse = !this.reverse; 
     } 
     this.order = value; 
-  }
-
-  getTxnsByRange(rangeData: [key: string]) {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    this.http.post(`${this.baseUrl}/api/Transaction/TransactionsByDateRange`, rangeData, {headers: headers})
-    .subscribe({
-      next: (res) => {
-        console.log(res);
-        // display range data in a dialogue and add download pdf format button to it.
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    })
   }
 
   getTxnsList() {
@@ -76,6 +60,15 @@ export class TransactionPageComponent implements OnInit{
     this.tableSize = event.target.value;
     this.page = 1;
     this.getTxnsList();
+  }
+
+  openTxnRangeDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(TxnRangeDialogContentComponent, {
+      width: '1000px',
+      height: '500px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
   }
 }
 

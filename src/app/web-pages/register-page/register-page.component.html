@@ -1,7 +1,7 @@
 <div class="container-fluid">
   <div class="row">
     <div class="col-10 p-3">
-      <img src="../assets/images/Logo-.png" alt="">
+      <img class="imgLogo" src="../../../assets/images/logo.png" alt="">
     </div>
   </div>
 </div>
@@ -21,6 +21,7 @@
               <h3 class="mb-3 text-uppercase text-center bnt">
                 <b>Register</b>
               </h3>
+              <div *ngIf="status == false" class="alert alert-danger">{{responseMsg}}</div>
               <div class="row">
                 <div class="col-md-6 mb-3">
                   <div class="form-outline">
@@ -93,8 +94,7 @@
 
               <div class="d-flex justify-content-center pt-3">
                 <button class="btn btn-primary ms-2 buttn" type="submit" 
-                  value="Submit" [disabled]="!regForm.valid"
-                  (click)="passDataToSnackComponent()">
+                  value="Submit" [disabled]="!regForm.valid">
                 Register</button>
               </div>
 
@@ -103,7 +103,6 @@
               </p>
             </div>
           </form>
-
         </div>
       </div>
     </div>
