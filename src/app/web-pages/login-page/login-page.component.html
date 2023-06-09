@@ -33,8 +33,10 @@
                 <div class="col-md-12 mb-3">
                   <div class="form-outline">
                     <label class="form-label inputColour" for="password">Password</label>
-                    <i class="iconEye mx-5 fw-bold" [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'" 
-                    (click)="togglePasswordVisibility()"></i>
+                    <div class="iconEye">
+                      <i class="mx-5 fw-bold" [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'" 
+                      (click)="togglePasswordVisibility()"></i>
+                    </div>
                     <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" 
                     pattern="^[a-zA-Z0-9]{6,}$" name="password" ngModel required/>
                   </div>

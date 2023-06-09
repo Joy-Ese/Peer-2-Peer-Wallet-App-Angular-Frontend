@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Injectable } from '@angular/core';
 import { Router } from "@angular/router";
 import { LoginResponseFromBackEnd } from '../models/response-from-backend/login-response';
+import { AuthService } from "../auth/auth.service";
 
 @Injectable({
   providedIn: 'root'
@@ -18,6 +19,7 @@ export class LoginPageService {
   constructor(
     private http: HttpClient, 
     private router: Router,
+    public authService: AuthService,
     ) {}
 
   onLogin(loginData: {
@@ -43,6 +45,7 @@ export class LoginPageService {
           .subscribe({
             next: (res) => {
               localStorage.setItem("userDetails", JSON.stringify(res))
+              this.authService.setUserLoggedIn(true);
               this.router.navigate(['/dashboard']);
             },
             error: (err) => {

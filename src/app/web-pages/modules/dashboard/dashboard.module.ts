@@ -1,9 +1,11 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import {MatDialogModule} from '@angular/material/dialog';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { MatDialogModule } from '@angular/material/dialog';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { OrderModule } from 'ngx-order-pipe';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { MatChipsModule } from '@angular/material/chips';
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
@@ -86,6 +88,7 @@ const routes: Routes = [
     NgxPaginationModule,
     OrderModule,
     MatFormFieldModule,
+    MatChipsModule,
   ],
   providers: [
     { 
@@ -103,6 +106,7 @@ const routes: Routes = [
       useClass: LoadingInterceptor, 
       multi: true
     },
+    BnNgIdleService,
   ],
   exports: [RouterModule]
 })

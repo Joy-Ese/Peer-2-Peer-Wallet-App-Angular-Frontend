@@ -15,6 +15,8 @@ export class MiniDashboardPageComponent implements OnInit{
   acctCurrencyResponseFromBackEnd! : AcctCurrencyResponseFromBackEnd;
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
 
+  username! : string;
+
   acctNumber! : string;
 
   balance! : string;
@@ -44,6 +46,7 @@ export class MiniDashboardPageComponent implements OnInit{
         this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
         this.acctNumber = this.userDetailResponseFromBackEnd.accountNumber;
         this.balance = this.userDetailResponseFromBackEnd.balance;
+        this.username = this.userDetailResponseFromBackEnd.username;
       },
       error: (err) => {
         console.log(err);

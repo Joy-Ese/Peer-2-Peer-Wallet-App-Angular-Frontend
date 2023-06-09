@@ -13,6 +13,9 @@ import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found
 import { LogoutDialogContentComponent } from './reuseable-components/logout-dialog-content/logout-dialog-content.component';
 import { PreSpinnerComponent } from './reuseable-components/pre-spinner/pre-spinner.component';
 import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading.interceptor';
+import { NotificationDialogContentComponent } from './reuseable-components/notification-dialog-content/notification-dialog-content.component';
+import { SetPinDialogContentComponent } from './reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
+import { SetSecquestDialogContentComponent } from './reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +25,9 @@ import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading
     PageNotFoundComponent,
     LogoutDialogContentComponent,
     PreSpinnerComponent,
+    NotificationDialogContentComponent,
+    SetPinDialogContentComponent,
+    SetSecquestDialogContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +35,7 @@ import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading
     MaterialModule,
     FormsModule,
     HttpClientModule,
-    AppRoutingModule
+    AppRoutingModule,
   ],
   providers: [
     { 

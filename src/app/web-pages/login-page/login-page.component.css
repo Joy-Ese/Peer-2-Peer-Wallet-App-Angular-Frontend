@@ -42,7 +42,7 @@ small {
 }
 
 .iconEye {
-  position: relative;
-  left: 63%;
-  margin-top: -30px;
+  position: absolute;
+  left: 82%;
+  margin-top: 10px;
 }

@@ -4,44 +4,42 @@
 	margin-left: -10px;
 }
 
-.ico {
-  color: white;
-	font-size: 27px;
+.chipBtnDiv {
+  margin-left: -600px;
+  margin-top: 15px;
+  position: relative;
 }
 
-.spanBadge {
-	font-size: 10px;
+.chipImg {
+  border: 1px solid #ff0033;
+}
+
+.firstChip {
+  position: absolute;
+  left: 100%;
+}
+
+.lastDiv {
+  margin-left: -500px;
+  margin-top: 15px;
+  position: relative;
+}
+
+.notificationDiv {
 	position: absolute;
-}
-
-.navContainer {
-	display: flex;
-	justify-content: space-between;
-}
-
-.allDivCon {
-	display: flex;
-	justify-content: space-between;
-	margin-top: 10px;
-}
-
-.imgDiv {
-	transform: translate(1440%, -2%);
+  right: 120%;
 }
 
 .imgElement {
 	width: 70px;
 	height: 70px;
 	border: 1px solid #ff0033;
-}
-
-.notificationDiv {
-	margin-top: 5px;
-	transform: translate(1480%, 5%);
+  margin-top: -10px;
 }
 
 .notificationColour {
 	background-color: #003366!important;
+  position: relative;
 }
 
 .notificationColour:hover {
@@ -49,55 +47,17 @@
 	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
-.nameDiv p {
-	margin-top: 10px;
-	/* color: #fff; */
-	color: #003366;
-	font-size: 1.2em;
-	position: absolute;
-	transform: translate(720%, 5%);
+.ico {
+  color: white;
+	font-size: 27px;
 }
 
-/* .nameDiv p:nth-child(1) {
-	color: transparent;
-	-webkit-text-stroke: 2.6px #003366;
+
+.spanBadge {
+  position: absolute;
+  right: -20%;
+  top: -25%;
 }
-
-.nameDiv p:nth-child(2) {
-	color: #FF0033;
-	animation: animate 3s ease-in-out infinite;
-}
-
-@keyframes animate {
-	0%,
-	100% {
-		clip-path: polygon(
-			0% 25%,
-			16% 44%,
-			33% 50%,
-			54% 60%,
-			70% 61%,
-			84% 59%,
-			100% 52%,
-			100% 100%,
-			0% 100%
-		);
-	}
-
-	50% {
-		clip-path: polygon(
-			0% 60%,
-			15% 65%,
-			34% 66%,
-			51% 62%,
-			67% 50%,
-			84% 45%,
-			100% 46%,
-			100% 100%,
-			0% 100%
-		);
-	}
-} */
 
 mat-toolbar {
   height: 100px!important;

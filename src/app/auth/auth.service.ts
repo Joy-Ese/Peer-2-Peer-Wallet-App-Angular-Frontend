@@ -1,17 +1,31 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { Subject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
+
   isLoggedIn : boolean = false;
 
-  constructor(private router: Router) { }
+  private userLoggedIn = new Subject<boolean>();
+
+  constructor(private router: Router) { 
+    this.userLoggedIn.next(false);
+  }
 
   public getToken() {
     const getToken = localStorage.getItem("token");
     return getToken;
+  }
+
+  setUserLoggedIn(userLoggedIn: boolean) {
+    this.userLoggedIn.next(userLoggedIn);
+  }
+
+  getUserLoggedIn(): Observable<boolean> {
+    return this.userLoggedIn.asObservable();
   }
 
   isAuthenticated(){

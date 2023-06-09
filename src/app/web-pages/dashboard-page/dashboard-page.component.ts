@@ -1,10 +1,20 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
 import { BreakpointObserver } from '@angular/cdk/layout';
-import {MatDialog} from '@angular/material/dialog';
+import { MatDialog } from '@angular/material/dialog';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LogoutDialogContentComponent } from 'src/app/reuseable-components/logout-dialog-content/logout-dialog-content.component';
+import { BnNgIdleService } from 'bn-ng-idle';
+import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { SnackBarComponent } from 'src/app/reuseable-components/snack-bar/snack-bar.component';
+import { NotificationDialogContentComponent } from 'src/app/reuseable-components/notification-dialog-content/notification-dialog-content.component';
+import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
+import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
+
 
 @Component({
   selector: 'app-dashboard-page',
@@ -22,13 +32,85 @@ export class DashboardPageComponent implements OnInit {
   username! : string;
   sourceAcct! : string;
 
+  userHavePin! : boolean;
+  userHaveSecAns! : boolean;
+
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
-  constructor(private observer: BreakpointObserver, private http: HttpClient, public dialog: MatDialog, ) {}
+  constructor(
+    private observer: BreakpointObserver, 
+    private http: HttpClient, 
+    public dialog: MatDialog, 
+    private bnIdle: BnNgIdleService,
+    private router: Router,
+    public authService: AuthService,
+    private matSnackBar: MatSnackBar,
+    ) { }
 
   ngOnInit(){
     this.getUsername();
     this.getUserImage();
+    this.doesUserHavePin();
+    this.doesUserHaveSecurityAns();
+    this.bnIdle.startWatching(1500).subscribe((res) => {
+      if (res) {
+        this.passDataToSnackComponent();
+        localStorage.clear();
+        this.router.navigate(['/login']);
+        // Swal.fire({
+        //   title: 'You have been idle!!!',
+        //   text: "You will be automatically logged out",
+        //   icon: 'warning',
+        //   // confirmButtonColor: '#003366',
+        //   // confirmButtonText: 'No, stay back!'
+        // })
+        // .then((result) => {
+        //   if (result.isConfirmed) {
+        //     this.router.navigate(['/dashboard/transactions']);
+        //   }
+        // })
+      }
+    });
+  }
+
+  doesUserHavePin() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserPin`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.userHavePin = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  doesUserHaveSecurityAns() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserSecurityAnswer`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.userHaveSecAns = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  passDataToSnackComponent() {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
+      data: `You have been idle!!! You were automatically logged out`,
+      duration: 5000,
+      panelClass: ["snack-notification"],
+      horizontalPosition: "center",
+      verticalPosition: "top",
+    })
   }
 
   getUsername() {
@@ -77,6 +159,33 @@ export class DashboardPageComponent implements OnInit {
 
   openLogoutDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(LogoutDialogContentComponent, {
+      width: '600px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openNotifyDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(NotificationDialogContentComponent, {
+      width: '600px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openSetPinDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(SetPinDialogContentComponent, {
+      width: '600px',
+      height: '300px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openSetSecQuestDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(SetSecquestDialogContentComponent, {
       width: '600px',
       height: '300px',
       enterAnimationDuration,

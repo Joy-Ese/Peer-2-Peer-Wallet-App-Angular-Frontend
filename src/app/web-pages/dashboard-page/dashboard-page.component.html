@@ -7,23 +7,47 @@
       close
     </mat-icon>
   </button>
-  <div class="row">
-    <div class="container-fluid navContainer">
-      <div>
-        <img class="imgLogo" src="../../../assets/images/logo.png" alt="">
-      </div>
-      <div class="container allDivCon">
-        <div class="notificationDiv">
-          <button type="button" class="btn btn-primary notificationColour">
-            <mat-icon class="ico">notifications</mat-icon><span class="badge bg-danger spanBadge">4</span>
-          </button>
+  <div class="container-fluid">
+    <div class="d-flex justify-content-between">
+      <div class="row">
+        <div>
+          <img class="imgLogo" src="../../../assets/images/logo.png" alt="">
         </div>
-        <!-- <div class="nameDiv">
-          <p>Hi, {{username}} </p>
-          <p>Hi, {{username}} </p>
-        </div> -->
-        <div class="imgDiv">
-          <img [src]="imageFromDb" class="rounded-circle imgElement" alt="Image" />
+      </div>
+      <div class="row">
+        <div class="d-flex justify-content-between">
+          <div class="row chipBtnDiv">
+            <div class="d-flex justify-content-between">
+              <div class="row firstChip" *ngIf="userHaveSecAns == false">
+                <mat-chip-listbox>
+                  <mat-chip (click)="openSetSecQuestDialog('600ms', '300ms')">
+                    <img matChipAvatar class="chipImg" src="../../../assets/images/undraw_notify_red.svg"/>
+                    Set Your Security Answer
+                  </mat-chip>
+                </mat-chip-listbox>
+              </div>
+              <div class="row secondChip" *ngIf="userHavePin == false">
+                <mat-chip-listbox>
+                  <mat-chip (click)="openSetPinDialog('600ms', '300ms')">
+                    <img matChipAvatar class="chipImg" src="../../../assets/images/undraw_notify_blue.svg"/>
+                    Set Your Pin
+                  </mat-chip>
+                </mat-chip-listbox>
+              </div>
+            </div>
+          </div>
+          <div class="row lastDiv">
+            <div class="d-flex justify-content-between">
+              <div class="notificationDiv">
+                <button type="button" class="btn btn-primary notificationColour" (click)="openNotifyDialog('600ms', '300ms')">
+                  <mat-icon class="ico">notifications</mat-icon><span class="badge bg-danger spanBadge">4</span>
+                </button>
+              </div>
+              <div>
+                <img [src]="imageFromDb" class="rounded-circle imgElement" alt="Image" />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -64,4 +88,6 @@
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>
+
+
 

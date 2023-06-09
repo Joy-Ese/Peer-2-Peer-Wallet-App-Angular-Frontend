@@ -1,0 +1,15 @@
+<ng-container *ngIf="notify.length > 0; else notifyEmpty">
+  <div *ngFor="let f of notify" class="card rounded-0 my-2">
+      <div class="card-header bg-transparent">
+          <p class="card-text">
+            {{ f.NotificationInfo }} on {{ f.CreatedAt | date:'MM/dd/yyyy' }}
+          </p>
+      </div>
+      <div class="card-body">
+          <p class="card-text">{{ f.Id }}</p>
+      </div>
+  </div>
+</ng-container>
+<ng-template #notifyEmpty>
+  <p>No notifications yet.</p>
+</ng-template>
