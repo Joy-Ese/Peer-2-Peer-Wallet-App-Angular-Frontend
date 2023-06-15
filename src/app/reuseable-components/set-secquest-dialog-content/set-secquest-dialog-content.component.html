@@ -1,1 +1,45 @@
-<p>set-secquest-dialog-content works!</p>
+<h4 mat-dialog-title>Set your security question</h4>
+
+<div mat-dialog-content>
+  <div class="d-flex">
+    <div>
+      <img class="img-fluid imgLog" src="../../../assets/images/undraw_security.svg" alt="">
+    </div>
+    <div class="col-9">
+      <div *ngIf="secQuestRespMsg" [ngClass]="secQuestStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{secQuestRespMsg}}</div>
+      <form #secQuestForm="ngForm">
+        <div class="row">
+          <div class="col-12 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="question">
+                Please choose a security question. <br>
+                Note: Answer is case sensitive
+              </label>
+              <select #question name="question" ngModel required>
+                <option  value="">Select a question from the following options.</option>
+                <option>Who is your daddy?</option>
+                <option>What is your favorite color?</option>
+                <option>What is your mother's favorite aunt's favorite color?</option>
+                <option>Where does the rain in Spain mainly fall?</option>
+                <option>If Mary had three apples, would you steal them?</option>
+                <option>What is the name of your first pet?</option>
+              </select>
+            </div>
+          </div>
+          <div class="col-12 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="answer">Answer</label>
+              <input #answer type="text" class="form-control" 
+              name="answer" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-outline-secondary mBB" type="submit" (click)="setSecQuest(secQuestForm.value)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

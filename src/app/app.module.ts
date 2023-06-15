@@ -14,8 +14,6 @@ import { LogoutDialogContentComponent } from './reuseable-components/logout-dial
 import { PreSpinnerComponent } from './reuseable-components/pre-spinner/pre-spinner.component';
 import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading.interceptor';
 import { NotificationDialogContentComponent } from './reuseable-components/notification-dialog-content/notification-dialog-content.component';
-import { SetPinDialogContentComponent } from './reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
-import { SetSecquestDialogContentComponent } from './reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
 
 @NgModule({
   declarations: [
@@ -26,8 +24,6 @@ import { SetSecquestDialogContentComponent } from './reuseable-components/set-se
     LogoutDialogContentComponent,
     PreSpinnerComponent,
     NotificationDialogContentComponent,
-    SetPinDialogContentComponent,
-    SetSecquestDialogContentComponent,
   ],
   imports: [
     BrowserModule,

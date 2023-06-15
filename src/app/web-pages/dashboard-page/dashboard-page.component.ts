@@ -187,7 +187,7 @@ export class DashboardPageComponent implements OnInit {
   openSetSecQuestDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(SetSecquestDialogContentComponent, {
       width: '600px',
-      height: '300px',
+      height: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

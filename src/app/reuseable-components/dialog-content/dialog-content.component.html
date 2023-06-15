@@ -3,7 +3,7 @@
   Please input the amount you wish to transfer and your pin.
 </div>
 <div class="row" mat-dialog-content>
-  <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-success'">{{responseMsg}}</div>
+  <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{responseMsg}}</div>
   <form #transferForm="ngForm" novalidate>
     <div class="row">
       <div class="col-md-6 mb-3">

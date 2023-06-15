@@ -1,1 +1,35 @@
-<p>set-pin-dialog-content works!</p>
+<h6 mat-dialog-title>Set your pin</h6>
+
+<div mat-dialog-content>
+  <div class="d-flex">
+    <div>
+      <img class="img-fluid imgLog" src="../../../assets/images/undraw_security.svg" alt="">
+    </div>
+    <div class="col-9">
+      <div *ngIf="createPinRespMsg" [ngClass]="createPinStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{createPinRespMsg}}</div>
+      <form #createPinForm="ngForm">
+        <div class="row">
+          <div class="col-md-5 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="pin">Old Pin</label>
+              <input #pin type="password" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
+              name="pin" ngModel required/>
+            </div>
+          </div>
+          <div class="col-md-5 mb-3">
+            <div class="form-outline">
+              <label class="form-label" for="confirmPin">Confirm Pin</label>
+              <input #confirmPin type="password" class="form-control" maxlength="4" pattern="^[0-9]{4}$" 
+              name="confirmPin" ngModel required/>
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <button class="btn btn-outline-secondary mBB" type="submit" (click)="onPinCreate(createPinForm.value)">Submit</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

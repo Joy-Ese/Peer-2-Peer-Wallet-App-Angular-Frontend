@@ -86,7 +86,7 @@ export class SendmoneyPageComponent implements OnInit{
     this.dialog.open(DialogContentComponent, {
       data: {destAcc: this.destAcct},
       width: '585px',
-      height: '400px',
+      height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

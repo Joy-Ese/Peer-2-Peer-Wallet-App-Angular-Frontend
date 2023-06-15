@@ -27,6 +27,8 @@ import { SpinnerComponent } from 'src/app/reuseable-components/spinner/spinner.c
 import { LoadingInterceptor } from 'src/app/reuseable-components/loader/loading.interceptor';
 import { TxnRangeDialogContentComponent } from 'src/app/reuseable-components/txn-range-dialog-content/txn-range-dialog-content.component';
 import { EditProfileDialogContentComponent } from 'src/app/reuseable-components/edit-profile-dialog-content/edit-profile-dialog-content.component';
+import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
+import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
 
 const routes: Routes = [
   {
@@ -75,6 +77,8 @@ const routes: Routes = [
     SpinnerComponent,
     TxnRangeDialogContentComponent,
     EditProfileDialogContentComponent,
+    SetPinDialogContentComponent,
+    SetSecquestDialogContentComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
