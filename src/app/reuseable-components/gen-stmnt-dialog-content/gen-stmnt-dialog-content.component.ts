@@ -67,9 +67,6 @@ export class GenStmntDialogContentComponent implements OnInit{
             }
           })
         }
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 500);
       },
       error: (err) => {
         console.log(err);
@@ -109,9 +106,6 @@ export class GenStmntDialogContentComponent implements OnInit{
             }
           })
         }
-        // setTimeout(() => {
-        //   window.location.reload();
-        // }, 500);
       },
       error: (err) => {
         console.log(err);

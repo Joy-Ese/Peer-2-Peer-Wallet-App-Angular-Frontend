@@ -29,7 +29,7 @@ export class ProfilePageComponent implements OnInit{
 
   updatePinRespMsg = "";
   updatePinStatus! : boolean;
-
+  isLocked! : boolean;
   changePassRespMsg = "";
   changePassStatus! : boolean;
 
@@ -97,6 +97,22 @@ export class ProfilePageComponent implements OnInit{
       next: (res) => {
         this.updatePinRespMsg = res.message;
         this.updatePinStatus = res.status;
+        this.isLocked = res.isLocked;
+        if (this.isLocked == true) {
+          Swal.fire({
+            text: this.updatePinRespMsg,
+            confirmButtonColor: "#003366",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1200);
+        }
         if (this.updatePinStatus == true) {
           Swal.fire({
             text: this.updatePinRespMsg,
@@ -128,6 +144,22 @@ export class ProfilePageComponent implements OnInit{
       next: (res) => {
         this.changePassRespMsg = res.message;
         this.changePassStatus = res.status;
+        this.isLocked = res.isLocked;
+        if (this.isLocked == true) {
+          Swal.fire({
+            text: this.updatePinRespMsg,
+            confirmButtonColor: "#003366",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+          setTimeout(() => {
+            this.router.navigate(['/login']);
+          }, 1200);
+        }
         if (this.changePassStatus == true) {
           Swal.fire({
             text: this.changePassRespMsg,

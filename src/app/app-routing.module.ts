@@ -8,6 +8,7 @@ import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found
 import { AuthGuard } from './auth/auth.guard';
 import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.component';
 import { AdminLoginPageComponent } from './web-pages/admin-login-page/admin-login-page.component';
+import { AdminAuthService } from './auth/admin-auth.service';
 
 const routes: Routes = [
   {
@@ -40,6 +41,11 @@ const routes: Routes = [
     canMatch: [() => inject(AuthService).isAuthenticated()],
     // canActivate: [AuthGuard],
     loadChildren: () => import("./web-pages/modules/dashboard/dashboard.module").then(d => d.DashboardModule)
+  },
+  {
+    path: "admindashboard",
+    canMatch: [() => inject(AdminAuthService).isAdminAuthenticated()],
+    loadChildren: () => import("./web-pages/modules/admin-dashboard/admin-dashboard.module").then(d => d.AdminDashboardModule)
   },
 ]
 

@@ -1,21 +1,21 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, RouterStateSnapshot, UrlTree } from '@angular/router';
 import { Observable } from 'rxjs';
-import { AuthService } from './auth.service';
+import { AdminAuthService } from './admin-auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class AuthGuard implements CanActivate {
-  constructor(private permissions: Permissions, private authService: AuthService, private router: Router){};
+export class AdminAuthGuard implements CanActivate {
+  constructor(private permissions: Permissions, private adminAuthService: AdminAuthService, private router: Router){};
 
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean | UrlTree> | Promise<boolean | UrlTree> | boolean | UrlTree {
-    var canLogIn = this.authService.isAuthenticated();
-    if (!canLogIn) {
-      this.router.navigate(['/login']);
+    var canAdminLogIn = this.adminAuthService.isAdminAuthenticated();
+    if (!canAdminLogIn) {
+      this.router.navigate(['/adminlogin']);
     }
-    return canLogIn;
+    return canAdminLogIn;
   }
 }
