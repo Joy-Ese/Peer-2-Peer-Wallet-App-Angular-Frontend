@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
-import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 
 @Component({
   selector: 'app-fundaccount-page',
@@ -12,9 +11,7 @@ export class FundaccountPageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
-
-  balance! : string;
+  acctDetails! : any[];
 
   initializeRespMsg = "";
   initializeStatus! : boolean;
@@ -37,12 +34,11 @@ export class FundaccountPageComponent implements OnInit{
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
     {headers: headers})
     .subscribe({
       next: (res) => {
-        this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
-        this.balance = this.userDetailResponseFromBackEnd.balance;
+        this.acctDetails = res.accountDetails;
       },
       error: (err) => {
         console.log(err);

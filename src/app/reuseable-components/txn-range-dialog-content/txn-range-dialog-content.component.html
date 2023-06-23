@@ -17,7 +17,13 @@
   </form>
 </div>
 <!--  -->
-<div mat-dialog-actions>
+<div mat-dialog-actions *ngIf="rangeTxns">
+  <div class="mx-2">
+    Sort Transactions By:
+    <p class="badge bg-success sortByDiv" (click)="getCredits()">CREDIT</p>
+    <p class="badge bg-danger mx-2 sortByDiv" (click)="getDebits()">DEBIT</p>
+    <p class="badge bg-primary mx-2 sortByDiv" (click)="getAll()">ALL</p>
+  </div>
   <div class="table-responsive mt-2 mx-2">
     <table id="rangeTable" class="table table-bordered text-center align-middle">
       <thead>
@@ -64,11 +70,8 @@
   </div>
 </div>
 <!--  -->
-<div mat-dialog-actions class="mx-2">
+<div mat-dialog-actions class="mx-2" *ngIf="rangeTxns">
   <button mat-button mat-dialog-close class="backBtn">Back</button>
   <button mat-button mat-dialog-close class="pdfBtn" (click)="download()">Download PDF</button>
-  <!-- <button class="btn btn-outline-secondary" type="submit" (click)="createTransfer(transferForm.value)">
-    Send
-  </button> -->
 </div>
 <app-spinner></app-spinner>

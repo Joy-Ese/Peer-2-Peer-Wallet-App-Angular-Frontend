@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>Proceed to generate your account statement</h1>
+<!--  -->
+<div class="row" mat-dialog-content>
+  <form #statementForm="ngForm">
+    <h2>Account Statement for:</h2>
+    <mat-form-field>
+      <mat-label>Currency Type</mat-label>
+      <mat-select [(ngModel)]="accountCurrency" name="accountCurrency">
+        <mat-option *ngFor="let item of currencySigns" [value]="item.value">
+          {{item.viewValue}}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+    <!--  -->
+    <div class="col-7 d-flex">
+      <div class="col-md-6 mb-1">
+        <label>Start Date: </label>
+        <input #startDate type="date" class="form-control" name="startDate" ngModel required/>
+      </div>
+      <div class="col-md-6 mb-1 mx-2">
+        <label>End Date: </label>
+        <input #endDate type="date" class="form-control" name="endDate" ngModel required/>
+      </div>
+    </div>
+  </form>
+</div>
+<!--  -->
+<div mat-dialog-actions class="mx-4">
+  <h3>Send Statement In:</h3>
+  <button mat-button mat-dialog-close class="pdfBtn mx-2 mb-3" type="submit" (click)="getPDFStatement(statementForm.value)">PDF</button>
+  <button mat-button mat-dialog-close class="excelBtn mx-2 mb-3" type="submit" (click)="getExcelStatement(statementForm.value)">Excel</button>
+</div>
+<app-spinner></app-spinner>

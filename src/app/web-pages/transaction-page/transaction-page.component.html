@@ -1,9 +1,13 @@
 <div class="row">
   <div class="tranDiv mt-3">
-    <h2 class="myBal mx-2">List of all Transactions</h2>
+    <h2 class="myBal mx-2">All Transactions</h2>
     <!--  -->
     <button class="mx-2 btn btn-outline-secondary" type="submit" (click)="openTxnRangeDialog('600ms', '300ms')">
       Get Transactions By Date Range
+    </button>
+    <!--  -->
+    <button class="mx-2 btn btn-outline-primary" type="submit" (click)="openGenStmntDialog('600ms', '300ms')">
+      Generate Account Statement
     </button>
     <!--  -->
     <div class="mt-3">
@@ -16,6 +20,12 @@
             </div>
           </div>
         </div>
+      </div>
+      <div class="mx-2">
+        Sort Transactions By:
+        <p class="badge bg-success sortByDiv" (click)="getCredits()">CREDIT</p>
+        <p class="badge bg-danger mx-2 sortByDiv" (click)="getDebits()">DEBIT</p>
+        <p class="badge bg-primary mx-2 sortByDiv" (click)="getAll()">ALL</p>
       </div>
       <div class="table-responsive mt-2 mx-2">
         <table class="table table-bordered text-center align-middle"

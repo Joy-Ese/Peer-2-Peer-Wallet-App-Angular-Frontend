@@ -1,7 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
-import { AcctEnquiryResponseFromBackEnd } from 'src/app/models/response-from-backend/acctEnquiry-response';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import { DialogContentComponent } from 'src/app/reuseable-components/dialog-content/dialog-content.component';
 
@@ -15,15 +14,14 @@ export class SendmoneyPageComponent implements OnInit{
   baseUrl : string = "http://localhost:7236";
 
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
-  acctEnquiryResponseFromBackEnd! : AcctEnquiryResponseFromBackEnd;
 
-  balance! : string;
+  acctDetails! : any[];
 
   searchInfo! : string;
 
   // sourceAcct! : string;
 
-  destAcct! : string;
+  destAcct! : any[];
   firstName! : string;
   lastName! : string;
   status! : boolean;
@@ -50,14 +48,14 @@ export class SendmoneyPageComponent implements OnInit{
     });
     const params = new URLSearchParams();
     params.append("searchInfo", value);
-    this.http.post(`${this.baseUrl}/api/Account/AccountLookUp?${params}`, {headers: headers})
+    this.http.post<any>(`${this.baseUrl}/api/Account/AccountLookUp?${params}`, {headers: headers})
     .subscribe({
       next: (res) => {
-        this.acctEnquiryResponseFromBackEnd = res as AcctEnquiryResponseFromBackEnd;
-        this.destAcct = this.acctEnquiryResponseFromBackEnd.acctNumber;
-        this.firstName = this.acctEnquiryResponseFromBackEnd.firstName;
-        this.lastName = this.acctEnquiryResponseFromBackEnd.lastName;
-        this.status = this.acctEnquiryResponseFromBackEnd.status;
+        console.log(res);
+        this.destAcct = res.accountDetails;
+        this.firstName = res.firstName;
+        this.lastName = res.lastName;
+        this.status = res.status;
       },
       error: (err) => {
         console.log(err);
@@ -69,12 +67,11 @@ export class SendmoneyPageComponent implements OnInit{
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
     {headers: headers})
     .subscribe({
       next: (res) => {
-        this.userDetailResponseFromBackEnd = res as UserDetailResponseFromBackEnd;
-        this.balance = this.userDetailResponseFromBackEnd.balance;
+        this.acctDetails = res.accountDetails;
       },
       error: (err) => {
         console.log(err);

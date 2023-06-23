@@ -6,6 +6,9 @@ import { OrderModule } from 'ngx-order-pipe';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BnNgIdleService } from 'bn-ng-idle';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
@@ -29,6 +32,7 @@ import { TxnRangeDialogContentComponent } from 'src/app/reuseable-components/txn
 import { EditProfileDialogContentComponent } from 'src/app/reuseable-components/edit-profile-dialog-content/edit-profile-dialog-content.component';
 import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
 import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
+import { GenStmntDialogContentComponent } from 'src/app/reuseable-components/gen-stmnt-dialog-content/gen-stmnt-dialog-content.component';
 
 const routes: Routes = [
   {
@@ -79,6 +83,7 @@ const routes: Routes = [
     EditProfileDialogContentComponent,
     SetPinDialogContentComponent,
     SetSecquestDialogContentComponent,
+    GenStmntDialogContentComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -93,6 +98,8 @@ const routes: Routes = [
     OrderModule,
     MatFormFieldModule,
     MatChipsModule,
+    MatSelectModule,
+    MatTabsModule,
   ],
   providers: [
     { 

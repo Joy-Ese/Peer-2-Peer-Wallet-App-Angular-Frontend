@@ -4,8 +4,7 @@
 	color: #003366;
 	font-size: 1.5em;
 	position: absolute;
-	/* transform: translate(440%, 5%); */
-	transform: translate(390%, 5%);
+	transform: translate(20%, 5%);
 }
 
 .nameDiv p:nth-child(1) {
@@ -121,3 +120,10 @@
   transform: translateY(-5px);
 	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.5);
 }
+
+mat-tab-group {
+	width: 100%;
+  margin-bottom: 48px;
+	color: #003366;
+}
+

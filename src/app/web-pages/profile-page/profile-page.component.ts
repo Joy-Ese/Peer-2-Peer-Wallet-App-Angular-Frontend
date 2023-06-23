@@ -111,7 +111,7 @@ export class ProfilePageComponent implements OnInit{
         }
         setTimeout(() => {
           window.location.reload();
-        }, 500);
+        }, 1500);
       },
       error: (err) => {
         console.log(err);
@@ -142,7 +142,7 @@ export class ProfilePageComponent implements OnInit{
         }
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 1200);
       },
       error: (err) => {
         console.log(err);

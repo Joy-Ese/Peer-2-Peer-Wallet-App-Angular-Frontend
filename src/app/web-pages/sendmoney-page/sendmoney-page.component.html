@@ -1,24 +1,98 @@
 <div class="row">
   <div class="container">
-    <div class="col-9 bdgDiv d-flex justify-content-between">
-      <div class="mt-4">
-        <div [hidden]="!showEye">
-          <span class="myBal mx-4 mt-5">Balance</span>
-          <div class="mx-4 mt-2 d-flex">
-            <h1 class="balFigure text-center">{{balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1>
+    <div class="col-12">
+      <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
+        <mat-tab label="NGN">
+          <div class="col-9 bdgDiv d-flex justify-content-between" *ngFor="let info of acctDetails">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">{{info.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
           </div>
-        </div>
-        <div [hidden]="showEye">
-          <span class="myBal mx-4 mt-5">Balance</span>
-          <div class="mx-4 mt-2 d-flex">
-            <h1 class="balFigure text-center">XXXXXXXX</h1>
+        </mat-tab>
+        <!-- ngIF="info.currency == 'USD'" -->
+        <mat-tab label="USD">
+          <div class="col-9 bdgDiv d-flex justify-content-between">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">$50,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="showBal d-flex flex-column">
-        <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
-      </div>
+        </mat-tab>
+        <!--  -->
+        <mat-tab label="EUR">
+          <div class="col-9 bdgDiv d-flex justify-content-between">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">E30,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
+          </div>
+        </mat-tab>
+        <!--  -->
+        <mat-tab label="GBP">
+          <div class="col-9 bdgDiv d-flex justify-content-between">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">G10,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+
+
     <!--  -->
     <div class="col-9 compusloryMargin">
       <form>
@@ -36,7 +110,7 @@
       <h2>Search Result:</h2>
       <h3>Firstname: <span>{{firstName}}</span></h3>
       <h3>Lastname: <span>{{lastName}}</span></h3>
-      <h3>Account Number: <span>{{destAcct}}</span></h3>
+      <h3 *ngFor="let info of destAcct">Account Number: <span>{{info.accountNumber}}</span></h3>
     </div>
     <ng-template #elseDiv>
       <div class="col-9 compusloryMargin searchResult">

@@ -3,12 +3,6 @@
     <div class="col-10 p-3">
       <img class="imgLogo" src="../../../assets/images/logo.png" alt="">
     </div>
-    <div class="col-2 mt-3">
-      <a class="linkToAdmin" routerLink="/adminlogin">
-        <img src="../../../assets/images/undraw_dashboard_blue.svg" class="rounded-circle imgElement" 
-          alt="Admin"><span class="adminTxt">Admin</span>
-      </a>
-    </div>
   </div>
 </div>
 
@@ -21,29 +15,29 @@
             <img src="../../assets/images/Tablet login-pana.svg"
               alt="Sample photo" class="img-fluid form-img"/>
           </div>
-          <form class="col-xl-6" (ngSubmit)="onLogin(logForm.value)" #logForm="ngForm">
+          <form class="col-xl-6" #adminLoginForm="ngForm">
             <div class="card-body p-md-5">
               <h3 class="mb-3 text-uppercase text-center bnt">
-                <b>Log In</b>
+                <b>Log In To Admin</b>
               </h3>
-              <small class="mb-2">
-                {{errorMsg}}
+              <small class="mb-2" *ngIf="status == false">
+                {{responseMsg}}
               </small>
               <div class="row">
                 <div class="col-md-12 mb-3">
                   <div class="form-outline">
-                    <label class="form-label inputColour" for="userName">Username</label>
-                    <input type="text" id="userName" class="form-control" name="userName" ngModel required/>
+                    <label class="form-label inputColour mt-3" for="userName">Admin Username</label>
+                    <input #username type="text" class="form-control" name="username" ngModel required/>
                   </div>
                 </div>
                 <div class="col-md-12 mb-3">
                   <div class="form-outline">
-                    <label class="form-label inputColour" for="password">Password</label>
+                    <label class="form-label inputColour" for="password">Admin Password</label>
                     <div class="iconEye">
                       <i class="mx-5 fw-bold" [ngClass]="showPassword ? 'fa fa-eye' : 'fa fa-eye-slash'" 
                       (click)="togglePasswordVisibility()"></i>
                     </div>
-                    <input [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" 
+                    <input #password [type]="showPassword ? 'text' : 'password'" id="password" class="form-control" 
                     pattern="^[a-zA-Z0-9]{6,}$" name="password" ngModel required/>
                   </div>
                 </div>
@@ -52,17 +46,14 @@
               <div class="d-flex justify-content-center pt-3">
                 <button
                   class="btn btn-primary ms-2 buttn" type="submit"
-                  value="Submit" [disabled]="!logForm.valid">
+                  (click)="onAdminLogin(adminLoginForm.value)"
+                  value="Submit" [disabled]="!adminLoginForm.valid">
                 Login
                 </button>
               </div>
 
-              <p class="text-center text-muted mt-3 mb-0">Don't have an account?
-                <a routerLink="/register" class="fw-bold text-body"><u>Register here</u></a>
-              </p>
-
-              <p class="text-center text-muted mt-3 mb-0">Having problems logging in?
-                <a routerLink="/contactadmin" class="fw-bold text-body"><u>Contact Admin here</u></a>
+              <p class="text-center text-muted mt-3 mb-0">Not an admin?
+                <a routerLink="/login" class="fw-bold text-body"><u>Click here</u></a>
               </p>
             </div>
           </form>

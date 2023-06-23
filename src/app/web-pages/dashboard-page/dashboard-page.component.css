@@ -60,7 +60,7 @@
 }
 
 mat-toolbar {
-  height: 100px!important;
+  height: 110px!important;
 }
 
 mat-sidenav {
@@ -75,13 +75,13 @@ mat-sidenav {
 }
 
 .content {
-  height: calc(113vh - 98px);
+  height: calc(117vh - 98px);
   margin: 16px;
   margin-left: 32px;
 }
 
 mat-sidenav-container {
-  height: calc(113vh - 65px);
+  height: calc(115vh - 65px);
 }
 
 .menu-button {
@@ -115,3 +115,6 @@ mat-divider {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
+.linkToTxn {
+  text-decoration: none;
+}

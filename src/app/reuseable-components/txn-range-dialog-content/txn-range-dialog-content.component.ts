@@ -13,6 +13,7 @@ export class TxnRangeDialogContentComponent implements OnInit{
   baseUrl : string = "http://localhost:7236";
 
   rangeTxns!: any[];
+  tempTxns!: any[];
 
   order!: string;
   reverse: boolean = false;
@@ -28,6 +29,21 @@ export class TxnRangeDialogContentComponent implements OnInit{
     this.order = value; 
   }
 
+  getCredits() {
+    const credits = this.tempTxns.filter((x: any) => x.transactionType === "CREDIT");
+    this.rangeTxns = credits;
+  }
+
+  getDebits() {
+    const debits = this.tempTxns.filter((x: any) => x.transactionType === "DEBIT");
+    this.rangeTxns = debits;
+  }
+
+  getAll() {
+    const allTxns = this.tempTxns;
+    this.rangeTxns = allTxns;
+  }
+
   getTxnsByRange(rangeData: [key: string]) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
@@ -36,6 +52,7 @@ export class TxnRangeDialogContentComponent implements OnInit{
     .subscribe({
       next: (res) => {
         this.rangeTxns = res;
+        this.tempTxns = res;
       },
       error: (err) => {
         console.log(err);

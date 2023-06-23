@@ -48,19 +48,3 @@ small {
   margin-top: 10px;
 }
 
-.linkToAdmin {
-  text-decoration: none;
-  color: #003366;
-}
-
-.imgElement {
-	width: 25px;
-	height: 25px;
-	border: 1px solid #003366;
-  margin-top: -10px;
-}
-
-.adminTxt {
-  font-size: 12px;
-}
-

@@ -55,3 +55,18 @@
 .btnDiv {
   margin-top: 18px;
 }
+
+.sortByDiv {
+  font-size: 13px;
+  cursor: pointer;
+}
+
+.btn-outline-primary {
+  background-color: #003366!important;
+  color: white!important;
+}
+
+.btn-outline-primary:hover {
+  transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}

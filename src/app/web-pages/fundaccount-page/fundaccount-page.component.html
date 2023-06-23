@@ -1,24 +1,100 @@
 <div class="row">
   <div class="container">
-    <div [ngClass]="displayIFrame == true ? 'col-9 bdgDiv d-flex justify-content-between bdgDivBlur' : 'col-9 bdgDiv d-flex justify-content-between'">
-      <div class="mt-4">
-        <div [hidden]="!showEye">
-          <span class="myBal mx-4 mt-5">Balance</span>
-          <div class="mx-4 mt-2 d-flex">
-            <h1 class="balFigure text-center">{{balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1>
+    <div class="col-12">
+      <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
+        <mat-tab label="NGN">
+          <div *ngFor="let info of acctDetails" [ngClass]="displayIFrame == true ? 'col-9 bdgDiv d-flex justify-content-between bdgDivBlur' : 'col-9 bdgDiv d-flex justify-content-between'">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">{{info.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
           </div>
-        </div>
-        <div [hidden]="showEye">
-          <span class="myBal mx-4 mt-5">Balance</span>
-          <div class="mx-4 mt-2 d-flex">
-            <h1 class="balFigure text-center">XXXXXXXX</h1>
+        </mat-tab>
+        <!-- ngIF="info.currency == 'USD'" -->
+        <mat-tab label="USD">
+          <div [ngClass]="displayIFrame == true ? 'col-9 bdgDiv d-flex justify-content-between bdgDivBlur' : 'col-9 bdgDiv d-flex justify-content-between'">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">$10,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
           </div>
-        </div>
-      </div>
-      <div class="showBal d-flex flex-column">
-        <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
-      </div>
+        </mat-tab>
+        <!--  -->
+        <mat-tab label="EUR">
+          <div [ngClass]="displayIFrame == true ? 'col-9 bdgDiv d-flex justify-content-between bdgDivBlur' : 'col-9 bdgDiv d-flex justify-content-between'">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">E5,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
+          </div>
+        </mat-tab>
+        <!--  -->
+        <mat-tab label="GBP">
+          <div [ngClass]="displayIFrame == true ? 'col-9 bdgDiv d-flex justify-content-between bdgDivBlur' : 'col-9 bdgDiv d-flex justify-content-between'">
+            <div class="mt-4">
+              <div [hidden]="!showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">G70,000</h1>
+                </div>
+              </div>
+              <div [hidden]="showEye">
+                <span class="myBal mx-4 mt-5">Balance</span>
+                <div class="mx-4 mt-2 d-flex">
+                  <h1 class="balFigure text-center">XXXXXXXX</h1>
+                </div>
+              </div>
+            </div>
+            <div class="showBal d-flex flex-column">
+              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            </div>
+          </div>
+        </mat-tab>
+      </mat-tab-group>
     </div>
+
+
+
+
     <div 
     [ngClass]="displayIFrame == true ? 'col-9 compusloryMargin bdgDivBlur' : 'col-9 compusloryMargin'">
       <div *ngIf="initializeRespMsg" [ngClass]="initializeStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{initializeRespMsg}}</div>

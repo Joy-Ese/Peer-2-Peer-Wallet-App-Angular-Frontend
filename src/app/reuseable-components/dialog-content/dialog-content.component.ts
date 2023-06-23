@@ -1,5 +1,4 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { UserInformation } from '../userInformation';
 import { Component, Inject, OnInit } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
@@ -13,7 +12,7 @@ export class DialogContentComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  userDetails! : any;
+  senderDetails! : any[];
   accInfo! : any;
 
   responseMsg = "";
@@ -21,10 +20,23 @@ export class DialogContentComponent implements OnInit{
 
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<DialogContentComponent>, @Inject(MAT_DIALOG_DATA) public data: MatDialogRef<DialogContentComponent>) {
     this.accInfo = data
+    console.log(this.accInfo);
   }
 
   ngOnInit() {
-    this.userDetails = UserInformation();
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
+    {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.senderDetails = res.accountDetails;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
 	}
 
   createTransfer(transferData: {[key: string] : string | number}) {

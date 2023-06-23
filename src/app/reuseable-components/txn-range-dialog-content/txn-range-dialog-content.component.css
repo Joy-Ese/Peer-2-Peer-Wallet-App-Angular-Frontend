@@ -25,3 +25,8 @@
   background-color: #FF0033!important;
   color: white!important;
 }
+
+.sortByDiv {
+  font-size: 13px;
+  cursor: pointer;
+}
