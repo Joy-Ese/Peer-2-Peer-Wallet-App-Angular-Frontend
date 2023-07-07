@@ -60,4 +60,5 @@ export class MiniDashboardPageComponent implements OnInit{
       },
     });
   }
+
 }

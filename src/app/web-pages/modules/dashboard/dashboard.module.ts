@@ -8,6 +8,9 @@ import { BnNgIdleService } from 'bn-ng-idle';
 import { MatChipsModule } from '@angular/material/chips';
 import { MatSelectModule } from '@angular/material/select';
 import { MatTabsModule } from '@angular/material/tabs';
+import { MatCardModule } from '@angular/material/card';
+import { MatProgressBarModule } from '@angular/material/progress-bar';
+import { MatRippleModule } from '@angular/material/core';
 
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
@@ -33,6 +36,8 @@ import { EditProfileDialogContentComponent } from 'src/app/reuseable-components/
 import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
 import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
 import { GenStmntDialogContentComponent } from 'src/app/reuseable-components/gen-stmnt-dialog-content/gen-stmnt-dialog-content.component';
+import { AccountPageComponent } from '../../account-page/account-page.component';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 const routes: Routes = [
   {
@@ -60,6 +65,10 @@ const routes: Routes = [
         component: TransactionPageComponent
       },
       {
+        path: "account",
+        component: AccountPageComponent
+      },
+      {
         path: "profile",
         component: ProfilePageComponent
       },
@@ -84,6 +93,7 @@ const routes: Routes = [
     SetPinDialogContentComponent,
     SetSecquestDialogContentComponent,
     GenStmntDialogContentComponent,
+    AccountPageComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -100,6 +110,9 @@ const routes: Routes = [
     MatChipsModule,
     MatSelectModule,
     MatTabsModule,
+    MatCardModule,
+    MatProgressBarModule,
+    MatRippleModule,
   ],
   providers: [
     { 
@@ -118,6 +131,7 @@ const routes: Routes = [
       multi: true
     },
     BnNgIdleService,
+    SignalrService,
   ],
   exports: [RouterModule]
 })

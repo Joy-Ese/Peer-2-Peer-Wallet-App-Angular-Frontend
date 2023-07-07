@@ -3,10 +3,6 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 
-interface CurrencySigns {
-  value: string;
-  viewValue: string;
-}
 
 @Component({
   selector: 'app-gen-stmnt-dialog-content',
@@ -22,18 +18,13 @@ export class GenStmntDialogContentComponent implements OnInit{
   responseMsg = "";
   status! : boolean;
 
+  currencies!: any[];
+
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<GenStmntDialogContentComponent>, ) {}
 
-  ngOnInit() {}
-
-  currencySigns: CurrencySigns[] = [
-    {value: 'NGN', viewValue: 'NGN'},
-    {value: 'USD', viewValue: 'USD'},
-    {value: 'GBP', viewValue: 'GBP'},
-    {value: 'EUR', viewValue: 'EUR'},
-  ];
-
-  getAcctNoAndCurrencyForUser() {}
+  ngOnInit() {
+    this.getCurrenciesUserHas();
+  }
 
   getPDFStatement(forPDFData: [key: string]) {
     const headers = new HttpHeaders({
@@ -44,10 +35,10 @@ export class GenStmntDialogContentComponent implements OnInit{
       next: (res) => {
         this.responseMsg = res.message;
         this.status = res.status;
-        if (this.status == true) {
+        if (this.status != true) {
           Swal.fire({
             text: this.responseMsg,
-            confirmButtonColor: "#003366",
+            confirmButtonColor: "#FF0033",
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
             },
@@ -55,10 +46,11 @@ export class GenStmntDialogContentComponent implements OnInit{
               popup: 'animate__animated animate__fadeOutUp'
             }
           })
-        } else {
+        } 
+        else {
           Swal.fire({
             text: this.responseMsg,
-            confirmButtonColor: "#FF0033",
+            confirmButtonColor: "#003366",
             showClass: {
               popup: 'animate__animated animate__fadeInDown'
             },
@@ -111,6 +103,21 @@ export class GenStmntDialogContentComponent implements OnInit{
         console.log(err);
       },
     })
+  }
+
+  getCurrenciesUserHas() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any[]>(`${this.baseUrl}/api/Account/UserAccountDetails`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.currencies = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
 }

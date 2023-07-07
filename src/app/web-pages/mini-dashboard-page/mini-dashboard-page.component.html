@@ -13,88 +13,25 @@
 
     <div class="col-12">
       <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
-        <mat-tab label="NGN">
-          <div class="mt-4 firstDiv">
+        <mat-tab label={{info.currency}} *ngFor="let info of acctDetails">
+          <div [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'firstDivRed' : 'firstDivBlue'">
             <div class="d-flex">
-              <div class="bdgDiv" *ngFor="let info of acctDetails">
+              <div [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'bdgDivRed' : 'bdgDivBlue'">
                 <div class="mt-4">
                   <span class="myBal text-center mx-4">Balance</span>
                   <div class="mx-4 mt-2 d-flex">
-                    <h1 class="balFigure text-center">{{info.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
+                    <h1 class="balFigure text-center" *ngIf="info.currency == 'NGN'">{{info.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
+                    <h1 class="balFigure text-center" *ngIf="info.currency == 'USD'">{{info.balance |currency:"USD":"symbol":"1.2-2"}}</h1> 
+                    <h1 class="balFigure text-center" *ngIf="info.currency == 'EUR'">{{info.balance |currency:"EUR":"symbol":"1.2-2"}}</h1> 
+                    <h1 class="balFigure text-center" *ngIf="info.currency == 'GBP'">{{info.balance |currency:"GBP":"symbol":"1.2-2"}}</h1> 
                     <span class="balCurr text-center mt-2">{{info.currency}}</span>
                   </div>
                 </div>
               </div>
-              <div class="mt-4" *ngFor="let info of acctDetails">
+              <div class="mt-4">
                 <div>
                   <span class="mx-4 text-center myAcct">Account Number</span>
                   <h1 class="mt-2 text-center acctNum">{{info.accountNumber}}</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <!-- ngIF="info.currency == 'USD'" -->
-        <mat-tab label="USD">
-          <div class="mt-4 firstDiv">
-            <div class="d-flex">
-              <div class="bdgDiv">
-                <div class="mt-4">
-                  <span class="myBal text-center mx-4">Balance</span>
-                  <div class="mx-4 mt-2 d-flex">
-                    <h1 class="balFigure text-center">$100,000</h1> 
-                    <span class="balCurr text-center mt-2">USD</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4">
-                <div>
-                  <span class="mx-4 text-center myAcct">Account Number</span>
-                  <h1 class="mt-2 text-center acctNum">1234567890</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <!--  -->
-        <mat-tab label="EUR">
-          <div class="mt-4 firstDiv">
-            <div class="d-flex">
-              <div class="bdgDiv">
-                <div class="mt-4">
-                  <span class="myBal text-center mx-4">Balance</span>
-                  <div class="mx-4 mt-2 d-flex">
-                    <h1 class="balFigure text-center">E100,000</h1> 
-                    <span class="balCurr text-center mt-2">EUR</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4">
-                <div>
-                  <span class="mx-4 text-center myAcct">Account Number</span>
-                  <h1 class="mt-2 text-center acctNum">1234567890</h1>
-                </div>
-              </div>
-            </div>
-          </div>
-        </mat-tab>
-        <!--  -->
-        <mat-tab label="GBP">
-          <div class="mt-4 firstDiv">
-            <div class="d-flex">
-              <div class="bdgDiv">
-                <div class="mt-4">
-                  <span class="myBal text-center mx-4">Balance</span>
-                  <div class="mx-4 mt-2 d-flex">
-                    <h1 class="balFigure text-center">G100,000</h1> 
-                    <span class="balCurr text-center mt-2">GBP</span>
-                  </div>
-                </div>
-              </div>
-              <div class="mt-4">
-                <div>
-                  <span class="mx-4 text-center myAcct">Account Number</span>
-                  <h1 class="mt-2 text-center acctNum">1234567890</h1>
                 </div>
               </div>
             </div>
@@ -145,3 +82,4 @@
     </div>
   </div>
 </div>
+

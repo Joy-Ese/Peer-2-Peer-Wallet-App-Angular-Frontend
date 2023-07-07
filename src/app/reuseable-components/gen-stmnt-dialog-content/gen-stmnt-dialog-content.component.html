@@ -6,8 +6,8 @@
     <mat-form-field>
       <mat-label>Currency Type</mat-label>
       <mat-select [(ngModel)]="accountCurrency" name="accountCurrency">
-        <mat-option *ngFor="let item of currencySigns" [value]="item.value">
-          {{item.viewValue}}
+        <mat-option *ngFor="let item of currencies" [value]="item.currency">
+          {{item.currency}}
         </mat-option>
       </mat-select>
     </mat-form-field>
@@ -26,7 +26,7 @@
 </div>
 <!--  -->
 <div mat-dialog-actions class="mx-4">
-  <h3>Send Statement In:</h3>
+  <h2>Send Statement:</h2>
   <button mat-button mat-dialog-close class="pdfBtn mx-2 mb-3" type="submit" (click)="getPDFStatement(statementForm.value)">Download PDF</button>
   <button mat-button mat-dialog-close class="excelBtn mx-2 mb-3" type="submit" (click)="getExcelStatement(statementForm.value)">Download EXCEL</button>
 </div>

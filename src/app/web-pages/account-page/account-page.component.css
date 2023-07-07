@@ -1,0 +1,73 @@
+.btn-outline-secondary {
+  background-color: #003366!important;
+  color: white!important;
+}
+
+.btn-outline-secondary:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.tabBtns {
+  color: white;
+  border-radius: 10px;
+  padding: 10px;
+  width: 230px;
+}
+
+.mBB {
+  margin-top: 30px;
+}
+
+mat-divider {
+  background-color: #003366;
+  height: calc(113vh - 98px);
+  width: 0px !important;
+  position: inherit !important;
+}
+
+.switchCases {
+  padding-left: 25px;
+  margin-top: 15px;
+}
+
+.imgLog {
+  display: block;
+  width: 80%;
+}
+
+.example-card {
+  width: 600px;
+  height: 100px;
+}
+
+.example-card2 {
+  width: 600px;
+  height: 50px;
+}
+
+.gifStyle {
+  position: absolute;
+}
+
+.currPill {
+  border: #003366 1px solid;
+  padding: 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  text-align: center;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.crWallet {
+  margin-left: 145px;
+}
+
+
+

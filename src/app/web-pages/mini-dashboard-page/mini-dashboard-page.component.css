@@ -54,7 +54,7 @@
   height: 260px;
 }
 
-.firstDiv {
+.firstDivBlue {
   border: 2px #003366 solid;
   margin-left: 50px;
   border-radius: 25px;
@@ -63,8 +63,25 @@
   margin-top: 65px!important;
 }
 
-.bdgDiv {
+.firstDivRed {
+  border: 2px #FF0033 solid;
+  margin-left: 50px;
+  border-radius: 25px;
+  width: 50%;
+  height: 21vh;
+  margin-top: 65px!important;
+}
+
+.bdgDivBlue {
   background-color: #003366;
+  border-radius: 30px;
+  width: 50%;
+  margin-left: -6px;
+  height: 20.5vh;
+}
+
+.bdgDivRed {
+  background-color: #FF0033;
   border-radius: 30px;
   width: 50%;
   margin-left: -6px;

@@ -72,12 +72,10 @@ export class TransactionPageComponent implements OnInit{
 
   onTableDataChange(event: any) {
     this.page = event;
-    // this.getTxnsList();
   }
   onTableSizeChange(event: any): void {
     this.tableSize = event.target.value;
     this.page = 1;
-    // this.getTxnsList();
   }
 
   openTxnRangeDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {

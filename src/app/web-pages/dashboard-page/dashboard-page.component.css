@@ -75,13 +75,13 @@ mat-sidenav {
 }
 
 .content {
-  height: calc(117vh - 98px);
+  height: calc(119vh - 98px);
   margin: 16px;
   margin-left: 32px;
 }
 
 mat-sidenav-container {
-  height: calc(115vh - 65px);
+  height: calc(117vh - 65px);
 }
 
 .menu-button {

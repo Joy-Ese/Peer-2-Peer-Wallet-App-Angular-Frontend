@@ -26,27 +26,7 @@ mat-divider {
   position: inherit !important;
 }
 
-.editProfile {
-  padding-left: 25px;
-  margin-top: 15px;
-}
-
-.updatePin {
-  padding-left: 25px;
-  margin-top: 15px;
-}
-
-.changePassword {
-  padding-left: 25px;
-  margin-top: 15px;
-}
-
-.uploadImage {
-  padding-left: 25px;
-  margin-top: 15px;
-}
-
-.updateImage {
+.switchCases {
   padding-left: 25px;
   margin-top: 15px;
 }

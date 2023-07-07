@@ -1,0 +1,132 @@
+<div class="row">
+  <div class="container d-flex"  [ngSwitch]="switchTabs">
+    <div class="firstDiv">
+      <div class="d-flex">
+        <div class="tabBtns">
+          <div>
+            <button class="btn btn-outline-secondary" (click)="changeContent('accountInfo')" type="button">Account Information</button>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('newWallet')" type="button">Create New Wallet</button>
+          </div>
+
+          <div>
+            <button class="btn btn-outline-secondary mBB" (click)="changeContent('fundWallet')" type="button">Fund Wallet</button>
+          </div>
+        </div>
+        <mat-divider [vertical]="true"></mat-divider>
+      </div>
+    </div>
+
+    <div class="secondDiv">
+      <div class="switchCases" *ngSwitchCase="'accountInfo'">
+        <div class="row">
+          <h4 class="fw-bold">Your account information</h4>
+          <div class="d-flex mt-5">
+            <div>
+              <img class="img-fluid imgLog" src="../../../assets/images/undraw_info.svg" alt="">
+            </div>
+            <div class="col-9">
+              <div class="row">
+                <mat-card [ngClass]="accountLevel == 'Verified' ? 'example-card2' : 'example-card'">
+                  <mat-card-header>
+                    <mat-card-subtitle class="fw-bold">Account Profile: {{accountLevel}}</mat-card-subtitle>
+                  </mat-card-header>
+                  <mat-card-content *ngIf="accountLevel == 'Unverified'">
+                    <!-- <mat-progress-bar mode="query"></mat-progress-bar> -->
+                    <p>
+                      Proceed to complete your KYC Validation to 
+                      upgrade your account and enable foreign wallet creation
+                    </p>
+                    <!-- <mat-progress-bar mode="indeterminate"></mat-progress-bar> -->
+                  </mat-card-content>
+                </mat-card>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="row" *ngIf="accountLevel == 'Unverified'">
+          <h4 class="fw-bold mt-3">
+            Please upload some ID documents (Valid Government ID and Utility Bill) for a basic KYC process.
+          </h4>
+        <div class="d-flex">
+          <div>
+            <img class="img-fluid imgLog" src="../../../assets/images/undraw_image.svg" alt="">
+          </div>
+          <div class="col-9">
+            <!-- <div *ngIf="kycRespMsg" [ngClass]="kycStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{kycRespMsg}}</div> -->
+            <form #profileImageForm="ngForm">
+              <div class="col-md-11 mb-3">
+                <div class="form-outline">
+                  <label for="KycDetails" class="form-label laBel">Choose documents</label>
+                  <input #KycDetails class="form-control form-control-sm mt-2" type="file" multiple 
+                  accept=".jpg, .jpeg, .png, .pdf" name="KycDetails" ngModel required (change)="handleFile($event)"/>
+                </div>
+              </div>
+
+              <div>
+                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(profileImageForm)">Upload Documents</button>
+              </div>
+            </form>
+          </div>
+        </div>
+        </div>
+        <div class="row" *ngIf="accountLevel == 'Verified'">
+          <div class="d-flex mt-5">
+            <div class="col-6">
+              <img class="img-fluid imgLog" src="../../../assets/images/undraw_info.svg" alt="">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- <div class="switchCases" *ngSwitchCase="'newWallet'">
+        <div class="row">
+          <h4 class="fw-bold">Create a new wallet account</h4>
+          <div class="d-flex mt-5">
+            <div>
+              <img class="img-fluid imgLog" src="../../../assets/images/undraw_new_wallet.svg" alt="">
+            </div>
+            <div class="col-9">
+              <div class="row">
+                <form #createWalletForm="ngForm">
+                  <div class="form-outline">
+                    <h4>Choose a foreign wallet account from the dropdown</h4>
+                    <div class="col-md-8 mb-3">
+                      <select #currency class="currPill form-control mat-elevation-z4" matRipple name="currency" ngModel required>
+                        <option  value="">Select a currency from the following options.</option>
+                        <option *ngFor="let x of unavailableCurrencies" id="checkCurrency">{{x.currency}}</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <button class="btn btn-outline-secondary crWallet mb-3 mt-3" type="submit" (click)="onWalletCreate(createWalletForm.value)">
+                    Create Wallet
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div> -->
+
+      <div class="switchCases" *ngSwitchCase="'fundWallet'">
+        <div class="row">
+          <h4 class="fw-bold">Fund your wallet account</h4>
+          <div class="d-flex mt-5">
+            <div>
+              <img class="img-fluid imgLog" src="../../../assets/images/undraw_fund_wallet.svg" alt="">
+            </div>
+            <div class="col-9">
+              <div class="row">
+                hh
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-spinner></app-spinner>

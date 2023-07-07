@@ -1,7 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HubConnection, HubConnectionBuilder } from '@microsoft/signalr';
-import { Observable, Subject } from 'rxjs';
-import { Notify } from '../models/notify';
+import * as signalR  from '@microsoft/signalr';
 
 @Injectable({
   providedIn: 'root'
@@ -10,11 +8,13 @@ export class SignalrService {
 
   baseUrl : string = "http://localhost:7236";
 
-  private hubConnection: any;
+  private hubConnection!: signalR.HubConnection;
+
+  constructor() { }
 
   public startConnection() {
     return new Promise((resolve, reject) => {
-      this.hubConnection = new HubConnectionBuilder()
+      this.hubConnection = new signalR.HubConnectionBuilder()
         .withUrl(`${this.baseUrl}/notification`).build();
       
       this.hubConnection.start()
@@ -29,17 +29,11 @@ export class SignalrService {
     });
   }
 
-  private $allNoti: Subject<Notify> = new Subject<Notify>();
-  public get AllNotificationObservable(): Observable<Notify> {
-    return this.$allNoti.asObservable();
+onReceiveAlert(callback: (user:string, message: string) => void) {
+  this.hubConnection.on("RecieveTransferAlert", callback);
   }
 
-  public listenToAllNotifications() {
-    (<HubConnection>this.hubConnection).on("GetNotification", (data: Notify) => {
-      console.log(data);
-      this.$allNoti.next(data);
-    });
-  }
 
-  constructor() { }
+
+
 }

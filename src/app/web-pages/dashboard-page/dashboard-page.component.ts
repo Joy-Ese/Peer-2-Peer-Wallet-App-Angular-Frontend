@@ -14,6 +14,7 @@ import { SnackBarComponent } from 'src/app/reuseable-components/snack-bar/snack-
 import { NotificationDialogContentComponent } from 'src/app/reuseable-components/notification-dialog-content/notification-dialog-content.component';
 import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
 import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 
 @Component({
@@ -34,6 +35,11 @@ export class DashboardPageComponent implements OnInit {
 
   userHavePin! : boolean;
   userHaveSecAns! : boolean;
+  userHaveImage! : boolean;
+
+  notificationCount : number = 0;
+  notificationMessage! : string;
+  noOfNotifications : number = 0;
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
 
@@ -45,6 +51,7 @@ export class DashboardPageComponent implements OnInit {
     private router: Router,
     public authService: AuthService,
     private matSnackBar: MatSnackBar,
+    private signalrService : SignalrService,
     ) { }
 
   ngOnInit(){
@@ -52,6 +59,7 @@ export class DashboardPageComponent implements OnInit {
     this.getUserImage();
     this.doesUserHavePin();
     this.doesUserHaveSecurityAns();
+    this.doesUserHaveImage();
     this.bnIdle.startWatching(1500).subscribe((res) => {
       if (res) {
         this.passDataToSnackComponent();
@@ -70,6 +78,34 @@ export class DashboardPageComponent implements OnInit {
         //   }
         // })
       }
+    });
+    this.signalrService.startConnection();
+    this.signalrService.onReceiveAlert((user, message) => {
+      if (user === this.username) {
+        Swal.fire({
+          position: 'top-end',
+          icon: 'info',
+          title: `${message}`,
+          showConfirmButton: false,
+          timer: 8000
+        })
+        this.noOfNotifications = this.notificationCount++;
+      }
+    });
+  }
+
+  doesUserHaveImage() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/DoesUserHaveImage`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.userHaveImage = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -192,4 +228,5 @@ export class DashboardPageComponent implements OnInit {
       exitAnimationDuration,
     });
   }
+
 }

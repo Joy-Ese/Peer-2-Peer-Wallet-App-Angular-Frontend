@@ -2,8 +2,15 @@
   margin-top: 10px;
 }
 
-.bdgDiv {
+.bdgDivBlue {
   background-color: #003366;
+  border-radius: 30px;
+  margin-left: 150px;
+  height: 20.5vh;
+}
+
+.bdgDivRed {
+  background-color: #FF0033;
   border-radius: 30px;
   margin-left: 150px;
   height: 20.5vh;

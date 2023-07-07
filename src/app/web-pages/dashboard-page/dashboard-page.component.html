@@ -40,12 +40,17 @@
             <div class="d-flex justify-content-between">
               <div class="notificationDiv">
                 <button type="button" class="btn btn-primary notificationColour" (click)="openNotifyDialog('600ms', '300ms')">
-                  <mat-icon class="ico">notifications</mat-icon><span class="badge bg-danger spanBadge">4</span>
+                  <mat-icon class="ico">notifications</mat-icon><span class="badge bg-danger spanBadge">{{noOfNotifications}}</span>
                 </button>
               </div>
-              <div>
+              <div *ngIf="userHaveImage == true">
                 <a class="linkToTxn" routerLink="/dashboard/profile">
                   <img [src]="imageFromDb" class="rounded-circle imgElement" alt="Image"/>
+                </a>
+              </div>
+              <div *ngIf="userHaveImage == false">
+                <a class="linkToTxn" routerLink="/dashboard/profile">
+                  <img src="../../../assets/images/undraw_avatar.svg" class="rounded-circle imgElement" alt="Image"/>
                 </a>
               </div>
             </div>
@@ -73,6 +78,14 @@
     <button mat-button class="menu-button mBB" routerLink="transactions">
       <mat-icon class="ico">list</mat-icon>
       <span>Transactions</span>
+    </button>
+    <button mat-button class="menu-button mBB" routerLink="notifications">
+      <mat-icon class="ico">notifications</mat-icon>
+      <span>Notifications</span>
+    </button>
+    <button mat-button class="menu-button mBB" routerLink="account">
+      <mat-icon class="ico">account_balance</mat-icon>
+      <span>Account</span>
     </button>
     <button mat-button class="menu-button mBB" routerLink="profile">
       <mat-icon class="ico">account_circle</mat-icon>
