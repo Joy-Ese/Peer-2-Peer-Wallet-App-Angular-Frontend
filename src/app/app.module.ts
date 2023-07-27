@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatCardModule } from '@angular/material/card';
 
 
 import { AppComponent } from './app.component';
@@ -17,7 +18,6 @@ import { PreSpinnerComponent } from './reuseable-components/pre-spinner/pre-spin
 import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading.interceptor';
 import { NotificationDialogContentComponent } from './reuseable-components/notification-dialog-content/notification-dialog-content.component';
 import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.component';
-import { AdminLoginPageComponent } from './web-pages/admin-login-page/admin-login-page.component';
 
 
 @NgModule({
@@ -30,7 +30,6 @@ import { AdminLoginPageComponent } from './web-pages/admin-login-page/admin-logi
     PreSpinnerComponent,
     NotificationDialogContentComponent,
     ContactAdminComponent,
-    AdminLoginPageComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +39,7 @@ import { AdminLoginPageComponent } from './web-pages/admin-login-page/admin-logi
     HttpClientModule,
     AppRoutingModule,
     MatExpansionModule,
+    MatCardModule,
   ],
   providers: [
     { 

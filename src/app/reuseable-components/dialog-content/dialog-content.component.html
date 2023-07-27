@@ -7,15 +7,15 @@
   <form #transferForm="ngForm" novalidate>
     <div class="row">
       <div class="col-md-6 mb-3">
-        <div class="form-outline" *ngFor="let info of senderDetails">
+        <div class="form-outline">
           <label class="form-label">Sender</label>
-          <input #sourceAccount type="text" class="form-control" name="sourceAccount" [(ngModel)]="info.accountNumber" readonly required/>
+          <input [(ngModel)]="accInfo.sendAcct" type="text" #sourceAccount class="form-control" name="sourceAccount" readonly required/>
         </div>
       </div>
-      <div class="col-md-6 mb-3" *ngFor="let info of accInfo.destAcc">
+      <div class="col-md-6 mb-3">
         <div class="form-outline">
           <label class="form-label">Recepient</label>
-          <input #destinationAccount type="text" class="form-control" name="destinationAccount" [(ngModel)]="info.accountNumber" readonly required/>
+          <input [(ngModel)]="accInfo.destAcc" type="text" #destinationAccount class="form-control" name="destinationAccount" readonly required/>
         </div>
       </div>
     </div>

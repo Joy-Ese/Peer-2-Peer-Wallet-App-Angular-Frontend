@@ -20,11 +20,7 @@
                 <div class="mt-4">
                   <span class="myBal text-center mx-4">Balance</span>
                   <div class="mx-4 mt-2 d-flex">
-                    <h1 class="balFigure text-center" *ngIf="info.currency == 'NGN'">{{info.balance |currency:"&#8358;":"symbol":"1.2-2"}}</h1> 
-                    <h1 class="balFigure text-center" *ngIf="info.currency == 'USD'">{{info.balance |currency:"USD":"symbol":"1.2-2"}}</h1> 
-                    <h1 class="balFigure text-center" *ngIf="info.currency == 'EUR'">{{info.balance |currency:"EUR":"symbol":"1.2-2"}}</h1> 
-                    <h1 class="balFigure text-center" *ngIf="info.currency == 'GBP'">{{info.balance |currency:"GBP":"symbol":"1.2-2"}}</h1> 
-                    <span class="balCurr text-center mt-2">{{info.currency}}</span>
+                    <h1 class="balFigure text-center">{{info.balance |currency:info.currency:"symbol":"1.2-2"}}</h1>
                   </div>
                 </div>
               </div>
@@ -41,7 +37,6 @@
     </div>
   </div>
 </div>
-
 
 
 <div class="row">
@@ -63,7 +58,7 @@
           </thead>
           <tbody class="text-white tableBody">
             <tr *ngFor="let item of lastThreeTxns">
-              <td>{{item.amount |currency:"&#8358;":"symbol":"1.2-2"}}</td>
+              <td>{{item.amount |currency:item.currency:"symbol":"1.2-2"}}</td>
               <td>{{item.senderInfo}}</td>
               <td>{{item.recepientInfo}}</td>
               <td>

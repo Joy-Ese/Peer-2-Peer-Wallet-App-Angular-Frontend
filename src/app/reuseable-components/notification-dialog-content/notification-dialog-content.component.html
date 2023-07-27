@@ -1,18 +1,25 @@
-<ng-container *ngIf="notificationMessage">
-  <div class="card rounded-0 my-2">
-      <div class="card-header bg-transparent">
-          <p class="card-text">
-            Notification!!!!!
-          </p>
-      </div>
-      <div class="card-body">
-        <p class="card-text">
-          {{notificationMessage}}
-        </p>
-      </div>
-      
+<h3 mat-dialog-title class="mx-2 mt-1">Preview your notifications</h3>
+<div class="col-12" mat-dialog-content *ngIf="noOfNotifications != 0">
+  <div class="card mx-2 mt-3" *ngFor="let info of notificationDetails">
+    <div class="card-body">
+      <button type="submit" class="btn-close d-flex ms-auto bd-highlight" 
+      aria-label="Close" id="notificationID" (click)="SetNotificationsToRead(info.id)"></button>
+      {{info.heading}}
+    </div>
   </div>
-</ng-container>
-<ng-template *ngIf="notificationMessage == ''">
-  <p>No notifications yet.</p>
-</ng-template>
+</div>
+
+<div class="col-12" mat-dialog-content *ngIf="noOfNotifications == 0">
+  <div class="card mx-2 mt-3">
+    <div class="card-body">
+      No new notifications
+    </div>
+  </div>
+</div>
+
+<div mat-dialog-actions class="mt-5">
+  <button mat-button mat-dialog-close class="cancelNoti mx-2" (click)="reloadPage()">Cancel</button>
+  <button mat-button mat-dialog-close cdkFocusInitial class="moreNoti mx-2" routerLink="/dashboard/notifications">
+    View more notifications...
+  </button>
+</div>

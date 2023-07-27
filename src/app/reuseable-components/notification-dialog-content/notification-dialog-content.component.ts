@@ -13,41 +13,69 @@ export class NotificationDialogContentComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  notificationMessage! : string;
-
   username! : string;
   acctDetails! : any[];
-  lastThreeTxns!: any[];
+
+  notificationDetails! : any[];
+
+  noOfNotifications : number = 0;
 
   constructor(
     public dialogRef: MatDialogRef<NotificationDialogContentComponent>,
     private signalrService : SignalrService,
     private http: HttpClient,
-    ) {}
+  ) {}
 
   ngOnInit() {
-    this.signalrService.startConnection();
-    this.signalrService.onReceiveAlert((user, message) => {
-      if (user === this.username) {
-        // this.notificationCount++;
-        alert(message);
-        this.notificationMessage = message;
-      }
-    });
-
-
+    this.getUnreadNotifications();
+    this.getNotificationCount();
   }
 
-  getUserDetails() {
+  getNotificationCount() {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
-    {headers: headers})
+    this.http.get<any>(`${this.baseUrl}/api/Notification/GetAllUnreadNotificationsNo`, {headers: headers})
     .subscribe({
       next: (res) => {
-        this.username = res.username;
-        this.acctDetails = res.accountDetails;
+        this.noOfNotifications = res.allNotifications;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getUnreadNotifications() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any[]>(`${this.baseUrl}/api/Notification/GetAllUnreadNotifications`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.notificationDetails = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  reloadPage() {
+    setTimeout(() => {
+      window.location.reload();
+    }, 500);
+  }
+
+  SetNotificationsToRead(id: [key: number]) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.put(`${this.baseUrl}/api/Notification/SetNotificationsToRead`, {id: id}, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getUnreadNotifications();
       },
       error: (err) => {
         console.log(err);

@@ -11,9 +11,11 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressBarModule } from '@angular/material/progress-bar';
 import { MatRippleModule } from '@angular/material/core';
+import { MatExpansionModule } from '@angular/material/expansion';
 
 
 import { SendmoneyPageComponent } from '../../sendmoney-page/sendmoney-page.component';
+import { NotificationPageComponent } from '../../notification-page/notification-page.component';
 import { FundaccountPageComponent } from '../../fundaccount-page/fundaccount-page.component';
 import { SnackBarComponent } from 'src/app/reuseable-components/snack-bar/snack-bar.component';
 import { MaterialModule } from 'src/app/material/material.module';
@@ -39,6 +41,7 @@ import { GenStmntDialogContentComponent } from 'src/app/reuseable-components/gen
 import { AccountPageComponent } from '../../account-page/account-page.component';
 import { SignalrService } from 'src/app/services/signalr.service';
 
+
 const routes: Routes = [
   {
     path: "",
@@ -63,6 +66,10 @@ const routes: Routes = [
       {
         path: "transactions",
         component: TransactionPageComponent
+      },
+      {
+        path: "notifications",
+        component: NotificationPageComponent
       },
       {
         path: "account",
@@ -94,6 +101,7 @@ const routes: Routes = [
     SetSecquestDialogContentComponent,
     GenStmntDialogContentComponent,
     AccountPageComponent,
+    NotificationPageComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -113,6 +121,7 @@ const routes: Routes = [
     MatCardModule,
     MatProgressBarModule,
     MatRippleModule,
+    MatExpansionModule,
   ],
   providers: [
     { 

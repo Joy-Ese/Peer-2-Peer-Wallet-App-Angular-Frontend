@@ -60,3 +60,18 @@ i {
 	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
+.currPill {
+  border: #003366 1px solid;
+  padding: 5px;
+  border-radius: 25px;
+  cursor: pointer;
+  width: 40%;
+
+  user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+
+  -webkit-user-drag: none;
+  -webkit-tap-highlight-color: transparent;
+}
+

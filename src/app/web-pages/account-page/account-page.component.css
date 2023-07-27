@@ -21,7 +21,7 @@
 
 mat-divider {
   background-color: #003366;
-  height: calc(113vh - 98px);
+  height: calc(119vh - 98px);
   width: 0px !important;
   position: inherit !important;
 }
@@ -43,7 +43,7 @@ mat-divider {
 
 .example-card2 {
   width: 600px;
-  height: 50px;
+  height: 40px;
 }
 
 .gifStyle {
@@ -68,6 +68,17 @@ mat-divider {
 .crWallet {
   margin-left: 145px;
 }
+
+mat-card-content {
+  background-color: #003366;
+  color: white;
+  border-radius: 10px;
+}
+
+.laBel {
+  font-weight: 600;
+}
+
 
 
 

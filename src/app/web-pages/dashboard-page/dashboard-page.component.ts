@@ -37,8 +37,6 @@ export class DashboardPageComponent implements OnInit {
   userHaveSecAns! : boolean;
   userHaveImage! : boolean;
 
-  notificationCount : number = 0;
-  notificationMessage! : string;
   noOfNotifications : number = 0;
 
   @ViewChild(MatSidenav) sidenav!: MatSidenav;
@@ -89,8 +87,28 @@ export class DashboardPageComponent implements OnInit {
           showConfirmButton: false,
           timer: 8000
         })
-        this.noOfNotifications = this.notificationCount++;
       }
+    });
+    this.signalrService.onUpdateNotifications((user) => {
+      if (user === this.username) {
+        this.noOfNotifications--;
+      }
+    });
+    this.getNotificationCount();
+  }
+
+  getNotificationCount() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Notification/GetAllUnreadNotificationsNo`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.noOfNotifications = res.allNotifications;
+      },
+      error: (err) => {
+        console.log(err);
+      },
     });
   }
 
@@ -204,8 +222,8 @@ export class DashboardPageComponent implements OnInit {
 
   openNotifyDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(NotificationDialogContentComponent, {
-      width: '600px',
-      height: '300px',
+      width: '700px',
+      height: '350px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

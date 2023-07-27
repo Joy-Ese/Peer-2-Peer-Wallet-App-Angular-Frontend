@@ -21,7 +21,7 @@
 
 mat-divider {
   background-color: #FF0033;
-  height: calc(113vh - 98px);
+  height: calc(119vh - 98px);
   width: 0px !important;
   position: inherit !important;
 }

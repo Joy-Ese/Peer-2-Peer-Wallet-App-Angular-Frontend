@@ -12,7 +12,6 @@ export class DialogContentComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  senderDetails! : any[];
   accInfo! : any;
 
   responseMsg = "";
@@ -20,24 +19,10 @@ export class DialogContentComponent implements OnInit{
 
   constructor(private http: HttpClient, public dialogRef: MatDialogRef<DialogContentComponent>, @Inject(MAT_DIALOG_DATA) public data: MatDialogRef<DialogContentComponent>) {
     this.accInfo = data
-    console.log(this.accInfo);
+    // console.log(this.accInfo);
   }
 
-  ngOnInit() {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
-    {headers: headers})
-    .subscribe({
-      next: (res) => {
-        this.senderDetails = res.accountDetails;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-	}
+  ngOnInit() {}
 
   createTransfer(transferData: {[key: string] : string | number}) {
     const headers = new HttpHeaders({
@@ -63,7 +48,7 @@ export class DialogContentComponent implements OnInit{
         }
         setTimeout(() => {
           window.location.reload();
-        }, 1000);
+        }, 2000);
       },
       error: (err) => {
         console.log(err);

@@ -34,6 +34,10 @@ onReceiveAlert(callback: (user:string, message: string) => void) {
   }
 
 
+  onUpdateNotifications(callback: (user:string) => void) {
+    this.hubConnection.on("UpdateNotification", callback);
+    }
+
 
 
 }

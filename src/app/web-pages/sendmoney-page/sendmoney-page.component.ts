@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 import {MatDialog} from '@angular/material/dialog';
 import { UserDetailResponseFromBackEnd } from 'src/app/models/response-from-backend/userdetails-response';
 import { DialogContentComponent } from 'src/app/reuseable-components/dialog-content/dialog-content.component';
+import Swal from 'sweetalert2/dist/sweetalert2.js';
 
 @Component({
   selector: 'app-sendmoney-page',
@@ -18,13 +19,14 @@ export class SendmoneyPageComponent implements OnInit{
   acctDetails! : any[];
 
   searchInfo! : string;
+  currn: string = "";
 
-  // sourceAcct! : string;
-
-  destAcct! : any[];
+  acctNum! : string;
   firstName! : string;
   lastName! : string;
   status! : boolean;
+
+  senderAcct! : string;
 
   constructor(private http: HttpClient, public dialog: MatDialog, ) {}
 
@@ -42,20 +44,35 @@ export class SendmoneyPageComponent implements OnInit{
     this.showEye = !this.showEye;
   }
 
-  accountLookUp(value: string) {
+  accountLookUp(value1: string, value2: string) {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
+
     const params = new URLSearchParams();
-    params.append("searchInfo", value);
-    this.http.post<any>(`${this.baseUrl}/api/Account/AccountLookUp?${params}`, {headers: headers})
+    params.append("searchInfo", value1);
+    params.append("currency", value2);
+
+    this.http.post<any>(`${this.baseUrl}/api/Account/AccountLookUp?${params}&${params}`, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
-        this.destAcct = res.accountDetails;
+        this.acctNum = res.acctNum;
         this.firstName = res.firstName;
         this.lastName = res.lastName;
         this.status = res.status;
+
+        if (this.status == false) {
+          Swal.fire({
+            text: `${this.firstName} does not have an account matching ${this.currn} currency`,
+            confirmButtonColor: "#FF0033",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+        }
       },
       error: (err) => {
         console.log(err);
@@ -79,13 +96,34 @@ export class SendmoneyPageComponent implements OnInit{
     });
   }
 
+  avoidChecks(value: string) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    const params = new URLSearchParams();
+    params.append("currency", value);
+
+    this.http.post<any>(`${this.baseUrl}/api/Account/SendMoneyCheck?${params}`, {senderAcct: this.acctNum}, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.senderAcct = res.senderAccountNumber;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
   openDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
     this.dialog.open(DialogContentComponent, {
-      data: {destAcc: this.destAcct},
+      // data: {destAcc: this.destAcct.find(item=> item.accountNumber === this.allAccounts)},
+      data: {destAcc: this.acctNum, sendAcct: this.senderAcct},
       width: '585px',
       height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
     });
   }
+
 }

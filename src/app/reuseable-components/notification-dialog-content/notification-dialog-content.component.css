@@ -1,0 +1,23 @@
+.card {
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.moreNoti {
+  background-color: #003366;
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 30px;
+  display: inline-block;
+  padding: 8px;
+}
+
+.cancelNoti {
+  background-color: #FF0033;
+  color: white;
+  font-size: 15px;
+  text-decoration: none;
+  border-radius: 30px;
+  display: inline-block;
+  padding: 8px;
+}

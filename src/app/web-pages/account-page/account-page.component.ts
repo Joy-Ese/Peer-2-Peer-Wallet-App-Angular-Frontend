@@ -14,15 +14,21 @@ export class AccountPageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  imageFiles: any;
+  imageFile: any;
+  previewImage1: any;
+  previewImage2: any;
 
   switchTabs: string = "accountInfo";
 
   status! : boolean;
   accountLevel! : string;
+  fCurrency: string = "";
 
   kycStatus! : boolean;
   kycRespMsg! : string;
+
+  kycREStatus! : boolean;
+  kycRERespMsg! : string;
 
   getCurrencyChargeStatus! : boolean;
   dollarCharge! : number;
@@ -33,21 +39,70 @@ export class AccountPageComponent implements OnInit{
   walletCreateCurrency! : string;
   walletCreateRespMsg! : string;
 
-  // currencies!: any[];
+  fundWalletCurrencies!: any[];
 
   unavailableCurrencies! : any[];
+
+  values: any;
+
+  acctDetails! : any[];
+  nairaAcctBal! : string;
+
+  getConversionRateStatus! : boolean;
+  dollarRate! : number;
+  euroRate! : number;
+  poundsRate! : number;
+
+  fundWalletResponseMsg = "";
+  fundWalletStatus = false;
+
+  kycStatusForReUpload! : boolean;
 
   constructor(private http: HttpClient, private router: Router,) {}
 
   ngOnInit() {
+    this.getUserDetails();
     this.getUserProfileLevel();
     this.getCurrenciesCharge();
-    // this.getCurrenciesUserHas();
+    this.getFundWalletCurrencies();
     this.getUnavailableCurrencies();
+    this.getUserNairaBal();
+    this.getConversionRate();
+    this.getKycStatus();
+
+    if (this.kycStatusForReUpload == true) {
+      Swal.fire({
+        text: "Please re-upload kyc documents!!!!",
+        icon: 'warning',
+        confirmButtonColor: "#FF0033",
+        showClass: {
+          popup: 'animate__animated animate__fadeInDown'
+        },
+        hideClass: {
+          popup: 'animate__animated animate__fadeOutUp'
+        }
+      })
+    }
   }
 
   changeContent(content: activeTab) {
     this.switchTabs = content;
+  }
+
+  getUserDetails() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`,
+    {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.acctDetails = res.accountDetails;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getUserProfileLevel() {
@@ -66,73 +121,126 @@ export class AccountPageComponent implements OnInit{
     });
   }
 
-  handleFile(event: any){
-    for (var i = 0; i < event.target.files.length; i++) {
-      this.imageFiles = event.target.files[i];
+  handleFile1(event: any){
+    this.imageFile = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = e => this.previewImage1 = reader.result;
+    reader.readAsDataURL(this.imageFile);
+  }
+
+  handleFile2(event: any){
+    this.imageFile = event.target.files[0];
+
+    const reader = new FileReader();
+    reader.onload = e => this.previewImage2 = reader.result;
+    reader.readAsDataURL(this.imageFile);
+  }
+
+  onKycUpload(imageData: any) {
+    const file:File = imageData;
+    if (file) {
+      const formData = new FormData();
+      formData.append('ImageDetails', this.imageFile);
+
+      this.http.post<any>(`${this.baseUrl}/api/Dashboard/KycUpload`, formData)
+      .subscribe({
+        next: (res) => {
+          this.kycRespMsg = res.message;
+          this.kycStatus = res.status;
+          if (this.kycStatus == true) {
+            Swal.fire({
+              text: this.kycRespMsg,
+              confirmButtonColor: "#003366",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          } else {
+            Swal.fire({
+              text: this.kycRespMsg,
+              confirmButtonColor: "#FF0033",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
     }
   }
 
-  onKycUpload(imagesData: any) {
-    const files:FileList = imagesData;
-    
-    if (files) {
+  onKycREUpload(imageData: any) {
+    const file:File = imageData;
+    if (file) {
       const formData = new FormData();
-    formData.append('KycDetails', this.imageFiles);
+      formData.append('ImageDetails', this.imageFile);
 
+      this.http.put<any>(`${this.baseUrl}/api/Dashboard/KycReUpload`, formData)
+      .subscribe({
+        next: (res) => {
+          this.kycRERespMsg = res.message;
+          this.kycREStatus = res.status;
+          if (this.kycREStatus == true) {
+            Swal.fire({
+              text: this.kycRERespMsg,
+              confirmButtonColor: "#003366",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          } else {
+            Swal.fire({
+              text: this.kycRERespMsg,
+              confirmButtonColor: "#FF0033",
+              showClass: {
+                popup: 'animate__animated animate__fadeInDown'
+              },
+              hideClass: {
+                popup: 'animate__animated animate__fadeOutUp'
+              }
+            })
+          }
+          setTimeout(() => {
+            window.location.reload();
+          }, 1500);
+        },
+        error: (err) => {
+          console.log(err);
+        }
+      });
+    }
+  }
 
-    this.http.post<any>(`${this.baseUrl}/api/Dashboard/KycValidation`, formData)
+  getFundWalletCurrencies() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any[]>(`${this.baseUrl}/api/Account/FundWalletCurrencies`, {headers: headers})
     .subscribe({
       next: (res) => {
-        this.kycRespMsg = res.message;
-        this.kycStatus = res.status;
-        if (this.kycStatus == true) {
-          Swal.fire({
-            text: this.kycRespMsg,
-            confirmButtonColor: "#003366",
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
-        } else {
-          Swal.fire({
-            text: this.kycRespMsg,
-            confirmButtonColor: "#FF0033",
-            showClass: {
-              popup: 'animate__animated animate__fadeInDown'
-            },
-            hideClass: {
-              popup: 'animate__animated animate__fadeOutUp'
-            }
-          })
-        }
-        setTimeout(() => {
-          window.location.reload();
-        }, 1500);
+        this.fundWalletCurrencies = res;
       },
       error: (err) => {
         console.log(err);
-      }
+      },
     });
-    }
   }
-
-  // getCurrenciesUserHas() {
-  //   const headers = new HttpHeaders({
-  //     "Content-Type": "application/json"
-  //   });
-  //   this.http.get<any[]>(`${this.baseUrl}/api/Account/UserAccountDetails`, {headers: headers})
-  //   .subscribe({
-  //     next: (res) => {
-  //       this.currencies = res;
-  //     },
-  //     error: (err) => {
-  //       console.log(err);
-  //     },
-  //   });
-  // }
 
   getUnavailableCurrencies() {
     const headers = new HttpHeaders({
@@ -168,7 +276,7 @@ export class AccountPageComponent implements OnInit{
   }
 
   onWalletCreate(walletCreateData: [key: string]) {
-    const currencyCheck = document.getElementById("checkCurrency")?.innerHTML;
+    let currencyCheck = this.fCurrency;
     console.log(currencyCheck);
     if (currencyCheck == "USD") {
       Swal.fire({
@@ -201,7 +309,7 @@ export class AccountPageComponent implements OnInit{
                   }
                 })
                 setTimeout(() => {
-                  this.router.navigate(['/login']);
+                  window.location.reload();
                 }, 1500);
               }
               else {
@@ -336,11 +444,156 @@ export class AccountPageComponent implements OnInit{
     }
   }
 
+  getConversionRate() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Account/GetConversionRates`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.getConversionRateStatus = res.status;
+        this.dollarRate = res.dollar;
+        this.euroRate = res.euro;
+        this.poundsRate = res.pounds;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  onKey(event: any) {
+    let checkCurrencyForRate = this.fCurrency;
+    console.log(checkCurrencyForRate);
+    if (checkCurrencyForRate === "USD") {
+      console.log(checkCurrencyForRate);
+      this.values = event.target.value * this.dollarRate;
+      if (this.values > this.nairaAcctBal) {
+        Swal.fire({
+          text: "Your naira balance is less than this equivalent in naira!!!",
+          confirmButtonColor: "#FF0033",
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      }
+    }
+    if (checkCurrencyForRate === "EUR") {
+      console.log(checkCurrencyForRate);
+      this.values = event.target.value * this.euroRate;
+      if (this.values > this.nairaAcctBal) {
+        Swal.fire({
+          text: "Your naira balance is less than this equivalent in naira!!!",
+          confirmButtonColor: "#FF0033",
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      }
+    }
+    if (checkCurrencyForRate === "GBP") {
+      console.log(checkCurrencyForRate);
+      this.values = event.target.value * this.poundsRate;
+      if (this.values > this.nairaAcctBal) {
+        Swal.fire({
+          text: "Your naira balance is less than this equivalent in naira!!!",
+          confirmButtonColor: "#FF0033",
+          showClass: {
+            popup: 'animate__animated animate__fadeInDown'
+          },
+          hideClass: {
+            popup: 'animate__animated animate__fadeOutUp'
+          }
+        })
+      }
+    }
+  }
+
+  getUserNairaBal() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Account/GetNairaBalance`,
+    {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.nairaAcctBal = res.nairaBal;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  onWalletFund(walletFundData: {[key: string] : string | number}) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.post<any>(`${this.baseUrl}/api/Account/FundForeignWallet`, walletFundData, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.fundWalletResponseMsg = res.message;
+        // this.status = res.status;
+        this.fundWalletStatus = res.status;
+        if (this.fundWalletStatus == true) {
+          Swal.fire({
+            text: this.fundWalletResponseMsg,
+            confirmButtonColor: "#003366",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+        }
+        else {
+          Swal.fire({
+            text: this.fundWalletResponseMsg,
+            confirmButtonColor: "#FF0033",
+            showClass: {
+              popup: 'animate__animated animate__fadeInDown'
+            },
+            hideClass: {
+              popup: 'animate__animated animate__fadeOutUp'
+            }
+          })
+        }
+        setTimeout(() => {
+          window.location.reload();
+        }, 2500);
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
 
+  getKycStatus() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetKycStatus`,
+    {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.kycStatusForReUpload = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
 
-
-
-
+// FIX REUPLOADDDDDDDDDDDDDDDDDDDDDDD // COMMITTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 }
