@@ -1,0 +1,75 @@
+.chatDiv {
+  width: 100%;
+  height: 100px;
+}
+
+#msgBox {
+  padding: 5px 10px 5px 10px;
+  height: 250px;
+  overflow-y: auto;
+}
+
+.chatterColour {
+  background-color: #003366!important;
+  color: white!important;
+}
+
+.right {
+  position: relative;
+  display: flex;
+  width: 100%;
+  margin: 3px 0;
+  color: white;
+}
+
+.right p {
+  position: relative;
+  right: 0;
+  text-align: right;
+  max-width: 65%;
+  padding: 8px;
+  background: #003366;
+  border-radius: 10px;
+}
+
+.right p::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  right: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(135deg, #003366 0%, #003366 50%, transparent 50%, transparent);
+}
+
+.right p span {
+  display: block;
+  margin-top: 3px;
+  font-size: 0.85em;
+  opacity: 0.5;
+}
+
+.forMe {
+  justify-content: flex-end;
+}
+
+.forYou {
+  justify-content: flex-start;
+}
+
+.forYou p {
+  background: #FF0033;
+  text-align: left;
+}
+
+.right.forYou p::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: -12px;
+  width: 20px;
+  height: 20px;
+  background: linear-gradient(225deg, #FF0033 0%, #FF0033 50%, transparent 50%, transparent);
+}
+
+

@@ -15,6 +15,7 @@ import { NotificationDialogContentComponent } from 'src/app/reuseable-components
 import { SetPinDialogContentComponent } from 'src/app/reuseable-components/set-pin-dialog-content/set-pin-dialog-content.component';
 import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/set-secquest-dialog-content/set-secquest-dialog-content.component';
 import { SignalrService } from 'src/app/services/signalr.service';
+import { ChatDialogContentComponent } from 'src/app/reuseable-components/chat-dialog-content/chat-dialog-content.component';
 
 
 @Component({
@@ -26,6 +27,8 @@ export class DashboardPageComponent implements OnInit {
 
   baseUrl : string = "http://localhost:7236";
 
+  // users: Array<userLoggedIn> = new Array<userLoggedIn>(); if is UserLocked == true throw user out of the application
+
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
 
   imageFromDb! : any;
@@ -36,6 +39,7 @@ export class DashboardPageComponent implements OnInit {
   userHavePin! : boolean;
   userHaveSecAns! : boolean;
   userHaveImage! : boolean;
+  isUserLoggedIn! : boolean;
 
   noOfNotifications : number = 0;
 
@@ -58,25 +62,6 @@ export class DashboardPageComponent implements OnInit {
     this.doesUserHavePin();
     this.doesUserHaveSecurityAns();
     this.doesUserHaveImage();
-    this.bnIdle.startWatching(1500).subscribe((res) => {
-      if (res) {
-        this.passDataToSnackComponent();
-        localStorage.clear();
-        this.router.navigate(['/login']);
-        // Swal.fire({
-        //   title: 'You have been idle!!!',
-        //   text: "You will be automatically logged out",
-        //   icon: 'warning',
-        //   // confirmButtonColor: '#003366',
-        //   // confirmButtonText: 'No, stay back!'
-        // })
-        // .then((result) => {
-        //   if (result.isConfirmed) {
-        //     this.router.navigate(['/dashboard/transactions']);
-        //   }
-        // })
-      }
-    });
     this.signalrService.startConnection();
     this.signalrService.onReceiveAlert((user, message) => {
       if (user === this.username) {
@@ -94,7 +79,52 @@ export class DashboardPageComponent implements OnInit {
         this.noOfNotifications--;
       }
     });
+    this.bnIdle.startWatching(1500).subscribe((res) => {
+      if (res) {
+        var userId = localStorage.getItem("userId"); 
+        this.signalrService.hubConnection.invoke("OnLogOut", userId);
+        this.passDataToSnackComponent();
+        this.router.navigate(['/login']);
+        localStorage.clear();
+        this.bnIdle.stopTimer();
+      }
+    });
     this.getNotificationCount();
+    this.getUserLogInStatus();
+  }
+
+  // checkTokenValidity(token: string) {
+  //   const expiryTime = (JSON.parse(window.atob(token.split('.')[1]))).exp;
+  //   return (Math.floor((new Date).getTime() / 1000)) >= expiryTime;
+  // }
+
+  passDataToSnackComponentAutoLogOut() {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
+      data: "You have been logged out!! Contact Admin!",
+      duration: 5000,
+      panelClass: ["snack-notification"],
+      horizontalPosition: "center",
+      verticalPosition: "top",
+    })
+  }
+
+  getUserLogInStatus() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json",
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Account/IsUserLoggedIn`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.isUserLoggedIn = res;
+        if (this.isUserLoggedIn == false) {
+          this.passDataToSnackComponentAutoLogOut();
+          this.router.navigate(['/login']);
+        }
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getNotificationCount() {
@@ -242,6 +272,15 @@ export class DashboardPageComponent implements OnInit {
     this.dialog.open(SetSecquestDialogContentComponent, {
       width: '600px',
       height: '350px',
+      enterAnimationDuration,
+      exitAnimationDuration,
+    });
+  }
+
+  openChatDialog(enterAnimationDuration: string, exitAnimationDuration: string): void {
+    this.dialog.open(ChatDialogContentComponent, {
+      width: '800px',
+      height: '500px',
       enterAnimationDuration,
       exitAnimationDuration,
     });

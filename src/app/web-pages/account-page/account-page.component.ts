@@ -14,9 +14,12 @@ export class AccountPageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
+  kycDocuments!: any[];
+
+  acceptedDocuments!: any[];
+
   imageFile: any;
   previewImage1: any;
-  previewImage2: any;
 
   switchTabs: string = "accountInfo";
 
@@ -26,9 +29,6 @@ export class AccountPageComponent implements OnInit{
 
   kycStatus! : boolean;
   kycRespMsg! : string;
-
-  kycREStatus! : boolean;
-  kycRERespMsg! : string;
 
   getCurrencyChargeStatus! : boolean;
   dollarCharge! : number;
@@ -56,11 +56,10 @@ export class AccountPageComponent implements OnInit{
   fundWalletResponseMsg = "";
   fundWalletStatus = false;
 
-  kycStatusForReUpload! : boolean;
-
   constructor(private http: HttpClient, private router: Router,) {}
 
   ngOnInit() {
+    this.getKycDocuments();
     this.getUserDetails();
     this.getUserProfileLevel();
     this.getCurrenciesCharge();
@@ -68,25 +67,25 @@ export class AccountPageComponent implements OnInit{
     this.getUnavailableCurrencies();
     this.getUserNairaBal();
     this.getConversionRate();
-    this.getKycStatus();
-
-    if (this.kycStatusForReUpload == true) {
-      Swal.fire({
-        text: "Please re-upload kyc documents!!!!",
-        icon: 'warning',
-        confirmButtonColor: "#FF0033",
-        showClass: {
-          popup: 'animate__animated animate__fadeInDown'
-        },
-        hideClass: {
-          popup: 'animate__animated animate__fadeOutUp'
-        }
-      })
-    }
   }
 
   changeContent(content: activeTab) {
     this.switchTabs = content;
+  }
+
+  getKycDocuments() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any[]>(`${this.baseUrl}/api/Dashboard/ListKycDocs`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.kycDocuments = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   getUserDetails() {
@@ -129,21 +128,16 @@ export class AccountPageComponent implements OnInit{
     reader.readAsDataURL(this.imageFile);
   }
 
-  handleFile2(event: any){
-    this.imageFile = event.target.files[0];
-
-    const reader = new FileReader();
-    reader.onload = e => this.previewImage2 = reader.result;
-    reader.readAsDataURL(this.imageFile);
-  }
-
-  onKycUpload(imageData: any) {
+  onKycUpload(imageData: any, value: string) {
     const file:File = imageData;
     if (file) {
       const formData = new FormData();
       formData.append('ImageDetails', this.imageFile);
 
-      this.http.post<any>(`${this.baseUrl}/api/Dashboard/KycUpload`, formData)
+      const params = new URLSearchParams();
+      params.append("fileCode", value);
+
+      this.http.post<any>(`${this.baseUrl}/api/Dashboard/KycUpload?${params}`, formData)
       .subscribe({
         next: (res) => {
           this.kycRespMsg = res.message;
@@ -162,51 +156,6 @@ export class AccountPageComponent implements OnInit{
           } else {
             Swal.fire({
               text: this.kycRespMsg,
-              confirmButtonColor: "#FF0033",
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-            })
-          }
-          setTimeout(() => {
-            window.location.reload();
-          }, 1500);
-        },
-        error: (err) => {
-          console.log(err);
-        }
-      });
-    }
-  }
-
-  onKycREUpload(imageData: any) {
-    const file:File = imageData;
-    if (file) {
-      const formData = new FormData();
-      formData.append('ImageDetails', this.imageFile);
-
-      this.http.put<any>(`${this.baseUrl}/api/Dashboard/KycReUpload`, formData)
-      .subscribe({
-        next: (res) => {
-          this.kycRERespMsg = res.message;
-          this.kycREStatus = res.status;
-          if (this.kycREStatus == true) {
-            Swal.fire({
-              text: this.kycRERespMsg,
-              confirmButtonColor: "#003366",
-              showClass: {
-                popup: 'animate__animated animate__fadeInDown'
-              },
-              hideClass: {
-                popup: 'animate__animated animate__fadeOutUp'
-              }
-            })
-          } else {
-            Swal.fire({
-              text: this.kycRERespMsg,
               confirmButtonColor: "#FF0033",
               showClass: {
                 popup: 'animate__animated animate__fadeInDown'
@@ -576,24 +525,5 @@ export class AccountPageComponent implements OnInit{
     });
   }
 
-
-  getKycStatus() {
-    const headers = new HttpHeaders({
-      "Content-Type": "application/json"
-    });
-    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetKycStatus`,
-    {headers: headers})
-    .subscribe({
-      next: (res) => {
-        console.log(res);
-        this.kycStatusForReUpload = res;
-      },
-      error: (err) => {
-        console.log(err);
-      },
-    });
-  }
-
-// FIX REUPLOADDDDDDDDDDDDDDDDDDDDDDD // COMMITTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTTT
 
 }

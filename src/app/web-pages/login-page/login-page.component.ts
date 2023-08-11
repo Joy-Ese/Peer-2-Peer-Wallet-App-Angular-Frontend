@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { LoginPageService } from 'src/app/services/login-page.service';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 @Component({
   selector: 'app-login-page',
@@ -14,11 +15,12 @@ export class LoginPageComponent implements OnInit{
 
   @ViewChild("logForm") form!: NgForm;
 
-  constructor(private loginPageService : LoginPageService) {
+  constructor(private loginPageService : LoginPageService, private signalrService : SignalrService) {
   }
 
   ngOnInit(): void {
     this.loginPageService;
+    // this.AuthLoginSuccess();
   }
 
   togglePasswordVisibility(): void {
@@ -30,7 +32,29 @@ export class LoginPageComponent implements OnInit{
     password: string
   }) {
     this.loginPageService.onLogin(loginData);
+    // this.AuthLoginUser(loginData.userName, loginData.password);
   }
+
+  // async AuthLoginUser(user: string, pass: string) {
+  //   let personUser = {userName: user, password: pass};
+
+  //   await this.signalrService.hubConnection.invoke("AuthLoginUser", personUser)
+  //   .finally(() => {
+  //     this.AuthLoginSuccess();
+  //     console.log("Login attempted")
+  //   })
+  //   .catch(err => console.error(err));
+  // }
+
+  // public AuthLoginSuccess() {
+  //   this.signalrService.hubConnection.on("AuthLoginSuccess", (users: userLoggedIn) => {
+  //     console.log(users);
+  //     this.signalrService.userData = {...users};
+
+  //     localStorage.setItem("userId", users.id);
+  //     localStorage.setItem("signalrUserLoginDetails", JSON.stringify(users));
+  //   });
+  // }
 
   get errorMsg(): string {
     return this.loginPageService.errorMessage;

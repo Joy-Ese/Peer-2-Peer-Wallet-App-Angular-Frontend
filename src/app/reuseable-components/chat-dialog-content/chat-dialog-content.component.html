@@ -1,0 +1,49 @@
+<h3 mat-dialog-title class="mx-2 mt-2">How can we help?</h3>
+<div mat-dialog-content class="mx-2">
+  <div class="row">
+    <div class="col-12 col-sm-3 mt-4 chatDiv">
+      <div class="card border-danger">
+        <div class="card-header h6 text-muted text-left">
+          <p class="badge bg-primary chatterColour">Admin</p>
+        </div>
+        <div class="card-body" id="chatBox">
+          <div #msgBox id="msgBox" [scrollTop]="msgBox.scrollHeight">
+            <div *ngFor="let message of messages" >
+              <div class="right forMe mt-2" *ngIf="message.userName == username">
+                <p>
+                  {{message.message}}
+                  <span>12:15</span>
+                </p>
+              </div>
+  
+              <div class="right forYou mt-2" *ngIf="message.userName != username">
+                <p>
+                  {{message.message}}
+                  <span>12:25</span>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="card-footer">
+          <form (ngSubmit)="onSendMessage()" #chatForm="ngForm">
+            <div class="form-outline">
+              <div class="input-group mb-3 mt-3">
+                <input type="text" [(ngModel)]="message" name="message" class="form-control form-control-sm mat-elevation-z4" required 
+                placeholder="Type a message here">
+                <button class="btn btn-dark btn-block" type="submit" [disabled]="!chatForm.valid">
+                  Send
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+

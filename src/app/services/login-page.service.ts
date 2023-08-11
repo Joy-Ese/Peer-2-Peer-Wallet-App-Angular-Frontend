@@ -41,10 +41,11 @@ export class LoginPageService {
           "Content-Type": "application/json",
           "Authorization": `Bearer ${this.loginResponseFromBackEnd.result}`
         });
-          this.http.get(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers2})
+          this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers2})
           .subscribe({
             next: (res) => {
-              localStorage.setItem("userDetails", JSON.stringify(res))
+              localStorage.setItem("userDetails", JSON.stringify(res));
+              localStorage.setItem("userId", res.username);
               this.authService.setUserLoggedIn(true);
               this.router.navigate(['/dashboard']);
             },

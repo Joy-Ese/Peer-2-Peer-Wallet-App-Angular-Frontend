@@ -100,6 +100,10 @@
   <mat-sidenav-content>
     <div class="content mat-elevation-z8">
       <router-outlet></router-outlet>
+      <button mat-button class="myButton" (click)="openChatDialog('600ms', '300ms')">
+        <mat-icon class="ico">perm_phone_msg</mat-icon>
+        <span>Help</span>
+      </button>
     </div>
   </mat-sidenav-content>
 </mat-sidenav-container>

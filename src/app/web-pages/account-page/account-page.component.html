@@ -44,60 +44,37 @@
             </div>
           </div>
         </div>
+
         <div class="row" *ngIf="accountLevel == 'Unverified'">
           <h4 class="fw-bold mt-5">
-            Please upload some ID documents (Valid Government ID and Utility Bill) for a basic KYC process.
+            Please upload some documents for KYC confirmation.
           </h4>
         <div class="d-flex">
-          <div class="col-6">
+          <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let item of kycDocuments">
             <form #kycUploadForm="ngForm">
               <div class="col-md-11 mb-3">
                 <div class="form-outline">
-                  <label for="ImageDetails" class="form-label laBel">Upload identity card here</label>
+                  <p #filecode name="filecode" ngModel ngDefaultControl required class="laBel">{{item.code}}</p>
+                  <label for="ImageDetails" class="form-label laBel">{{item.name}}</label>
                   <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
                   accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile1($event)"/>
                 </div>
               </div>
 
-              <div class="col-5">
-                <img class="img-responsive img-thumbnail" [src]="previewImage1">
-              </div>
-
               <div>
-                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm)" *ngIf="kycStatusForReUpload == false">Upload</button>
-              </div>
-
-              <div>
-                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm)" *ngIf="kycStatusForReUpload == true">ReUpload</button>
-              </div>
-            </form>
-          </div>
-
-          <div class="col-6">
-            <form #kycUploadForm="ngForm">
-              <div class="col-md-11 mb-3">
-                <div class="form-outline">
-                  <label for="ImageDetails" class="form-label laBel">upload utility bill here</label>
-                  <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
-                  accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile2($event)"/>
-                </div>
-              </div>
-
-              <div class="col-5">
-                <img class="img-responsive img-thumbnail popupclass" [src]="previewImage2">
-              </div>
-
-              <div>
-                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm)" *ngIf="kycStatusForReUpload == false">Upload</button>
-              </div>
-
-              <div>
-                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm)" *ngIf="kycStatusForReUpload == true">ReUpload</button>
+                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm, item.code)">Upload</button>
               </div>
             </form>
           </div>
         </div>
+
+        <div class="row mx-4" *ngIf="accountLevel == 'Unverified'">
+          <div class="col-5 mt-3 mx-5">
+            <img class="img-responsive img-thumbnail" [src]="previewImage1">
+          </div>
         </div>
+        </div>
+
         <div class="row" *ngIf="accountLevel == 'Verified'">
           <div class="d-flex mt-4">
             <div class="col-12">

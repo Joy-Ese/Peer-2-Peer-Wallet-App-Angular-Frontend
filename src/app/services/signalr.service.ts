@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import * as signalR  from '@microsoft/signalr';
 
+
 @Injectable({
   providedIn: 'root'
 })
@@ -8,7 +9,7 @@ export class SignalrService {
 
   baseUrl : string = "http://localhost:7236";
 
-  private hubConnection!: signalR.HubConnection;
+  public hubConnection!: signalR.HubConnection;
 
   constructor() { }
 
@@ -29,15 +30,19 @@ export class SignalrService {
     });
   }
 
-onReceiveAlert(callback: (user:string, message: string) => void) {
-  this.hubConnection.on("RecieveTransferAlert", callback);
-  }
+  onReceiveAlert(callback: (user:string, message: string) => void) {
+    this.hubConnection.on("RecieveTransferAlert", callback);
+    }
 
 
   onUpdateNotifications(callback: (user:string) => void) {
     this.hubConnection.on("UpdateNotification", callback);
     }
 
+
+  // onReceiveMessage(callback: (user:string, message: string) => void) {
+  //   this.hubConnection.on("ReceiveMessage", callback);
+  //   }
 
 
 }

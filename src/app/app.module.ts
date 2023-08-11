@@ -18,6 +18,8 @@ import { PreSpinnerComponent } from './reuseable-components/pre-spinner/pre-spin
 import { PreLoadingInterceptor } from './reuseable-components/loader/pre-loading.interceptor';
 import { NotificationDialogContentComponent } from './reuseable-components/notification-dialog-content/notification-dialog-content.component';
 import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.component';
+import { ChatDialogContentComponent } from './reuseable-components/chat-dialog-content/chat-dialog-content.component';
+import { SignalrService } from './services/signalr.service';
 
 
 @NgModule({
@@ -30,6 +32,7 @@ import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.c
     PreSpinnerComponent,
     NotificationDialogContentComponent,
     ContactAdminComponent,
+    ChatDialogContentComponent,
   ],
   imports: [
     BrowserModule,
@@ -47,6 +50,7 @@ import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.c
       useClass: PreLoadingInterceptor, 
       multi: true
     },
+    SignalrService,
   ],
   bootstrap: [AppComponent]
 })
