@@ -17,14 +17,31 @@
 
 .bnt {
   color: #0e3457;
+  /* color: #003366; */
 }
 
 .roundB {
   border-radius: 50px;
 }
 
-.buttn {
-  background-color: #337AB7;
+.redBtn {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.redBtn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.bluBtn {
+  background-color: #003366!important;
+  color: white!important;
+}
+
+.bluBtn:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 
 .divHeight {

@@ -130,3 +130,11 @@ mat-divider {
 	transform: translateY(-3px);
 	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
+
+.chatB {
+  background-color: #003366!important;
+  color: white!important;
+  position: absolute;
+  right: -30%;
+  bottom: -70%;
+}

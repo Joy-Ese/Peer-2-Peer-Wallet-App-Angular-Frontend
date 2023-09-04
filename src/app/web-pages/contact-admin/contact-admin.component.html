@@ -30,28 +30,6 @@
                     <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
                       <mat-expansion-panel-header>
                         <mat-panel-title>
-                          Account Locked?
-                        </mat-panel-title>
-                      </mat-expansion-panel-header>
-                    
-                      <div class="col-md-12 mb-3">
-                        <p>Send username to notify Admin</p>
-                        <div class="input-group mb-3 mt-3">
-                          <input type="text" class="form-control" placeholder="Send admin your username" name="" ngModel required>
-                          <button class="btn btn-outline-danger">
-                            Send
-                          </button>
-                        </div>
-                      </div>
-                    </mat-expansion-panel>
-                  </mat-accordion>
-                </div>
-                <!--  -->
-                <div class="col-12 mb-3">
-                  <mat-accordion>
-                    <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">
-                      <mat-expansion-panel-header>
-                        <mat-panel-title>
                           Trouble logging in?
                         </mat-panel-title>
                       </mat-expansion-panel-header>
@@ -59,7 +37,7 @@
                       <div class="col-md-12 mb-3">
                         <p>Did you forget your password?</p>
                         <div class="row col-2 mx-1">
-                          <button class="btn btn-outline-danger">
+                          <button class="btn btn-outline-danger redBtn">
                             Yes
                           </button>
                         </div>
@@ -70,7 +48,7 @@
               </div>
 
               <div class="d-flex justify-content-center pt-3">
-                <button class="btn btn-primary ms-2 buttn" type="submit" value="Submit">
+                <button class="btn btn-primary ms-2 bluBtn" type="submit" (click)="openPreOutChatDialog('600ms', '300ms')">
                 Chat with App Support
                 </button>
               </div>

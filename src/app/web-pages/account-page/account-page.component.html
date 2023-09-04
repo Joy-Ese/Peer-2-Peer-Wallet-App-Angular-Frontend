@@ -33,10 +33,15 @@
                   <mat-card-header>
                     <mat-card-subtitle class="fw-bold">Account Profile: {{accountLevel}}</mat-card-subtitle>
                   </mat-card-header>
-                  <mat-card-content *ngIf="accountLevel == 'Unverified'">
+                  <mat-card-content *ngIf="unavailableDocs?.length != 0">
                     <p class="mt-1">
                       Proceed to complete your KYC Validation to 
                       upgrade your account and enable foreign wallet creation
+                    </p>
+                  </mat-card-content>
+                  <mat-card-content *ngIf="unavailableDocs?.length == 0">
+                    <p class="mt-3">
+                      Your uploaded documents are awaiting review
                     </p>
                   </mat-card-content>
                 </mat-card>
@@ -45,49 +50,58 @@
           </div>
         </div>
 
-        <div class="row" *ngIf="accountLevel == 'Unverified'">
-          <h4 class="fw-bold mt-5">
-            Please upload some documents for KYC confirmation.
-          </h4>
-        <div class="d-flex">
-          <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let item of kycDocuments">
-            <form #kycUploadForm="ngForm">
-              <div class="col-md-11 mb-3">
-                <div class="form-outline">
-                  <p #filecode name="filecode" ngModel ngDefaultControl required class="laBel">{{item.code}}</p>
-                  <label for="ImageDetails" class="form-label laBel">{{item.name}}</label>
-                  <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
-                  accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile1($event)"/>
+        <div class="row">
+          <div class="d-flex">
+            <div class="col-sm-6 col-md-6 col-lg-6" *ngFor="let item of unavailableDocs">
+              <h4 class="fw-bold mt-5">
+                Please upload some documents for KYC confirmation.
+              </h4>
+              <form #kycUploadForm="ngForm">
+                <div class="col-md-11 mb-3">
+                  <div class="form-outline">
+                    <p #filecode name="filecode" ngModel ngDefaultControl required class="laBel">{{item.code}}</p>
+                    <label for="ImageDetails" class="form-label laBel" *ngIf="item.code == 'A'">Government Id</label>
+                    <label for="ImageDetails" class="form-label laBel" *ngIf="item.code == 'B'">Utility Bill</label>
+                    <input #ImageDetails class="form-control form-control-sm mt-2" type="file" 
+                    accept=".jpg, .jpeg, .png, .pdf" name="ImageDetails" ngModel required (change)="handleFile1($event)"/>
+                  </div>
                 </div>
-              </div>
 
-              <div>
-                <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm, item.code)">Upload</button>
-              </div>
-            </form>
+                <div>
+                  <button class="btn btn-outline-secondary mBB" type="submit" (click)="onKycUpload(kycUploadForm, item.code)">Upload</button>
+                </div>
+              </form>
+            </div>
+          </div>
+
+          <div class="row mx-4" *ngIf="accountLevel == 'Unverified'">
+            <div class="col-5 mt-3 mx-5" *ngIf="previewImage1 != null">
+              <img class="img-responsive img-thumbnail" [src]="previewImage1">
+            </div>
           </div>
         </div>
 
-        <div class="row mx-4" *ngIf="accountLevel == 'Unverified'">
-          <div class="col-5 mt-3 mx-5">
-            <img class="img-responsive img-thumbnail" [src]="previewImage1">
-          </div>
-        </div>
-        </div>
-
-        <div class="row" *ngIf="accountLevel == 'Verified'">
+        <div class="row" *ngIf="unavailableDocs?.length == 0">
           <div class="d-flex mt-4">
             <div class="col-12">
               <iframe src="https://embed.lottiefiles.com/animation/8011" width="700" height="300"></iframe>
             </div>
           </div>
         </div>
+
+        <!-- <div class="row" *ngIf="unavailableDocs?.length == 0">
+          <div class="d-flex mt-4">
+            <div class="col-12">
+              <img src="../../../assets/images/pending.gif" alt="">
+            </div>
+          </div>
+        </div> -->
       </div>
 
       <div class="switchCases" *ngSwitchCase="'newWallet'">
         <div class="row">
           <h4 class="fw-bold">Create a new wallet account</h4>
-          <div class="d-flex mt-5">
+          <div class="d-flex mt-5" [ngClass]="{'blur': accountLevel === 'Unverified'}">
             <div>
               <img class="img-fluid imgLog" src="../../../assets/images/undraw_new_wallet.svg" alt="">
             </div>
@@ -117,7 +131,7 @@
       <div class="switchCases" *ngSwitchCase="'fundWallet'">
         <div class="row">
           <h4 class="fw-bold">Fund your wallet account</h4>
-          <div class="d-flex mt-5">
+          <div class="d-flex mt-5" [ngClass]="{'blur': accountLevel === 'Unverified'}">
             <div>
               <img class="img-fluid imgLog" src="../../../assets/images/undraw_fund_wallet.svg" alt="">
             </div>

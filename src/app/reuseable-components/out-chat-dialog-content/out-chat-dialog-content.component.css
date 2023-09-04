@@ -74,8 +74,15 @@
 }
 
 .posSend {
-  bottom: 25rem;
-  left: 1rem;  
+  left: 70rem;  
   position: sticky;
+  background-color: transparent;
+  color: #FF0033;
+  font-size: 12px;
+}
+
+.posSend:hover {
+	transform: translateY(-3px);
+	box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
 }
 

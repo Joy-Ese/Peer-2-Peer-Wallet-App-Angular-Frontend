@@ -1,0 +1,43 @@
+<h3 class="mx-3 mt-2">Confirm {{chatTrn.curr}} Transfer</h3>
+<div class="row mx-1">
+  <div class="col-12">
+    <div *ngIf="responseMsg" [ngClass]="status == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{responseMsg}}</div>
+    <form #chatTrnForm="ngForm">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <div class="form-outline">
+            <label class="form-label">Sender</label>
+            <input [(ngModel)]="sourceAccountVal" type="text" #sourceAccount class="form-control" name="sourceAccount" readonly required/>
+          </div>
+        </div>
+        <div class="col-md-6 mb-3">
+          <div class="form-outline">
+            <label class="form-label">Recepient</label>
+            <input [(ngModel)]="destinationAccountVal" type="text" #destinationAccount class="form-control" name="destinationAccount" readonly required/>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-md-12 mb-3">
+        <div class="form-outline">
+          <label class="form-label">Amount</label>
+          <input [(ngModel)]="chatTrn.amt" type="text" #amount class="form-control" name="amount" readonly required/>
+        </div>
+      </div>
+      <div class="col-md-12 mb-3">
+        <div class="form-outline">
+          <label class="form-label">Pin</label>
+          <input #pin type="password" class="form-control" maxlength="4" pattern="^[0-9]{4}$" name="pin" ngModel required/>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>
+<!--  -->
+<div>
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button class="btn btn-outline-secondary" type="submit" (click)="createTransfer(chatTrnForm.value)">
+    Send
+  </button>
+</div>
+<app-spinner></app-spinner>

@@ -14,7 +14,7 @@ export class AccountPageComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
-  kycDocuments!: any[];
+  unavailableDocs!: any[];
 
   acceptedDocuments!: any[];
 
@@ -59,7 +59,7 @@ export class AccountPageComponent implements OnInit{
   constructor(private http: HttpClient, private router: Router,) {}
 
   ngOnInit() {
-    this.getKycDocuments();
+    this.getUnavailableDocuments();
     this.getUserDetails();
     this.getUserProfileLevel();
     this.getCurrenciesCharge();
@@ -73,14 +73,15 @@ export class AccountPageComponent implements OnInit{
     this.switchTabs = content;
   }
 
-  getKycDocuments() {
+  getUnavailableDocuments() {
     const headers = new HttpHeaders({
       "Content-Type": "application/json"
     });
-    this.http.get<any[]>(`${this.baseUrl}/api/Dashboard/ListKycDocs`, {headers: headers})
+    this.http.get<any[]>(`${this.baseUrl}/api/Dashboard/GetUnavailableDocuments`, {headers: headers})
     .subscribe({
       next: (res) => {
-        this.kycDocuments = res;
+        console.log(res);
+        this.unavailableDocs = res;
       },
       error: (err) => {
         console.log(err);
@@ -122,6 +123,11 @@ export class AccountPageComponent implements OnInit{
 
   handleFile1(event: any){
     this.imageFile = event.target.files[0];
+
+    if (this.imageFile.type == "application/pdf") {
+      this.previewImage1 = null;
+      return this.previewImage1;
+    }
 
     const reader = new FileReader();
     reader.onload = e => this.previewImage1 = reader.result;

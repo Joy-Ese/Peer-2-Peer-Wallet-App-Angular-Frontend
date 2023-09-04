@@ -28,7 +28,7 @@
         <form (ngSubmit)="onSendMessage()" #chatForm="ngForm">
           <div class="form-outline">
             <div class="input-group mb-3 mt-3">
-              <input type="text" [(ngModel)]="message" name="message" keyUphere class="form-control form-control-sm mat-elevation-z4" required 
+              <input type="text" [(ngModel)]="message" name="message" class="form-control form-control-sm mat-elevation-z4" required 
               placeholder="Type a message here">
               <button class="btn btn-dark btn-block" type="submit" [disabled]="!chatForm.valid" (click)="postSendMsg(chatForm.value)">
                 Send
@@ -39,9 +39,10 @@
       </div>
     </div>
   </div>
+
+  <div>
+    <button class="btn btn-secondary posSend" (click)="endChatConn()">  
+      End Chat Connection
+    </button>
+  </div>
 </div>
-
-
-
-
-

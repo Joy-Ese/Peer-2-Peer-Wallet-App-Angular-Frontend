@@ -1,0 +1,54 @@
+<div class="row">
+  <div class="col mx-2 mt-2">
+    <h4 class="bnt">Please fill out the form below to start chatting with the next available admin.</h4>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <form #preChatForm="ngForm">
+      <div class="row">
+        <div class="form-outline">
+          <div class="col-md-11 mb-3">
+            <label class="form-label">Username</label>
+            <input type="text" [(ngModel)]="uName" [value]="uName" class="form-control mat-elevation-z4" name="uName"/>
+          </div>
+        </div>
+
+        <div class="form-outline">
+          <div class="col-md-11 mb-4">
+            <label class="form-label">Email</label>
+            <input #email type="email" class="form-control mat-elevation-z4" name="email" ngModel required/>
+          </div>
+        </div>
+
+        <div class="form-outline">
+          <div class="col-md-11 mb-3">
+            <label class="form-label mat-elevation-z4 p-2">Verify your email and a six digit pin will be sent to you</label>
+            <input type="checkbox" [(ngModel)]="showInputBox" class="mx-3" name="showInputBox" (click)="generatePin(preChatForm.value)">
+          </div>
+        </div>
+
+        <div class="form-outline" *ngIf="showInputBox">
+          <div class="col-md-11 mb-3">
+            <label class="form-label">A six digit pin has been sent to your email. Please type it out here</label>
+            <input #pin type="password" class="form-control mat-elevation-z4" name="pin" ngModel required/>
+          </div>
+        </div>
+
+        <div class="col-11">
+          <button class="btn btn-outline-secondary mb-3 mt-3 bluBtn" type="submit" (click)="validatePin(preChatForm.value)">
+            Send 
+          </button>
+        </div>
+<!-- ///////////////////////////// -->
+        <!-- <div class="col-11">
+          <button class="btn btn-outline-secondary mb-3 mt-3 bluBtn" type="submit" (click)="openOutChatDialog('600ms', '300ms', uName)">
+            Sendttttt
+          </button>
+        </div> -->
+      </div>
+    </form>
+  </div>
+</div>
+

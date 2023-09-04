@@ -40,6 +40,11 @@ import { SetSecquestDialogContentComponent } from 'src/app/reuseable-components/
 import { GenStmntDialogContentComponent } from 'src/app/reuseable-components/gen-stmnt-dialog-content/gen-stmnt-dialog-content.component';
 import { AccountPageComponent } from '../../account-page/account-page.component';
 import { SignalrService } from 'src/app/services/signalr.service';
+import { FindContactPageComponent } from '../../find-contact-page/find-contact-page.component';
+import { UserDataService } from 'src/app/services/user-data.service';
+import { ChatDialogContentComponent } from 'src/app/reuseable-components/chat-dialog-content/chat-dialog-content.component';
+import { UsersChatDialogContentComponent } from 'src/app/reuseable-components/users-chat-dialog-content/users-chat-dialog-content.component';
+import { ChatTrnDialogContentComponent } from 'src/app/reuseable-components/chat-trn-dialog-content/chat-trn-dialog-content.component';
 
 
 const routes: Routes = [
@@ -62,6 +67,10 @@ const routes: Routes = [
       {
         path: "fundaccount",
         component: FundaccountPageComponent
+      },
+      {
+        path: "findcontact",
+        component: FindContactPageComponent
       },
       {
         path: "transactions",
@@ -102,6 +111,10 @@ const routes: Routes = [
     GenStmntDialogContentComponent,
     AccountPageComponent,
     NotificationPageComponent,
+    FindContactPageComponent,
+    ChatDialogContentComponent,
+    UsersChatDialogContentComponent,
+    ChatTrnDialogContentComponent,
   ],
   imports: [
     RouterModule.forChild(routes),
@@ -141,6 +154,7 @@ const routes: Routes = [
     },
     BnNgIdleService,
     SignalrService,
+    UserDataService,
   ],
   exports: [RouterModule]
 })

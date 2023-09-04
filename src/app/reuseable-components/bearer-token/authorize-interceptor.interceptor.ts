@@ -18,15 +18,25 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor, OnInit{
 
   userDetails! : any;
 
-  constructor(private router: Router, private matSnackBar: MatSnackBar, private signalrService : SignalrService,) {}
+  constructor(private router: Router, private matSnackBar: MatSnackBar, private signalrService : SignalrService) {}
 
   ngOnInit() {
     this.userDetails = UserInformation();
   }
 
-  passDataToSnackComponent() {
+  passDataToSnackComponent1() {
     this.matSnackBar.openFromComponent(SnackBarComponent, {
       data: `Hi ${this.userDetails.firstName}, You now have unauthorized access!`,
+      duration: 5000,
+      panelClass: ["snack-notification"],
+      horizontalPosition: "center",
+      verticalPosition: "top",
+    })
+  }
+
+  passDataToSnackComponent2() {
+    this.matSnackBar.openFromComponent(SnackBarComponent, {
+      data: `You now have unauthorized access!`,
       duration: 5000,
       panelClass: ["snack-notification"],
       horizontalPosition: "center",
@@ -40,7 +50,7 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor, OnInit{
       next: (event) => {
         if (event instanceof HttpResponse) {
           if(event.status == 401) {
-            this.passDataToSnackComponent();
+            this.passDataToSnackComponent2();
           }
         }
         return event;
@@ -49,7 +59,7 @@ export class AuthorizeInterceptorInterceptor implements HttpInterceptor, OnInit{
         if(error.status === 401) {
           var userId = localStorage.getItem("userId");
           this.signalrService.hubConnection.invoke("OnLogOut", userId);
-          this.passDataToSnackComponent();
+          this.passDataToSnackComponent1();
           setTimeout(() => {this.router.navigate(['/login'])}, 4000);
           localStorage.clear();
         }

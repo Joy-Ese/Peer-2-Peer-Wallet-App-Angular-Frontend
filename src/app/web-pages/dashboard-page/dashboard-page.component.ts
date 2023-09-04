@@ -27,6 +27,8 @@ export class DashboardPageComponent implements OnInit {
 
   baseUrl : string = "http://localhost:7236";
 
+  chatCount : number = 0;
+
   // users: Array<userLoggedIn> = new Array<userLoggedIn>(); if is UserLocked == true throw user out of the application
 
   userDetailResponseFromBackEnd! : UserDetailResponseFromBackEnd;
@@ -60,6 +62,7 @@ export class DashboardPageComponent implements OnInit {
     this.getUsername();
     this.getUserImage();
     this.doesUserHavePin();
+    this.getAllUnreadChatsCount();
     this.doesUserHaveSecurityAns();
     this.doesUserHaveImage();
     this.signalrService.startConnection();
@@ -79,6 +82,10 @@ export class DashboardPageComponent implements OnInit {
         this.noOfNotifications--;
       }
     });
+    // this.signalrService.onUpdateChatCount(() => {
+    //   this.getAllUnreadChatsCount();
+    // });
+
     this.bnIdle.startWatching(1500).subscribe((res) => {
       if (res) {
         var userId = localStorage.getItem("userId"); 
@@ -97,6 +104,25 @@ export class DashboardPageComponent implements OnInit {
   //   const expiryTime = (JSON.parse(window.atob(token.split('.')[1]))).exp;
   //   return (Math.floor((new Date).getTime() / 1000)) >= expiryTime;
   // }
+
+  getAllUnreadChatsCount() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+
+    const params = new URLSearchParams();
+    params.append("userOrAdmin", "User");
+
+    this.http.get<any>(`${this.baseUrl}/api/Chat/GetAllUnreadChatsCount?${params}`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.chatCount = res.allChats;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   passDataToSnackComponentAutoLogOut() {
     this.matSnackBar.openFromComponent(SnackBarComponent, {

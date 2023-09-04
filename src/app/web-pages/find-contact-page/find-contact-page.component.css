@@ -1,0 +1,30 @@
+.btn-outline-secondary {
+  background-color: #FF0033!important;
+  color: white!important;
+}
+
+.chBtn {
+  background-color: #003366;
+  color: white;
+}
+
+.linkToTxn {
+  text-decoration: none;
+}
+
+.imgElement {
+	width: 70px;
+	height: 70px;
+	border: 1px solid #ff0033;
+  margin-top: -10px;
+}
+
+.raisedbox { 
+  padding-top: 50px;
+}
+
+.acTxt {
+  color: #003366;
+}
+
+

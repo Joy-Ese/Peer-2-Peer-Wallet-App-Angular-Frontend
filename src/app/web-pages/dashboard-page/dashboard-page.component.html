@@ -75,6 +75,10 @@
       <mat-icon class="ico">payment</mat-icon>
       <span>Fund Account</span>
     </button>
+    <button mat-button class="menu-button mBB" routerLink="findcontact">
+      <mat-icon class="ico">search</mat-icon>
+      <span>Find Contact</span>
+    </button>
     <button mat-button class="menu-button mBB" routerLink="transactions">
       <mat-icon class="ico">list</mat-icon>
       <span>Transactions</span>
@@ -102,7 +106,7 @@
       <router-outlet></router-outlet>
       <button mat-button class="myButton" (click)="openChatDialog('600ms', '300ms')">
         <mat-icon class="ico">perm_phone_msg</mat-icon>
-        <span>Help</span>
+        <span>Help</span><span class="badge bg-danger chatB">{{chatCount}}</span>
       </button>
     </div>
   </mat-sidenav-content>
