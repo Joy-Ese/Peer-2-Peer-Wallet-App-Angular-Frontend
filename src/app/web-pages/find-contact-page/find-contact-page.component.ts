@@ -5,6 +5,7 @@ import { UsersChatDialogContentComponent } from 'src/app/reuseable-components/us
 import { UserDataService } from 'src/app/services/user-data.service';
 import Swal from 'sweetalert2/dist/sweetalert2.js';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { SignalrService } from 'src/app/services/signalr.service';
 
 class User {
   constructor(public username: string) {}
@@ -19,9 +20,13 @@ export class FindContactPageComponent implements OnInit {
 
   baseUrl : string = "http://localhost:7236";
 
+  loggedInUserName! : string;
+
   displayedUsers: { firstName: string, lastName: string, userName: string, imageFromDb: string | null }[] = [];
 
   initChats!: any[];
+
+  chatCountData!: any[];
 
   searchInfo! : string;
   firstName! : string;
@@ -42,10 +47,51 @@ export class FindContactPageComponent implements OnInit {
     private http: HttpClient, 
     public dialog: MatDialog,
     public userDataService: UserDataService,
+    private signalrService : SignalrService,
     ) { }
 
   ngOnInit() {
     this.getInitChats();
+    this.getUserDetails();
+    this.getUnreadChatCount();
+
+    this.signalrService.startConnection();
+    this.signalrService.onUpdateNotifications((user) => {
+      if (user === this.loggedInUserName) {
+        this.getUnreadChatCount();
+      }
+    });
+  }
+
+  getUserDetails() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Dashboard/GetUserDetails`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.loggedInUserName = res.username;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getUnreadChatCount() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Contact/GetUnreadChatCount`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.chatCountData = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
   }
 
   searchContact(value: string) {

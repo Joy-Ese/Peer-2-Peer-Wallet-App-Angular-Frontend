@@ -23,6 +23,7 @@ import { SignalrService } from './services/signalr.service';
 import { UserDataService } from './services/user-data.service';
 import { PreOutChatDialogContentComponent } from './reuseable-components/pre-out-chat-dialog-content/pre-out-chat-dialog-content.component';
 import { OutChatDialogContentComponent } from './reuseable-components/out-chat-dialog-content/out-chat-dialog-content.component';
+import { ResetPasswordPageComponent } from './web-pages/reset-password-page/reset-password-page.component';
 
 
 @NgModule({
@@ -37,6 +38,7 @@ import { OutChatDialogContentComponent } from './reuseable-components/out-chat-d
     ContactAdminComponent,
     PreOutChatDialogContentComponent,
     OutChatDialogContentComponent,
+    ResetPasswordPageComponent,
   ],
   imports: [
     BrowserModule,

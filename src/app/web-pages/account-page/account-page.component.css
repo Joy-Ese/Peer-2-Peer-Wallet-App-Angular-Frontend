@@ -33,17 +33,7 @@ mat-divider {
 
 .imgLog {
   display: block;
-  width: 80%;
-}
-
-.example-card {
-  width: 600px;
-  height: 100px;
-}
-
-.example-card2 {
-  width: 600px;
-  height: 40px;
+  width: 100%;
 }
 
 .gifStyle {
@@ -67,6 +57,10 @@ mat-divider {
 
 .crWallet {
   margin-left: 145px;
+}
+
+mat-card-header {
+  width: 80%;
 }
 
 mat-card-content {

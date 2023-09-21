@@ -15,6 +15,18 @@
   font-size: 15px;
 }
 
+.onlineStatusSize {
+  font-size: 12px;
+}
+
+.pGrey {
+  color: gray;
+}
+
+.pGreen {
+  color: green;
+}
+
 .right {
   position: relative;
   display: flex;

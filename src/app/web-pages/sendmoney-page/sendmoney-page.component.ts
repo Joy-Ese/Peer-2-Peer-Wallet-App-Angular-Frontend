@@ -63,7 +63,8 @@ export class SendmoneyPageComponent implements OnInit{
 
         if (this.status == false) {
           Swal.fire({
-            text: `${this.firstName} does not have an account matching ${this.currn} currency`,
+            // text: `${this.firstName} does not have an account matching ${this.currn} currency`,
+            text: `No account matching ${this.currn} currency`,
             confirmButtonColor: "#FF0033",
             showClass: {
               popup: 'animate__animated animate__fadeInDown'

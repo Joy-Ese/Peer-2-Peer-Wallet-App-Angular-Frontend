@@ -13,6 +13,8 @@ export class UsersChatDialogContentComponent implements OnInit{
 
   baseUrl : string = "http://localhost:7236";
 
+  onlineStatus!: boolean;
+
   username!: string;
 
   messages: { userName: string, message: string }[] = [];
@@ -25,6 +27,8 @@ export class UsersChatDialogContentComponent implements OnInit{
   currenc!: string;
   amoun!: number;
 
+  chatCountData!: any[];
+
   constructor(
     private http: HttpClient, 
     private signalrService : SignalrService,
@@ -36,11 +40,77 @@ export class UsersChatDialogContentComponent implements OnInit{
     }
 
   ngOnInit() {
+    this.readUserChats();
+    this.getUnreadChatCount();
+    this.getOnlineStatus();
     this.getUserDetails();
+    this.getUser2UserChats();
     this.signalrService.startConnection();
+    this.signalrService.onUserRefreshChat((loggedInUser, userChattingWith) => {
+      if (userChattingWith == this.chattingWith || loggedInUser == this.username) {
+        this.getUser2UserChats();
+      }
+    });
+
 
     this.signalrService.hubConnection.on("User2UserReceiveMessage", (userName, message) => {
       this.messages.push({ userName, message });
+      this.getUser2UserChats();
+    });
+  }
+
+
+  readUserChats() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const params = new URLSearchParams();
+    params.append("chattingWith", this.chattingWith);
+
+    this.http.put<any>(`${this.baseUrl}/api/Chat/ReadUserChats?${params}`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.getUnreadChatCount();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
+
+  getUnreadChatCount() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any>(`${this.baseUrl}/api/Contact/GetUnreadChatCount`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.chatCountData = res;
+      },
+      error: (err) => {
+        console.log(err);
+      },
+    });
+  }
+
+  getOnlineStatus() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const params = new URLSearchParams();
+    params.append("chattingWith", this.chattingWith);
+
+    this.http.get<any>(`${this.baseUrl}/api/Contact/GetOnlineStatus?${params}`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        console.log(res);
+        this.onlineStatus = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
     });
   }
 
@@ -60,13 +130,45 @@ export class UsersChatDialogContentComponent implements OnInit{
     });
   }
 
-  onSendMessage() {
-    if (!this.username || !this.message || this.message.trim() == "") return;
-    this.signalrService.hubConnection.invoke("User2UserSendMessage", this.username, this.message);
-    this.message = "";
+  getUser2UserChats() {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    this.http.get<any[]>(`${this.baseUrl}/api/Chat/GetUser2UserChats`, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.usersChats = res;
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
   }
 
+  onSendMessage() {
+    if (!this.username || !this.message || this.message.trim() == "") return;
+    this.signalrService.hubConnection.invoke("User2UserSendMessage", this.username, this.message); 
+    this.message = "";
+    this.getUser2UserChats();
+  }
 
+  postSendMsg(msgData: [key: string]) {
+    const headers = new HttpHeaders({
+      "Content-Type": "application/json"
+    });
+    const params = new URLSearchParams();
+    params.append("chattingWith", this.chattingWith); 
+
+    this.http.post(`${this.baseUrl}/api/Chat/User2User?${params}`, msgData, {headers: headers})
+    .subscribe({
+      next: (res) => {
+        this.getUser2UserChats();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
 
   handleMsg(event: any) {

@@ -43,12 +43,20 @@
         <div class="col-5 col-md-6" *ngFor="let init of initChats | paginate: {itemsPerPage: tableSize, currentPage: page, totalItems: count}; let i = index">
           <mat-card>
             <mat-card-header>
-              <mat-card-title>
+              <mat-card-title *ngIf="init.receivedFrom == loggedInUserName">
                 {{init.startedWith}}
               </mat-card-title>
+              <mat-card-title *ngIf="init.receivedFrom != loggedInUserName">
+                {{init.receivedFrom}}
+              </mat-card-title>
             </mat-card-header>
-            <mat-card-actions align="end">
-              <button mat-button class="chBtn" (click)="openUsersChatDialog('600ms', '300ms', init.startedWith)">
+            <mat-card-actions align="end" *ngFor="let item of chatCountData">
+              <button mat-button class="chBtn" (click)="openUsersChatDialog('600ms', '300ms', init.startedWith)" *ngIf="init.receivedFrom == loggedInUserName">
+                <mat-icon>chat_bubble</mat-icon>
+                <span>CHAT</span>
+                <span class="badge bg-danger mt-1 mx-1" >{{item.unreadChat}}</span>
+              </button>
+              <button mat-button class="chBtn" (click)="openUsersChatDialog('600ms', '300ms', init.receivedFrom)" *ngIf="init.receivedFrom != loggedInUserName">
                 <mat-icon>chat_bubble</mat-icon>
                 <span>CHAT</span>
               </button>

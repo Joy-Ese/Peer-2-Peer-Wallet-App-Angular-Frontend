@@ -1,18 +1,14 @@
-.container {
-  margin-top: 10px;
-}
-
 .bdgDivBlue {
   background-color: #003366;
   border-radius: 30px;
-  margin-left: 150px;
+  margin-left: 100px;
   height: 20.5vh;
 }
 
 .bdgDivRed {
   background-color: #FF0033;
   border-radius: 30px;
-  margin-left: 150px;
+  margin-left: 100px;
   height: 20.5vh;
 }
 
@@ -41,11 +37,21 @@ i {
 }
 
 .compusloryMargin {
-  margin-left: 150px;
+  margin-left: 100px;
 }
 
+/* If the screen size is 990px wide or less, set the font-size of <div> to 30px */
+@media screen and (max-width: 990px) {
+  .compusloryMargin {
+    margin-left: 100px;
+  }
+
+}
+/* ************************************************************************ */
+
+
 .btn-outline-secondary {
-  background-color: #FF0033!important;
+  background-color: #003366!important;
   color: white!important;
 }
 
@@ -55,7 +61,9 @@ i {
 }
 
 .proceedTo {
-  margin-left: 580px;
+  position: absolute;
+  left: 63%;
+  bottom: 25%;
 }
 
 .styleIFrame {

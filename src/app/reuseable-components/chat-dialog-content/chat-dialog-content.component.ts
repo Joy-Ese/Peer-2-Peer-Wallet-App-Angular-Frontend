@@ -37,13 +37,16 @@ export class ChatDialogContentComponent implements OnInit{
     this.signalrService.onUpdateUser(() => {
       this.getUserIsLoggedIn();
     });
-    this.signalrService.onReceiveMessage(() => {
-      this.getUserAdminChat();
+    this.signalrService.onReceiveMessage((name) => {
+      if (name == this.selectedAdmin.username) {
+        this.getUserAdminChat();
+      }
     });
 
 
     this.signalrService.hubConnection.on("ReceiveMessage", (userName, message) => {
       this.messages.push({ userName, message });
+      this.getUserAdminChat();
     });
   }
 
@@ -132,6 +135,7 @@ export class ChatDialogContentComponent implements OnInit{
     if (!this.username || !this.message || this.message.trim() == "") return;
     this.signalrService.hubConnection.invoke("SendMessage", this.username, this.message);
     this.message = "";
+    this.getUserAdminChat();
   }
 
   postSendMsg(msgData: [key: string]) {
@@ -141,10 +145,10 @@ export class ChatDialogContentComponent implements OnInit{
     const params = new URLSearchParams();
     params.append("chattingWIth", this.selectedAdmin.username);
 
-    this.http.post(`${this.baseUrl}/api/Chat/UserChat${params}`, msgData, {headers: headers})
+    this.http.post(`${this.baseUrl}/api/Chat/UserChat?${params}`, msgData, {headers: headers})
     .subscribe({
       next: (res) => {
-        console.log(res);
+        this.getUserAdminChat();
       },
       error: (err) => {
         console.log(err);

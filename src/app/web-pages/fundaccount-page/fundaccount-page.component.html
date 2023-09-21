@@ -1,52 +1,47 @@
 <div class="row">
-  <div class="container">
-    <div class="col-12">
-      <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
-        <mat-tab label={{info.currency}} *ngFor="let info of acctDetails">
-          <div [ngClass]="displayIFrame == true ? 'bdgDivBlur' : ''" 
-              [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'col-9 bdgDivRed d-flex justify-content-between ' : 'col-9 bdgDivBlue d-flex justify-content-between'">
-            <div class="mt-4">
-              <div [hidden]="!showEye">
-                <span class="myBal mx-4 mt-5">Balance</span>
-                <div class="mx-4 mt-2 d-flex">
-                  <h1 class="balFigure text-center">{{info.balance |currency:info.currency:"symbol":"1.2-2"}}</h1>
-                </div>
-              </div>
-              <div [hidden]="showEye">
-                <span class="myBal mx-4 mt-5">Balance</span>
-                <div class="mx-4 mt-2 d-flex">
-                  <h1 class="balFigure text-center">XXXXXXXX</h1>
-                </div>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
+      <mat-tab label={{info.currency}} *ngFor="let info of acctDetails">
+        <div [ngClass]="displayIFrame == true ? 'bdgDivBlur' : ''" 
+            [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'col-9 bdgDivRed d-flex justify-content-between ' : 'col-9 bdgDivBlue d-flex justify-content-between'">
+          <div class="mt-4">
+            <div [hidden]="!showEye">
+              <span class="myBal mx-4 mt-5">Balance</span>
+              <div class="mx-4 mt-2 d-flex">
+                <h1 class="balFigure text-center">{{info.balance |currency:info.currency:"symbol":"1.2-2"}}</h1>
               </div>
             </div>
-            <div class="showBal d-flex flex-column">
-              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            <div [hidden]="showEye">
+              <span class="myBal mx-4 mt-5">Balance</span>
+              <div class="mx-4 mt-2 d-flex">
+                <h1 class="balFigure text-center">XXXXXXXX</h1>
+              </div>
             </div>
           </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-
-
-
-
-    <div 
-    [ngClass]="displayIFrame == true ? 'col-9 compusloryMargin bdgDivBlur' : 'col-9 compusloryMargin'">
-      <div *ngIf="initializeRespMsg" [ngClass]="initializeStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{initializeRespMsg}}</div>
-      <form #initializePaystackForm="ngForm">
-        <div class="col-12">
-          <h4 class="mt-4">Enter an amount to fund your account</h4>
-          <input #amount type="number" class="form-control mb-3 mt-3" name="amount" ngModel required>
-          <button class="btn btn-outline-secondary proceedTo mb-3 mt-3" type="submit" (click)="onPaystackInit(initializePaystackForm.value)">
-            Proceed to Fund Account
-          </button>
+          <div class="showBal d-flex flex-column">
+            <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+          </div>
         </div>
-      </form>
-    </div>
-
-    <iframe
-      [src]="iFrameUrl" *ngIf="displayIFrame" id="paystackIFrame" class="styleIFrame"
-    ></iframe>
+      </mat-tab>
+    </mat-tab-group>
   </div>
+
+  <div 
+  [ngClass]="displayIFrame == true ? 'col-9 compusloryMargin bdgDivBlur' : 'col-9 compusloryMargin'">
+    <div *ngIf="initializeRespMsg" [ngClass]="initializeStatus == false ? 'alert alert-danger' : 'alert alert-danger d-none'">{{initializeRespMsg}}</div>
+    <form #initializePaystackForm="ngForm">
+      <div class="col-12">
+        <h4 class="mt-4">Enter an amount to fund your account</h4>
+        <input #amount type="number" class="form-control mb-3 mt-3" name="amount" ngModel required>
+        <button class="btn btn-outline-secondary proceedTo mb-3 mt-3" type="submit" (click)="onPaystackInit(initializePaystackForm.value)">
+          Proceed to Fund Account
+        </button>
+      </div>
+    </form>
+  </div>
+
+  <iframe
+    [src]="iFrameUrl" *ngIf="displayIFrame" id="paystackIFrame" class="styleIFrame"
+  ></iframe>
 </div>
 <app-spinner></app-spinner>

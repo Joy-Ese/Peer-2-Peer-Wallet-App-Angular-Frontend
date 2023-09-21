@@ -14,16 +14,8 @@
   font-size: 15px;
 }
 
-.filterCard {
-  color: #003366;
-}
-
-.filterText {
-  margin-left: 45rem;
-}
-
 .filterInput {
-  margin-top: -11px;
+  margin-top: 10px;
 }
 
 .dateColour {

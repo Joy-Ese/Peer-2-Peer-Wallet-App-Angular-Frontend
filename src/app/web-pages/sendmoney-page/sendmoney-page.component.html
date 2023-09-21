@@ -1,75 +1,73 @@
 <div class="row">
-  <div class="container">
-    <div class="col-12">
-      <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
-        <mat-tab label={{info.currency}} *ngFor="let info of acctDetails">
-          <div [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'col-9 bdgDivRed d-flex justify-content-between' : 'col-9 bdgDivBlue d-flex justify-content-between'">
-            <div class="mt-4">
-              <div [hidden]="!showEye">
-                <span class="myBal mx-4 mt-5">Balance</span>
-                <div class="mx-4 mt-2 d-flex">
-                  <h1 class="balFigure text-center">{{info.balance |currency:info.currency:"symbol":"1.2-2"}}</h1>
-                </div>
-              </div>
-              <div [hidden]="showEye">
-                <span class="myBal mx-4 mt-5">Balance</span>
-                <div class="mx-4 mt-2 d-flex">
-                  <h1 class="balFigure text-center">XXXXXXXX</h1>
-                </div>
+  <div class="col-lg-12 col-md-12 col-sm-12">
+    <mat-tab-group animationDuration="2000ms" mat-stretch-tabs="false" mat-align-tabs="end">
+      <mat-tab label={{info.currency}} *ngFor="let info of acctDetails">
+        <div [ngClass]="info.currency == 'USD' || info.currency == 'GBP' ? 'col-9 bdgDivRed d-flex justify-content-between' : 'col-9 bdgDivBlue d-flex justify-content-between'">
+          <div class="mt-4">
+            <div [hidden]="!showEye">
+              <span class="myBal mx-4 mt-5">Balance</span>
+              <div class="mx-4 mt-2 d-flex">
+                <h1 class="balFigure text-center">{{info.balance |currency:info.currency:"symbol":"1.2-2"}}</h1>
               </div>
             </div>
-            <div class="showBal d-flex flex-column">
-              <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+            <div [hidden]="showEye">
+              <span class="myBal mx-4 mt-5">Balance</span>
+              <div class="mx-4 mt-2 d-flex">
+                <h1 class="balFigure text-center">XXXXXXXX</h1>
+              </div>
             </div>
           </div>
-        </mat-tab>
-      </mat-tab-group>
-    </div>
-    <!--  -->
-    <div class="col-9 compusloryMargin">
-      <form>
-        <div class="col-12 mt-4 mb-3">
-          <h3>Select an account to transfer from</h3>
-          <select [(ngModel)]="currn" [value]="currn" class="form-control" name="currency">
-            <option *ngFor="let info of acctDetails" value={{info.currency}}>{{info.accountNumber}}({{info.currency}})</option>
-          </select>
+          <div class="showBal d-flex flex-column">
+            <i (click)="toggleEye()" [ngClass]="showEye ? 'fa fa-eye mx-5' : 'fa fa-eye-slash mx-5'"></i>
+          </div>
         </div>
-        <div class="input-group mb-3 mt-3">
-          <input type="search" class="form-control" name="searchInfo" 
-          [(ngModel)]="searchInfo" [value]="searchInfo" placeholder="Search by email or username or account number">
-          <button class="btn btn-outline-secondary" type="submit" (click)="accountLookUp(searchInfo, currn)" (click)="avoidChecks(currn)">
-            Search
-          </button>
-        </div>
-      </form>
-    </div>
-    <!--  -->
-    <div class="col-9 compusloryMargin searchResult" *ngIf="this.status">
-      <h2>Search Result:</h2>
-      <h3>Firstname: <span>{{firstName}}</span></h3>
-      <h3>Lastname: <span>{{lastName}}</span></h3>
-      <h3>Account Number: <span>{{acctNum}}</span></h3>
-      <!-- <select [(ngModel)]="allAccounts" class="currPill form-control" (change)="avoidChecks($event)">
-        <option  value="">Select an account to transfer to</option>
-        <option *ngFor="let x of acctLookUpDestAcct" value={{x.accountNumber}}>{{x.accountNumber}}({{x.currency}})</option>
-      </select> -->
-    </div>
+      </mat-tab>
+    </mat-tab-group>
+  </div>
+  <!--  -->
+  <div class="col-lg-9 col-md-10 col-sm-8 compusloryMargin">
+    <form>
+      <div class="col-lg-9 col-md-10 col-sm-8 mt-4 mb-3">
+        <h3>Select an account to transfer from</h3>
+        <select [(ngModel)]="currn" [value]="currn" class="form-control" name="currency">
+          <option *ngFor="let info of acctDetails" value={{info.currency}}>{{info.accountNumber}}({{info.currency}})</option>
+        </select>
+      </div>
+      <div class="input-group mb-3 mt-3 col-lg-9 col-md-10 col-sm-8">
+        <input type="search" class="form-control" name="searchInfo" 
+        [(ngModel)]="searchInfo" [value]="searchInfo" placeholder="Search by email or username or account number">
+        <button class="btn btn-outline-secondary" type="submit" (click)="accountLookUp(searchInfo, currn)" (click)="avoidChecks(currn)">
+          Search
+        </button>
+      </div>
+    </form>
+  </div>
+  <!--  -->
+  <div class="col-lg-9 col-md-10 col-sm-8 compusloryMargin searchResult" *ngIf="this.status">
+    <h2>Search Result:</h2>
+    <h3>Firstname: <span>{{firstName}}</span></h3>
+    <h3>Lastname: <span>{{lastName}}</span></h3>
+    <h3>Account Number: <span>{{acctNum}}</span></h3>
+    <!-- <select [(ngModel)]="allAccounts" class="currPill form-control" (change)="avoidChecks($event)">
+      <option  value="">Select an account to transfer to</option>
+      <option *ngFor="let x of acctLookUpDestAcct" value={{x.accountNumber}}>{{x.accountNumber}}({{x.currency}})</option>
+    </select> -->
+  </div>
 
-    <div class="col-9 compusloryMargin searchResult" *ngIf="this.status == false">
+  <div class="col-lg-12 col-md-10 col-sm-8 compusloryMargin searchResult" *ngIf="this.status == false">
+    <h3>Account Not Found</h3>
+  </div>
+  <!-- <ng-template #elseDiv>
+    *ngIf="this.status; else elseDiv"
+    <div class="col-9 compusloryMargin searchResult">
       <h3>Account Not Found</h3>
     </div>
-    <!-- <ng-template #elseDiv>
-      *ngIf="this.status; else elseDiv"
-      <div class="col-9 compusloryMargin searchResult">
-        <h3>Account Not Found</h3>
-      </div>
-    </ng-template> -->
-    <!--  -->
-    <div class="col-9 compusloryMargin mt-5">
-      <button class="btn btn-outline-secondary proceedTo" type="submit" (click)="openDialog('600ms', '300ms')">
-        Proceed to Transfer
-      </button>
-    </div>
+  </ng-template> -->
+  <!--  -->
+  <div class="col-lg-12 col-md-8 col-sm-6 mt-5">
+    <button class="btn btn-outline-primary proceedTo" type="submit" (click)="openDialog('600ms', '300ms')">
+      Proceed to Transfer
+    </button>
   </div>
 </div>
 <app-spinner></app-spinner>

@@ -6,6 +6,7 @@ import { LoginPageComponent } from './web-pages/login-page/login-page.component'
 import { AuthService } from './auth/auth.service';
 import { PageNotFoundComponent } from './web-pages/page-not-found/page-not-found.component';
 import { ContactAdminComponent } from './web-pages/contact-admin/contact-admin.component';
+import { ResetPasswordPageComponent } from './web-pages/reset-password-page/reset-password-page.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
   {
     path: "notfound",
     component: PageNotFoundComponent
+  },
+  {
+    path: "resetpass",
+    component: ResetPasswordPageComponent
   },
   {
     path: "dashboard",
